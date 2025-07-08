@@ -13,7 +13,7 @@ export default function HeroSection() {
       {/* Main content */}
       <div className="relative z-10">
         {/* Grid layout */}
-        <div className="grid grid-cols-4 grid-rows-2 gap-4 max-w-[1500px] mx-auto">
+        <div className="grid grid-cols-4 grid-rows-2 gap-4 max-w-[1500px] mr-auto">
           {/* First div - spans all 4 columns */}
           <div className="col-span-4">
             <motion.h2
