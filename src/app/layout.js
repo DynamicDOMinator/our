@@ -1,3 +1,4 @@
+import "./fonts/font-imports.css";
 import "./globals.css";
 
 import CustomCursor from "./components/CustomCursor";

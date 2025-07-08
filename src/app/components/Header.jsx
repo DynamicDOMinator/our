@@ -37,7 +37,7 @@ export default function Header() {
       <div className="flex fixed w-full items-center justify-between pt-10 px-16 font-medium text-lg z-50">
         <div className=" ">
           <Image src={"/Techshun.png"} height={40} width={140} alt="Techshun" />
-        </div>  
+        </div>
 
         <div className="flex items-center gap-[40px]">
           <div>
@@ -95,17 +95,17 @@ export default function Header() {
       </div>
 
       {isScrolled && (
-        <div className="fixed top-10 right-10 z-50">
+        <div className="fixed top-10 right-5 z-50 ">
           <div
-            className={`p-3 rounded-full shadow-2xl hover:bg-black group transition-all duration-700 delay-100 cursor-pointer ${
+            className={` rounded-full p-2 py-3   hover:bg-black group transition-all duration-700 delay-100 cursor-pointer ${
               animationStage >= 5
-                ? "border-4 border-black/40 shadow-2xl opacity-100 scale-100"
+                ? "border-4 border-black/30 shadow-2xl opacity-100 rotate-180 scale-100"
                 : "border-4 border-black/20 shadow-white/50 opacity-0 scale-0"
             }`}
             onClick={() => console.log("Menu clicked")}
           >
             <div
-              className={`flex flex-col justify-between h-5 w-7 transition-all duration-500 ${
+              className={`flex flex-col items-center   w-5 h-3 gap-1 transition-all duration-500 ${
                 animationStage >= 5
                   ? "opacity-100 scale-100"
                   : "opacity-0 scale-0"
