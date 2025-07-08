@@ -85,7 +85,7 @@ export default function HeroSection() {
                 autoPlay
                 loop
                 muted
-                className="min-w-1 h-[200px]"
+                className="min-w-1 h-[200px] rounded-full"
               />
             </motion.div>
           </div>
