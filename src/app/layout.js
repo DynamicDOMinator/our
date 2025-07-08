@@ -1,14 +1,14 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Inter } from "next/font/google";
+import CustomCursor from "./components/CustomCursor";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Define the font stack with Arial and sans-serif as fallbacks
+const abcdiaFont = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "700"],
+  variable: "--font-abcdia",
+  fallback: ["Abcdiatype", "Arial", "sans-serif"],
 });
 
 export const metadata = {
@@ -18,10 +18,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html scroll-behavior="smooth" lang="en" className={abcdiaFont.variable}>
+      <body scroll-behavior="smooth" className={`${abcdiaFont.className} h-[2000px]`}>
+        <CustomCursor />
         {children}
       </body>
     </html>
