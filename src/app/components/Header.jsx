@@ -13,12 +13,12 @@ export default function Header() {
       setIsScrolled(newIsScrolled);
 
       if (newIsScrolled) {
-        // Progressive animation based on scroll distance
-        if (scrollY > 100) setAnimationStage(1);
-        if (scrollY > 150) setAnimationStage(2);
-        if (scrollY > 200) setAnimationStage(3);
-        if (scrollY > 250) setAnimationStage(4);
-        if (scrollY > 300) setAnimationStage(5);
+        // Set animation stage based on scroll distance
+        if (scrollY > 300) {
+          setAnimationStage(2); // All elements hidden
+        } else if (scrollY > 100) {
+          setAnimationStage(1); // Starting to hide
+        }
       } else {
         setAnimationStage(0);
       }
@@ -53,7 +53,7 @@ export default function Header() {
               </li>
               <li
                 className={`transition-all duration-500 delay-200 cursor-pointer ${
-                  animationStage >= 2
+                  animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
                     : "opacity-100 transform translate-x-0 scale-100"
                 }`}
@@ -62,7 +62,7 @@ export default function Header() {
               </li>
               <li
                 className={`transition-all duration-500 delay-400 cursor-pointer ${
-                  animationStage >= 3
+                  animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
                     : "opacity-100 transform translate-x-0 scale-100"
                 }`}
@@ -71,7 +71,7 @@ export default function Header() {
               </li>
               <li
                 className={`transition-all duration-500 delay-600 cursor-pointer ${
-                  animationStage >= 4
+                  animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
                     : "opacity-100 transform translate-x-0 scale-100"
                 }`}
@@ -83,7 +83,7 @@ export default function Header() {
 
           <div
             className={`flex items-center text-xl font-[400]  gap-5 transition-all duration-500 delay-800 cursor-pointer ${
-              animationStage >= 5
+              animationStage >= 1
                 ? "opacity-0 transform translate-x-20 scale-0"
                 : "opacity-100 transform translate-x-0 scale-100"
             }`}
@@ -98,7 +98,7 @@ export default function Header() {
         <div className="fixed top-10 right-5 z-50 ">
           <div
             className={` rounded-full p-2 py-3   hover:bg-black group transition-all duration-700 delay-100 cursor-pointer ${
-              animationStage >= 5
+              animationStage >= 2
                 ? "border-4 border-black/30 shadow-2xl opacity-100 rotate-180 scale-100"
                 : "border-4 border-black/20 shadow-white/50 opacity-0 scale-0"
             }`}
@@ -106,7 +106,7 @@ export default function Header() {
           >
             <div
               className={`flex flex-col items-center   w-5 h-3 gap-1 transition-all duration-500 ${
-                animationStage >= 5
+                animationStage >= 2
                   ? "opacity-100 scale-100"
                   : "opacity-0 scale-0"
               }`}
