@@ -25,7 +25,7 @@ export default function HeroSection() {
   }, []);
 
   const lines = [
-    { text: "Your ideas,", highlight: false },
+    { text: "Your ideas", highlight: false },
     { text: "our code", highlight: true },
     { text: "built to scale.", highlight: false },
   ];
