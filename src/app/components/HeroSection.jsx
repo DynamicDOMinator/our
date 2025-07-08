@@ -13,7 +13,7 @@ export default function HeroSection() {
       {/* Main content */}
       <div className="relative z-10">
         {/* Grid layout */}
-        <div className="grid grid-cols-4 grid-rows-2 gap-4">
+        <div className="grid grid-cols-4 grid-rows-2 gap-4 max-w-[1500px] mx-auto">
           {/* First div - spans all 4 columns */}
           <div className="col-span-4">
             <motion.h2
@@ -37,7 +37,7 @@ export default function HeroSection() {
           </div>
 
           {/* Second div - spans 2 columns in row 2 */}
-          <div className="col-span-2 row-start-2">
+          <div className="col-span-2 row-start-2 ">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ export default function HeroSection() {
           </div>
 
           {/* Fourth div - spans 2 columns and 3 rows, contains image */}
-          <div className="col-span-2 row-span-3 col-start-3 row-start-2">
+          <div className="col-span-2 row-span-3  place-content-center  col-start-3 row-start-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function HeroSection() {
                 autoPlay
                 loop
                 muted
-                className="min-w-1 h-[200px] rounded-full"
+                className="min-w-1 h-[200px]  rounded-full"
               />
             </motion.div>
           </div>
