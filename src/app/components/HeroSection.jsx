@@ -31,7 +31,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <div className="relative pt-32 flex flex-col justify-center px-8 md:px-20 overflow-hidden">
+    <div className="relative pt-32 min-h-screen flex flex-col justify-center px-8 md:px-20 overflow-hidden">
       {/* Background decorative elements */}
       <motion.div
         className="absolute inset-0 -z-10 overflow-hidden"
@@ -125,7 +125,7 @@ export default function HeroSection() {
                 delay: index * 0.3 + 0.2,
                 ease: [0.25, 0.1, 0.25, 1.0],
               }}
-              className={`text-4xl text-center md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight ${
+              className={`text-4xl text-center md:text-6xl lg:text-8xl font-extrabold tracking-tight leading-tight ${
                 line.highlight ? "text-cyan-600  " : "text"
               }`}
               style={{
