@@ -39,21 +39,7 @@ export default function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-purple-200 via-blue-500 to-teal-400 opacity-20"
-          animate={{
-            backgroundPosition: ["0% 0%", "100% 100%"],
-          }}
-          transition={{
-            duration: 15,
-            ease: "linear",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          style={{
-            backgroundSize: "200% 200%",
-          }}
-        />
+      
 
         {/* Floating particles */}
         {particles.map((particle) => (

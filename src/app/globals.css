@@ -1,17 +1,8 @@
 @import "tailwindcss";
 
-/* Custom font styling */
-:root {
-  --font-family-base: "Abcdiatype", Arial, sans-serif;
-}
-
+/* Font Configuration */
 body {
-  font-family: var(--font-family-base);
-}
-
-/* Use the CSS variable from Next.js font module */
-.custom-font {
-  font-family: var(--font-abcdia), var(--font-family-base);
+  font-family: 'Satoshi', Arial, sans-serif;
 }
 
 /* Custom Smooth Cursor - Black Circle Following Default Cursor */

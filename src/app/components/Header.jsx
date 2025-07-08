@@ -1,8 +1,7 @@
 "use client";
 import { FaArrowRight } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { useState, useEffect } from "react";
-
+import Image from "next/image";
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [animationStage, setAnimationStage] = useState(0);
@@ -36,13 +35,13 @@ export default function Header() {
   return (
     <div>
       <div className="flex fixed w-full items-center justify-between pt-10 px-16 font-medium text-lg z-50">
-        <div>
-          <h1>VCdesign.Team</h1>
-        </div>
+        <div className=" ">
+          <Image src={"/Techshun.png"} height={40} width={140} alt="Techshun" />
+        </div>  
 
         <div className="flex items-center gap-[40px]">
           <div>
-            <ul className="flex items-center gap-5">
+            <ul className="flex text-xl font-[400] items-center gap-5">
               <li
                 className={`transition-all duration-500 cursor-pointer ${
                   animationStage >= 1
@@ -83,7 +82,7 @@ export default function Header() {
           </div>
 
           <div
-            className={`flex items-center gap-5 transition-all duration-500 delay-800 cursor-pointer ${
+            className={`flex items-center text-xl font-[400]  gap-5 transition-all duration-500 delay-800 cursor-pointer ${
               animationStage >= 5
                 ? "opacity-0 transform translate-x-20 scale-0"
                 : "opacity-100 transform translate-x-0 scale-100"
@@ -98,19 +97,23 @@ export default function Header() {
       {isScrolled && (
         <div className="fixed top-10 right-10 z-50">
           <div
-              className={`p-2 rounded-full shadow-2xl hover:bg-black transition-all duration-700 delay-100  cursor-pointer ${
-                animationStage >= 5
-                  ? "border-4 border-black/40 shadow-2xl opacity-100 scale-100"
-                  : "border-4 border-black/20 shadow-white/50 opacity-0 scale-0"
-              }`}
+            className={`p-3 rounded-full shadow-2xl hover:bg-black group transition-all duration-700 delay-100 cursor-pointer ${
+              animationStage >= 5
+                ? "border-4 border-black/40 shadow-2xl opacity-100 scale-100"
+                : "border-4 border-black/20 shadow-white/50 opacity-0 scale-0"
+            }`}
+            onClick={() => console.log("Menu clicked")}
           >
-            <GiHamburgerMenu
-              className={`text-xl text-black transition-all hover:text-white   duration-700 delay-100 ${
+            <div
+              className={`flex flex-col justify-between h-5 w-7 transition-all duration-500 ${
                 animationStage >= 5
-                  ? "transform rotate-180 scale-110 drop-shadow-lg opacity-100"
-                  : "transform rotate-0 scale-100 opacity-0"
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-0"
               }`}
-            />
+            >
+              <div className="h-[3px] w-full bg-black rounded-full "></div>
+              <div className="h-[3px] w-full bg-black rounded-full "></div>
+            </div>
           </div>
         </div>
       )}
