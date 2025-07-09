@@ -2,6 +2,11 @@
 import { FaArrowRight } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+
+import Cursor from "mouse-follower";
+import gsap from "gsap";
+import "mouse-follower/dist/mouse-follower.min.css";
+import { scrollToSection } from "../utils/scrollUtils";
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [animationStage, setAnimationStage] = useState(0);
@@ -33,6 +38,8 @@ export default function Header() {
     };
   }, []);
 
+ 
+
   return (
     <div className="relative">
       {isMenuOpen && (
@@ -48,6 +55,7 @@ export default function Header() {
           <div>
             <ul className="flex text-xl font-[400] items-center gap-5">
               <li
+                onClick={() => scrollToSection('hero-section')}
                 className={`transition-all duration-500 cursor-pointer ${
                   animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
@@ -57,6 +65,7 @@ export default function Header() {
                 about
               </li>
               <li
+                onClick={() => scrollToSection('second-section')}
                 className={`transition-all duration-500 delay-200 cursor-pointer ${
                   animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
@@ -66,6 +75,7 @@ export default function Header() {
                 services
               </li>
               <li
+                onClick={() => scrollToSection('third-section')}
                 className={`transition-all duration-500 delay-400 cursor-pointer ${
                   animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
@@ -75,6 +85,7 @@ export default function Header() {
                 cases
               </li>
               <li
+                onClick={() => scrollToSection('contact-section')}
                 className={`transition-all duration-500 delay-600 cursor-pointer ${
                   animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
@@ -87,6 +98,7 @@ export default function Header() {
           </div>
 
           <div
+            onClick={() => scrollToSection('contact-section')}
             className={`flex items-center text-xl font-[400]  gap-5 transition-all duration-500 delay-800 cursor-pointer ${
               animationStage >= 1
                 ? "opacity-0 transform translate-x-20 scale-0"
@@ -101,7 +113,7 @@ export default function Header() {
 
       {/* Hamburger menu button - always visible when scrolled or menu is open, with higher z-index */}
       {(isScrolled || isMenuOpen) && (
-        <div className="fixed top-10 right-5 z-[70] ">
+        <div  data-cursor-stick  className="fixed top-10 right-5 z-[70] ">
           <div
             className={`rounded-full p-3 py-3 ${
               isMenuOpen ? "bg-white" : " "
@@ -148,7 +160,7 @@ export default function Header() {
             <h3 className="text-gray-400">Menu</h3>
 
             <ul className="pt-7 text-[40px]">
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('hero-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   What we do
                 </span>
@@ -156,7 +168,7 @@ export default function Header() {
                   What we do
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('second-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Projects
                 </span>
@@ -164,15 +176,15 @@ export default function Header() {
                   Projects
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('third-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  Compeny
+                  Company
                 </span>
                 <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  Compeny
+                  Company
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('second-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Tutorials
                 </span>
@@ -180,7 +192,7 @@ export default function Header() {
                   Tutorials
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('contact-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Contacts
                 </span>

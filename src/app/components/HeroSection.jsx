@@ -9,7 +9,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <div className="relative pt-28 min-h-screen flex flex-col justify-center px-8 md:px-20 overflow-hidden">
+    <div id="hero-section" className="relative pt-28 min-h-screen flex flex-col justify-center px-8 md:px-20 overflow-hidden">
       {/* Main content */}
       <div className="relative z-10">
         {/* Grid layout */}

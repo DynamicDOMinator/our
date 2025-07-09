@@ -1,6 +1,6 @@
 export default function ThirdSection() {
   return (
-    <div>
+    <div id="third-section">
       {/* === Marquee Section === */}
       <div className="relative overflow-hidden whitespace-nowrap">
         <style>{`
@@ -12,7 +12,7 @@ export default function ThirdSection() {
           .animate-marquee {
             display: inline-block;
             white-space: nowrap;
-            animation: marquee 40s linear infinite;
+            animation: marquee 50s linear infinite;
           }
 
           @keyframes typing {
