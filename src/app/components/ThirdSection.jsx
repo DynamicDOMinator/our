@@ -43,9 +43,7 @@ export default function ThirdSection() {
           <span className="lg:text-8xl text-2xl md:text-5xl">
             INNOVATION / UI/UX DESIGN / WEB DEVELOPMENT / MOBILE APPS / DIGITAL STRATEGY / CUSTOM SOFTWARE / BRAND IDENTITY / E-COMMERCE SOLUTIONS / CLOUD INTEGRATION / SAAS PLATFORMS /
           </span>
-          <span className="lg:text-7xl text-2xl md:text-5xl">
-            INNOVATION / UI/UX DESIGN / WEB DEVELOPMENT / MOBILE APPS / DIGITAL STRATEGY / CUSTOM SOFTWARE / BRAND IDENTITY / E-COMMERCE SOLUTIONS / CLOUD INTEGRATION / SAAS PLATFORMS /
-          </span>
+          
         </div>
       </div>
 
