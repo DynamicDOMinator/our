@@ -12,12 +12,12 @@ export default function ThirdSection() {
           .animate-marquee {
             display: inline-block;
             white-space: nowrap;
-            animation: marquee 12s linear infinite;
+            animation: marquee 16s linear infinite;
           }
 
           @keyframes typing {
-            from { width: 0;  }
-            to { width: 100%;  }
+            from { width: 0; opacity: 0; }
+            to { width: 100%; opacity: 1; }
           }
 
           .typing-line {
@@ -33,13 +33,15 @@ export default function ThirdSection() {
           }
 
           .line-1 { animation-delay: 0.5s; }
-          .line-2 { animation-delay: 2s; }
-          .line-3 { animation-delay: 3.5s; }
-          .line-4 { animation-delay: 5s; }
+          .line-2 { animation-delay: 1.5s; }
+          .line-3 { animation-delay: 2.5s; }
+          .line-4 { animation-delay: 3.5s; }
 
         `}</style>
-
-        <div className="animate-marquee pb-2 pt-12">
+<div className="text-center pt-14 pb-5 text-xl font-semibold  ">
+  WHAT WE DO
+</div>
+        <div className="animate-marquee pb-2 pt-7">
           <span className="lg:text-8xl text-2xl md:text-5xl">
             INNOVATION / UI/UX DESIGN / WEB DEVELOPMENT / MOBILE APPS / DIGITAL STRATEGY / CUSTOM SOFTWARE / BRAND IDENTITY / E-COMMERCE SOLUTIONS / CLOUD INTEGRATION / SAAS PLATFORMS /
           </span>
