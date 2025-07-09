@@ -16,8 +16,8 @@ export default function ThirdSection() {
           }
 
           @keyframes typing {
-            from { width: 0; opacity: 0; }
-            to { width: 100%; opacity: 1; }
+            from { width: 0;  }
+            to { width: 100%;  }
           }
 
           .typing-line {
