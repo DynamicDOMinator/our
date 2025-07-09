@@ -38,6 +38,23 @@ export default function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    // Initialize mouse-follower cursor
+    Cursor.registerGSAP(gsap);
+
+    const timeout = setTimeout(() => {
+      const cursor = new Cursor({
+        container: document.body,
+        speed: 0.5,
+        ease: "expo.out",
+        visibleTimeout: 300,
+        hideNativeCursor: true,
+      });
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
  
 
   return (
@@ -61,6 +78,9 @@ export default function Header() {
                     ? "opacity-0 transform translate-x-20 scale-0"
                     : "opacity-100 transform translate-x-0 scale-100"
                 }`}
+                data-cursor-text="About"
+                data-cursor-stick="#about-item"
+                id="about-item"
               >
                 about
               </li>
@@ -71,6 +91,9 @@ export default function Header() {
                     ? "opacity-0 transform translate-x-20 scale-0"
                     : "opacity-100 transform translate-x-0 scale-100"
                 }`}
+                data-cursor-text="Services"
+                data-cursor-stick="#services-item"
+                id="services-item"
               >
                 services
               </li>
@@ -81,6 +104,9 @@ export default function Header() {
                     ? "opacity-0 transform translate-x-20 scale-0"
                     : "opacity-100 transform translate-x-0 scale-100"
                 }`}
+                data-cursor-text="Studies"
+                data-cursor-stick="#cases-item"
+                id="cases-item"
               >
                 cases
               </li>
@@ -91,6 +117,9 @@ export default function Header() {
                     ? "opacity-0 transform translate-x-20 scale-0"
                     : "opacity-100 transform translate-x-0 scale-100"
                 }`}
+                data-cursor-text="Careers"
+                data-cursor-stick="#careers-item"
+                id="careers-item"
               >
                 careers
               </li>
@@ -104,6 +133,9 @@ export default function Header() {
                 ? "opacity-0 transform translate-x-20 scale-0"
                 : "opacity-100 transform translate-x-0 scale-100"
             }`}
+            data-cursor-stick="#get-in-touch"
+            id="get-in-touch"
+            data-cursor-text="Contact"
           >
             get in touch
             <FaArrowRight className="bg-black text-white w-[30px] p-1.5 h-[30px] rounded-full" />
@@ -113,7 +145,7 @@ export default function Header() {
 
       {/* Hamburger menu button - always visible when scrolled or menu is open, with higher z-index */}
       {(isScrolled || isMenuOpen) && (
-        <div  data-cursor-stick  className="fixed top-10 right-5 z-[70] ">
+        <div data-cursor-stick="#hamburger" id="hamburger" className="fixed top-10 right-5 z-[70] ">
           <div
             className={`rounded-full p-3 py-3 ${
               isMenuOpen ? "bg-white" : " "
@@ -123,6 +155,7 @@ export default function Header() {
                 : " shadow-white/50 opacity-0 scale-0"
             }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            data-cursor-text="Menu"
           >
             <div
               className={`flex flex-col items-center justify-center   w-5 h-5 transition-all duration-500 ${
@@ -160,7 +193,7 @@ export default function Header() {
             <h3 className="text-gray-400">Menu</h3>
 
             <ul className="pt-7 text-[40px]">
-              <li onClick={() => { scrollToSection('hero-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('hero-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#what-we-do" id="what-we-do" data-cursor-text="What We Do">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   What we do
                 </span>
@@ -168,7 +201,7 @@ export default function Header() {
                   What we do
                 </span>
               </li>
-              <li onClick={() => { scrollToSection('second-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('second-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#projects" id="projects" data-cursor-text="Projects">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Projects
                 </span>
@@ -176,7 +209,7 @@ export default function Header() {
                   Projects
                 </span>
               </li>
-              <li onClick={() => { scrollToSection('third-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('third-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#company" id="company" data-cursor-text="Company">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Company
                 </span>
@@ -184,7 +217,7 @@ export default function Header() {
                   Company
                 </span>
               </li>
-              <li onClick={() => { scrollToSection('second-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('second-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#tutorials" id="tutorials" data-cursor-text="Tutorials">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Tutorials
                 </span>
@@ -192,7 +225,7 @@ export default function Header() {
                   Tutorials
                 </span>
               </li>
-              <li onClick={() => { scrollToSection('contact-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li onClick={() => { scrollToSection('contact-section'); setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#contacts" id="contacts" data-cursor-text="Contact Us">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Contacts
                 </span>
@@ -206,7 +239,7 @@ export default function Header() {
             <h3 className="text-gray-400">Social media</h3>
 
             <ul className="pt-7 text-xl flex flex-col gap-3">
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#facebook-item" id="facebook-item" data-cursor-text="Facebook">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Facebook
                 </span>
@@ -214,7 +247,7 @@ export default function Header() {
                   Facebook
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#instagram-item" id="instagram-item" data-cursor-text="Instagram">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Instagram
                 </span>
@@ -222,7 +255,7 @@ export default function Header() {
                   Instagram
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#twitter-item" id="twitter-item" data-cursor-text="Twitter">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Twitter
                 </span>
@@ -230,7 +263,7 @@ export default function Header() {
                   Twitter
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105">
+              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#linkedin-item" id="linkedin-item" data-cursor-text="LinkedIn">
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Linkedin
                 </span>
