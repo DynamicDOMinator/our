@@ -12,7 +12,7 @@ export default function ThirdSection() {
           .animate-marquee {
             display: inline-block;
             white-space: nowrap;
-            animation: marquee 16s linear infinite;
+            animation: marquee 40s linear infinite;
           }
 
           @keyframes typing {
@@ -39,7 +39,7 @@ export default function ThirdSection() {
 
         `}</style>
 <div className="text-center pt-14 pb-5 text-xl font-semibold  ">
-  WHAT WE DO
+  WHAT WE DO?
 </div>
         <div className="animate-marquee pb-2 pt-7">
           <span className="lg:text-8xl text-2xl md:text-5xl">
