@@ -39,8 +39,8 @@ export default function ThirdSection() {
 
         `}</style>
 
-        <div className="animate-marquee pb-2 pt-5">
-          <span className="lg:text-7xl text-2xl md:text-5xl">
+        <div className="animate-marquee pb-2 pt-12">
+          <span className="lg:text-8xl text-2xl md:text-5xl">
             INNOVATION / UI/UX DESIGN / WEB DEVELOPMENT / MOBILE APPS / DIGITAL STRATEGY / CUSTOM SOFTWARE / BRAND IDENTITY / E-COMMERCE SOLUTIONS / CLOUD INTEGRATION / SAAS PLATFORMS /
           </span>
           <span className="lg:text-7xl text-2xl md:text-5xl">
