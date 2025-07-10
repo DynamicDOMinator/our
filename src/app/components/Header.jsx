@@ -39,17 +39,20 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    // Initialize mouse-follower cursor
+    // Initialize mouse-follower cursor only on non-mobile devices
     Cursor.registerGSAP(gsap);
 
     const timeout = setTimeout(() => {
-      const cursor = new Cursor({
-        container: document.body,
-        speed: 0.5,
-        ease: "expo.out",
-        visibleTimeout: 300,
-        hideNativeCursor: true,
-      });
+      // Check if device is not mobile before initializing cursor
+      if (window.innerWidth > 768) {
+        const cursor = new Cursor({
+          container: document.body,
+          speed: 0.5,
+          ease: "expo.out",
+          visibleTimeout: 300,
+          hideNativeCursor: true,
+        });
+      }
     }, 300);
 
     return () => clearTimeout(timeout);

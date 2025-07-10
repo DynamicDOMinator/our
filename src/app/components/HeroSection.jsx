@@ -1,12 +1,34 @@
 "use client";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function HeroSection() {
+  const [showControls, setShowControls] = useState(false);
+  const mobileVideoRef = useRef(null);
+  const desktopVideoRef = useRef(null);
+  
   const lines = [
     { text: "Your ideas our code", highlight: false },
     { text: " built to scale", highlight: true },
   ];
+  
+  const handleVideoClick = (videoRef) => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+      } else {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else if (videoRef.current.requestFullscreen) {
+          videoRef.current.requestFullscreen();
+        } else if (videoRef.current.webkitRequestFullscreen) {
+          videoRef.current.webkitRequestFullscreen();
+        } else if (videoRef.current.msRequestFullscreen) {
+          videoRef.current.msRequestFullscreen();
+        }
+      }
+    }
+  };
 
   return (
     <div id="hero-section" className="relative md:pt-28 pt-36 lg:min-h-screen flex flex-col justify-center px-8 md:px-20 overflow-hidden">
@@ -66,11 +88,17 @@ export default function HeroSection() {
               className="block lg:hidden ml-2"
             >
               <video
+                ref={mobileVideoRef}
                 src="/header.mp4"
                 autoPlay
                 loop
                 muted
-                className="h-[70px] w-[100px] md:h-[100px] md:w-[150px] rounded-full object-cover"
+                playsInline
+                controls={showControls}
+                onClick={() => handleVideoClick(mobileVideoRef)}
+                onTouchStart={() => setShowControls(true)}
+                onTouchEnd={() => setTimeout(() => setShowControls(false), 3000)}
+                className="h-[70px] w-[100px] md:h-[100px] md:w-[150px] rounded-full object-cover cursor-pointer"
               />
             </motion.div>
           </div>
@@ -98,11 +126,19 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 1.0 }}
             >
               <video
+                ref={desktopVideoRef}
                 src="/header.mp4"
                 autoPlay
                 loop
                 muted
-                className="min-w-1 h-[200px] w-full lg:w-auto rounded-full object-cover"
+                playsInline
+                controls={showControls}
+                onClick={() => handleVideoClick(desktopVideoRef)}
+                onMouseEnter={() => setShowControls(true)}
+                onMouseLeave={() => setShowControls(false)}
+                onTouchStart={() => setShowControls(true)}
+                onTouchEnd={() => setTimeout(() => setShowControls(false), 3000)}
+                className="min-w-1 h-[200px] w-full lg:w-auto rounded-full object-cover cursor-pointer"
               />
             </motion.div>
           </div>
