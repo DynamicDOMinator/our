@@ -55,24 +55,21 @@ export default function Header() {
     return () => clearTimeout(timeout);
   }, []);
 
- 
-
   return (
     <div className="relative">
       {isMenuOpen && (
-        <div className="min-h-screen  fixed opacity-40 z-[55] w-full bg-black"></div>
+        <div className="min-h-screen  md:fixed md:block hidden opacity-40 z-[55] w-full bg-black"></div>
       )}
 
-      <div className="flex fixed w-full items-center justify-between pt-10 px-16 font-medium text-lg z-50">
+      <div className="flex fixed w-full items-center justify-between pt-10 md:px-16 px-8 font-medium text-lg z-50">
         <div className=" ">
           <Image src={"/Techshun.png"} height={40} width={140} alt="Techshun" />
         </div>
 
         <div className="flex items-center gap-[40px]">
           <div>
-            <ul className="flex text-xl font-[400] items-center gap-5">
+            <ul className="lg:flex text-xl font-[400] items-center gap-5 hidden ">
               <li
-             
                 className={`transition-all duration-500 cursor-pointer ${
                   animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
@@ -85,7 +82,6 @@ export default function Header() {
                 about
               </li>
               <li
-               
                 className={`transition-all duration-500 delay-200 cursor-pointer ${
                   animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
@@ -98,7 +94,6 @@ export default function Header() {
                 services
               </li>
               <li
-             
                 className={`transition-all duration-500 delay-400 cursor-pointer ${
                   animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
@@ -111,7 +106,6 @@ export default function Header() {
                 cases
               </li>
               <li
-        
                 className={`transition-all duration-500 delay-600 cursor-pointer ${
                   animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
@@ -127,8 +121,7 @@ export default function Header() {
           </div>
 
           <div
-           
-            className={`flex items-center text-xl font-[400]  gap-5 transition-all duration-500 delay-800 cursor-pointer ${
+            className={`lg:flex hidden items-center text-xl font-[400]  gap-5 transition-all duration-500 delay-800 cursor-pointer ${
               animationStage >= 1
                 ? "opacity-0 transform translate-x-20 scale-0"
                 : "opacity-100 transform translate-x-0 scale-100"
@@ -143,9 +136,43 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Hamburger menu button - always visible when scrolled or menu is open, with higher z-index */}
+      {/* Hamburger menu button - always visible on mobile and when scrolled or menu is open on larger screens */}
+      <div
+        data-cursor-stick="#hamburger"
+        id="hamburger"
+        className="fixed top-8 right-5 z-[70] lg:hidden"
+      >
+        <div
+          className={`rounded-full p-3 py-3 ${
+            isMenuOpen ? "bg-white" : " "
+          } group transition-all duration-700 delay-100 cursor-pointer opacity-100 scale-100`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          data-cursor-text="Menu"
+        >
+          <div className="flex flex-col items-center justify-center w-5 h-5">
+            {/* First line of the hamburger/X icon */}
+            <div
+              className={`h-[4px] w-full bg-black hover:bg-white mt-0.5 rounded-full transition-all duration-300 ${
+                isMenuOpen ? "transform rotate-45 translate-y-[4px]" : ""
+              }`}
+            ></div>
+            {/* Second line of the hamburger/X icon */}
+            <div
+              className={`h-[4px] w-full bg-black rounded-full mt-1 transition-all duration-300 ${
+                isMenuOpen ? "transform -rotate-45 -translate-y-[4px]" : ""
+              }`}
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Hamburger menu button for larger screens - only visible when scrolled or menu is open */}
       {(isScrolled || isMenuOpen) && (
-        <div data-cursor-stick="#hamburger" id="hamburger" className="fixed top-10 right-5 z-[70] ">
+        <div
+          data-cursor-stick="#hamburger-lg"
+          id="hamburger-lg"
+          className="fixed top-10 right-5 z-[70] hidden lg:block"
+        >
           <div
             className={`rounded-full p-3 py-3 ${
               isMenuOpen ? "bg-white" : " "
@@ -158,7 +185,7 @@ export default function Header() {
             data-cursor-text="Menu"
           >
             <div
-              className={`flex flex-col items-center justify-center   w-5 h-5 transition-all duration-500 ${
+              className={`flex flex-col items-center justify-center w-5 h-5 transition-all duration-500 ${
                 animationStage >= 2 || isMenuOpen
                   ? "opacity-100 scale-100"
                   : "opacity-0 scale-0"
@@ -182,18 +209,25 @@ export default function Header() {
       )}
 
       {/* menu items  */}
-
       <div
-        className={`fixed z-[60] right-0 w-1/2 min-h-screen bg-white transition-transform duration-1000 ease-in-out ${
+        className={`fixed z-[60] right-0 md:w-1/2 w-full min-h-screen overflow-hidden bg-white transition-transform duration-1000 ease-in-out ${
           isMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
         }`}
       >
-        <div className="flex flex-row-reverse items-start justify-between w-[70%] pl-20 pt-48">
+        <div className="flex flex-row-reverse items-start px-10 lg:px-0 justify-between  gap-10 lg:w-[70%] lg:pl-20 lg:pt-48 pt-36">
           <div>
             <h3 className="text-gray-400">Menu</h3>
 
-            <ul className="pt-7 text-[40px]">
-              <li onClick={() => { setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#what-we-do" id="what-we-do" data-cursor-text="What We Do">
+            <ul className="pt-7 2xl:text-[40px] text-2xl">
+              <li
+                onClick={() => {
+                  setIsMenuOpen(false);
+                }}
+                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                data-cursor-stick="#what-we-do"
+                id="what-we-do"
+                data-cursor-text="What We Do"
+              >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   What we do
                 </span>
@@ -201,7 +235,15 @@ export default function Header() {
                   What we do
                 </span>
               </li>
-              <li onClick={() => {  setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#projects" id="projects" data-cursor-text="Projects">
+              <li
+                onClick={() => {
+                  setIsMenuOpen(false);
+                }}
+                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                data-cursor-stick="#projects"
+                id="projects"
+                data-cursor-text="Projects"
+              >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Projects
                 </span>
@@ -209,7 +251,15 @@ export default function Header() {
                   Projects
                 </span>
               </li>
-              <li onClick={() => {  setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#company" id="company" data-cursor-text="Company">
+              <li
+                onClick={() => {
+                  setIsMenuOpen(false);
+                }}
+                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                data-cursor-stick="#company"
+                id="company"
+                data-cursor-text="Company"
+              >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Company
                 </span>
@@ -217,7 +267,15 @@ export default function Header() {
                   Company
                 </span>
               </li>
-              <li onClick={() => {  setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#tutorials" id="tutorials" data-cursor-text="Tutorials">
+              <li
+                onClick={() => {
+                  setIsMenuOpen(false);
+                }}
+                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                data-cursor-stick="#tutorials"
+                id="tutorials"
+                data-cursor-text="Tutorials"
+              >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Tutorials
                 </span>
@@ -225,7 +283,15 @@ export default function Header() {
                   Tutorials
                 </span>
               </li>
-              <li onClick={() => { setIsMenuOpen(false); }} className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#contacts" id="contacts" data-cursor-text="Contact Us">
+              <li
+                onClick={() => {
+                  setIsMenuOpen(false);
+                }}
+                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                data-cursor-stick="#contacts"
+                id="contacts"
+                data-cursor-text="Contact Us"
+              >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Contacts
                 </span>
@@ -239,7 +305,12 @@ export default function Header() {
             <h3 className="text-gray-400">Social media</h3>
 
             <ul className="pt-7 text-xl flex flex-col gap-3">
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#facebook-item" id="facebook-item" data-cursor-text="Facebook">
+              <li
+                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                data-cursor-stick="#facebook-item"
+                id="facebook-item"
+                data-cursor-text="Facebook"
+              >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Facebook
                 </span>
@@ -247,7 +318,12 @@ export default function Header() {
                   Facebook
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#instagram-item" id="instagram-item" data-cursor-text="Instagram">
+              <li
+                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                data-cursor-stick="#instagram-item"
+                id="instagram-item"
+                data-cursor-text="Instagram"
+              >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Instagram
                 </span>
@@ -255,7 +331,12 @@ export default function Header() {
                   Instagram
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#twitter-item" id="twitter-item" data-cursor-text="Twitter">
+              <li
+                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                data-cursor-stick="#twitter-item"
+                id="twitter-item"
+                data-cursor-text="Twitter"
+              >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Twitter
                 </span>
@@ -263,7 +344,12 @@ export default function Header() {
                   Twitter
                 </span>
               </li>
-              <li className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105" data-cursor-stick="#linkedin-item" id="linkedin-item" data-cursor-text="LinkedIn">
+              <li
+                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                data-cursor-stick="#linkedin-item"
+                id="linkedin-item"
+                data-cursor-text="LinkedIn"
+              >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Linkedin
                 </span>
