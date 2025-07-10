@@ -41,21 +41,48 @@ export default function Header() {
   useEffect(() => {
     // Initialize mouse-follower cursor only on non-mobile devices
     Cursor.registerGSAP(gsap);
-
-    const timeout = setTimeout(() => {
-      // Check if device is not mobile before initializing cursor
-      if (window.innerWidth > 768) {
-        const cursor = new Cursor({
-          container: document.body,
-          speed: 0.5,
-          ease: "expo.out",
-          visibleTimeout: 300,
-          hideNativeCursor: true,
-        });
+    
+    let cursor = null;
+    
+    const initializeCursor = () => {
+      // Check if device is not mobile or tablet
+      if (window.innerWidth > 1024) {
+        // Only initialize if not already initialized
+        if (!cursor) {
+          cursor = new Cursor({
+            container: document.body,
+            speed: 0.5,
+            ease: "expo.out",
+            visibleTimeout: 300,
+            hideNativeCursor: true,
+          });
+        }
+      } else {
+        // Destroy cursor if it exists and we're on mobile/tablet
+        if (cursor) {
+          cursor.destroy();
+          cursor = null;
+          // Restore native cursor
+          document.body.style.cursor = 'auto';
+        }
       }
-    }, 300);
+    };
+    
+    // Initialize after a short delay
+    const timeout = setTimeout(initializeCursor, 300);
+    
+    // Re-initialize on resize (handles orientation changes)
+    window.addEventListener('resize', initializeCursor);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', initializeCursor);
+      // Clean up cursor if it exists
+      if (cursor) {
+        cursor.destroy();
+        cursor = null;
+      }
+    };
   }, []);
 
   return (

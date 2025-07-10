@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 
 export default function HeroSection() {
-  const [showControls, setShowControls] = useState(false);
   const mobileVideoRef = useRef(null);
   const desktopVideoRef = useRef(null);
   
@@ -17,15 +16,7 @@ export default function HeroSection() {
       if (videoRef.current.paused) {
         videoRef.current.play();
       } else {
-        if (document.fullscreenElement) {
-          document.exitFullscreen();
-        } else if (videoRef.current.requestFullscreen) {
-          videoRef.current.requestFullscreen();
-        } else if (videoRef.current.webkitRequestFullscreen) {
-          videoRef.current.webkitRequestFullscreen();
-        } else if (videoRef.current.msRequestFullscreen) {
-          videoRef.current.msRequestFullscreen();
-        }
+        videoRef.current.pause();
       }
     }
   };
@@ -94,10 +85,7 @@ export default function HeroSection() {
                 loop
                 muted
                 playsInline
-                controls={showControls}
                 onClick={() => handleVideoClick(mobileVideoRef)}
-                onTouchStart={() => setShowControls(true)}
-                onTouchEnd={() => setTimeout(() => setShowControls(false), 3000)}
                 className="h-[70px] w-[100px] md:h-[100px] md:w-[150px] rounded-full object-cover cursor-pointer"
               />
             </motion.div>
@@ -132,12 +120,7 @@ export default function HeroSection() {
                 loop
                 muted
                 playsInline
-                controls={showControls}
                 onClick={() => handleVideoClick(desktopVideoRef)}
-                onMouseEnter={() => setShowControls(true)}
-                onMouseLeave={() => setShowControls(false)}
-                onTouchStart={() => setShowControls(true)}
-                onTouchEnd={() => setTimeout(() => setShowControls(false), 3000)}
                 className="min-w-1 h-[200px] w-full lg:w-auto rounded-full object-cover cursor-pointer"
               />
             </motion.div>
