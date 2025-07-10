@@ -148,7 +148,7 @@ export default function FourthSection() {
           key={section.id}
           className={`flex flex-col md:flex-row items-start sticky section-${section.id} px-4 sm:px-8 md:px-12 lg:px-16 z-${
             10 - section.id
-          } top-0 bg-white gap-6 md:gap-12 lg:gap-28 py-8 md:py-12 lg:py-16 border-t-2 border-gray-300 relative`}
+          } top-0 bg-white  gap-6 md:gap-12 lg:gap-28 py-8 md:py-12 lg:py-16 border-t-2 border-gray-300 relative`}
         >
           {/* Individual overlay for each section (except the last one) */}
           {section.id !== 5 && (
@@ -178,7 +178,7 @@ export default function FourthSection() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-8 sm:gap-16 md:gap-24 lg:gap-40 pt-6 md:pt-10 lg:pt-16">
+            <div className="flex  items-start sm:items-center justify-start gap-8 sm:gap-16 md:gap-24 lg:gap-40 pt-6 md:pt-7 lg:pt-16">
               <div>
                 <ul className="space-y-2">
                   {section.leftItems.map((item, index) => (

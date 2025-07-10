@@ -92,7 +92,7 @@ export default function Header() {
       )}
 
       <div className="flex fixed w-full items-center justify-between pt-10 md:px-16 px-8 font-medium text-lg z-50">
-        <div className=" ">
+        <div className="">
           <Image src={"/Techshun.png"} height={40} width={140} alt="Techshun" />
         </div>
 
