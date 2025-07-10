@@ -1,8 +1,6 @@
 import "./fonts/font-imports.css";
 import "./globals.css";
 
-import CustomCursor from "./components/CustomCursor";
-import Cursor from "./components/Cursor";
 import SmoothScroll from "./components/SmoothScroll";
 // Define the font stack with Arial and sans-serif as fallbacks
 
@@ -14,10 +12,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={` h-[2000px]`}>
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+      <body>
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
