@@ -11,6 +11,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [animationStage, setAnimationStage] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isInFifthSection, setIsInFifthSection] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +37,41 @@ export default function Header() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+  
+  // Use Intersection Observer to detect when FifthSection is in viewport
+  useEffect(() => {
+    const fifthSection = document.getElementById('fifth-section');
+    
+    if (!fifthSection) {
+      // If the section doesn't exist yet, try again after a short delay
+      const checkTimer = setTimeout(() => {
+        const retrySection = document.getElementById('fifth-section');
+        if (retrySection) {
+          setupObserver(retrySection);
+        }
+      }, 1000);
+      return () => clearTimeout(checkTimer);
+    }
+    
+    function setupObserver(element) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const [entry] = entries;
+          setIsInFifthSection(entry.isIntersecting);
+          console.log('Fifth section intersection:', entry.isIntersecting);
+        },
+        { threshold: 0.1 } // Trigger when at least 10% of the element is visible
+      );
+      
+      observer.observe(element);
+      
+      return () => {
+        if (element) observer.unobserve(element);
+      };
+    }
+    
+    return setupObserver(fifthSection);
   }, []);
 
   useEffect(() => {
@@ -91,8 +127,8 @@ export default function Header() {
         <div className="min-h-screen  md:fixed md:block hidden opacity-40 z-[55] w-full bg-black"></div>
       )}
 
-      <div className="flex fixed top-9 w-full items-center justify-between pt-10 md:px-16 px-8 font-medium text-lg z-50">
-        <div className={`transition-all duration-500 ${isScrolled ? 'md:opacity-100 opacity-0 md:transform-none transform -translate-y-10' : 'opacity-100 transform-none'}`}>
+      <div className="flex fixed lg:top-9 w-full items-center justify-between pt-10 md:px-16 px-8 font-medium text-lg z-50">
+        <div className={`transition-all duration-500 ${isScrolled ? 'opacity-0 transform -translate-y-10' : 'opacity-100 transform-none'}`}>
           <Image src={"/Techshun.png"} height={40} width={140} alt="Techshun" />
         </div>
 
@@ -182,15 +218,17 @@ export default function Header() {
           <div className="flex flex-col items-center justify-center w-5 h-5">
             {/* First line of the hamburger/X icon */}
             <div
-              className={`h-[4px] w-full bg-black hover:bg-white mt-0.5 rounded-full transition-all duration-300 ${
+              className={`h-[4px] w-full mt-0.5 rounded-full transition-all duration-300 ${
                 isMenuOpen ? "transform rotate-45 translate-y-[4px]" : ""
               }`}
+              style={{ backgroundColor: isMenuOpen ? 'black' : (isInFifthSection ? 'white' : 'black') }}
             ></div>
             {/* Second line of the hamburger/X icon */}
             <div
-              className={`h-[4px] w-full bg-black rounded-full mt-1 transition-all duration-300 ${
+              className={`h-[4px] w-full rounded-full mt-1 transition-all duration-300 ${
                 isMenuOpen ? "transform -rotate-45 -translate-y-[4px]" : ""
               }`}
+              style={{ backgroundColor: isMenuOpen ? 'black' : (isInFifthSection ? 'white' : 'black') }}
             ></div>
           </div>
         </div>
@@ -223,15 +261,17 @@ export default function Header() {
             >
               {/* First line of the hamburger/X icon */}
               <div
-                className={`h-[4px] w-full bg-black hover:bg-white mt-0.5 rounded-full transition-all duration-300 ${
+                className={`h-[4px] w-full mt-0.5 rounded-full transition-all duration-300 ${
                   isMenuOpen ? "transform rotate-45 translate-y-[4px]" : ""
                 }`}
+                style={{ backgroundColor: isMenuOpen ? 'black' : (isInFifthSection ? 'white' : 'black') }}
               ></div>
               {/* Second line of the hamburger/X icon */}
               <div
-                className={`h-[4px] w-full bg-black rounded-full mt-1 transition-all duration-300 ${
+                className={`h-[4px] w-full rounded-full mt-1 transition-all duration-300 ${
                   isMenuOpen ? "transform -rotate-45 -translate-y-[4px]" : ""
                 }`}
+                style={{ backgroundColor: isMenuOpen ? 'black' : (isInFifthSection ? 'white' : 'black') }}
               ></div>
             </div>
           </div>

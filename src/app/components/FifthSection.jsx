@@ -368,6 +368,7 @@ export default function FifthSection() {
     
     <motion.div 
       ref={sectionRef} 
+      id="fifth-section"
       className="mt-10 py-10 lg:pl-38 px-10 bg-black " 
       style={{ 
         borderTopLeftRadius: isMobile ? mobileBorderRadius : desktopBorderRadius, 
