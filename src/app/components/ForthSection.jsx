@@ -148,12 +148,12 @@ export default function FourthSection() {
           key={section.id}
           className={`flex flex-col md:flex-row items-start sticky section-${section.id} px-4 sm:px-8 md:px-12 lg:px-16 z-${
             10 - section.id
-          } top-0 bg-white  gap-6 md:gap-12 lg:gap-28 py-8 md:py-12 lg:py-16 border-t-2 border-gray-300 relative`}
+          } top-0 bg-white gap-6 md:gap-12 lg:gap-28 py-8 md:py-12 lg:py-16 border-t-2 border-gray-300 relative overflow-hidden`}
         >
           {/* Individual overlay for each section (except the last one) */}
           {section.id !== 5 && (
             <div
-              className="fixed left-0 right-0 top-0 bottom-0 z-[999] bg-black transition-opacity duration-300 w-screen"
+              className="absolute left-0 right-0 top-0 bottom-0 z-[999] bg-black transition-opacity duration-300 w-full h-full"
               style={{
                 pointerEvents: "none", // Ensure it doesn't block interactions
                 opacity: sectionOpacities[section.id], // Individual opacity from state

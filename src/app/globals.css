@@ -1,6 +1,18 @@
 @import "tailwindcss";
 @import "mouse-follower/dist/mouse-follower.min.css";
 
+/* Custom cursor styles */
+.mf-cursor .text {
+  color: black!important;
+  mix-blend-mode: normal !important;
+  
+}
+
+.mf-cursor.-text:before {
+  background-color: black!important;
+  mix-blend-mode: normal !important;
+}
+
 /* Font Configuration */
 body {
   font-family: 'Satoshi-Variable', Arial, sans-serif;

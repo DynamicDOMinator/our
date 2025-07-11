@@ -91,7 +91,7 @@ export default function Header() {
         <div className="min-h-screen  md:fixed md:block hidden opacity-40 z-[55] w-full bg-black"></div>
       )}
 
-      <div className="flex fixed w-full items-center justify-between pt-10 md:px-16 px-8 font-medium text-lg z-50">
+      <div className="flex fixed top-9 w-full items-center justify-between pt-10 md:px-16 px-8 font-medium text-lg z-50">
         <div className={`transition-all duration-500 ${isScrolled ? 'md:opacity-100 opacity-0 md:transform-none transform -translate-y-10' : 'opacity-100 transform-none'}`}>
           <Image src={"/Techshun.png"} height={40} width={140} alt="Techshun" />
         </div>
