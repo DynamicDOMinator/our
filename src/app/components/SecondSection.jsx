@@ -1,30 +1,31 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 export default function SecondSection() {
     const videoRef = useRef(null);
     
-    const handleVideoClick = () => {
+    useEffect(() => {
+        // Force autoplay when component mounts
         if (videoRef.current) {
-            if (videoRef.current.paused) {
-                videoRef.current.play();
-            } else {
-                videoRef.current.pause();
-            }
+            videoRef.current.play().catch(error => {
+                console.log("Video autoplay failed:", error);
+            });
         }
-    };
+    }, []);
+    
+
     
     return (
         <div id="second-section" className="py-10">
             <video 
                 ref={videoRef}
-                className="w-full cursor-pointer" 
+                className="w-full" 
                 src="/short.mp4" 
-                autoPlay 
+                autoplay 
                 loop 
                 muted
                 playsInline
-                onClick={handleVideoClick}
+                
             ></video>
         </div>
     )

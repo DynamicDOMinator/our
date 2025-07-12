@@ -11,15 +11,22 @@ export default function HeroSection() {
     { text: " built to scale", highlight: true },
   ];
   
-  const handleVideoClick = (videoRef) => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-      } else {
-        videoRef.current.pause();
-      }
+  useEffect(() => {
+    // Force autoplay when component mounts
+    if (mobileVideoRef.current) {
+      mobileVideoRef.current.play().catch(error => {
+        console.log("Mobile video autoplay failed:", error);
+      });
     }
-  };
+    
+    if (desktopVideoRef.current) {
+      desktopVideoRef.current.play().catch(error => {
+        console.log("Desktop video autoplay failed:", error);
+      });
+    }
+  }, []);
+
+
 
   return (
     <div id="hero-section" className="relative md:pt-28 pt-36 lg:min-h-screen flex flex-col justify-center px-8 md:px-20 overflow-hidden">
@@ -85,8 +92,8 @@ export default function HeroSection() {
                 loop
                 muted
                 playsInline
-                onClick={() => handleVideoClick(mobileVideoRef)}
-                className="h-[70px] w-[100px] md:h-[100px] md:w-[150px] rounded-full object-cover cursor-pointer"
+                
+                className="h-[70px] w-[100px] md:h-[100px] md:w-[150px] rounded-full object-cover"
               />
             </motion.div>
           </div>
@@ -120,8 +127,8 @@ export default function HeroSection() {
                 loop
                 muted
                 playsInline
-                onClick={() => handleVideoClick(desktopVideoRef)}
-                className="min-w-1 h-[200px] w-full lg:w-auto rounded-full object-cover cursor-pointer"
+                
+                className="min-w-1 h-[200px] w-full lg:w-auto rounded-full object-cover"
               />
             </motion.div>
           </div>

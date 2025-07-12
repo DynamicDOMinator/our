@@ -239,7 +239,7 @@ export default function Header() {
         <div
           data-cursor-stick="#hamburger-lg"
           id="hamburger-lg"
-          className="fixed top-10 right-5 z-[70] hidden lg:block"
+          className="fixed top-17  right-5 z-[70] hidden lg:block"
         >
           <div
             className={`rounded-full p-3 py-3 ${
