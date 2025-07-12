@@ -5,17 +5,18 @@ import ThirdSection from "./components/ThirdSection";
 import FourthSection from "./components/ForthSection";
 import FifthSection from "./components/FifthSection";
 import Footer from "./components/Footer";
-
+import Philosophy from "./components/PhilosophySection";
 export default function Home() {
   return (
     <>
       <Header />
       <HeroSection />
-      <SecondSection/>
+      <SecondSection />
       <ThirdSection />
       <FourthSection />
-      <FifthSection/>
-      <Footer/>
+      <FifthSection />
+      <Philosophy />
+      <Footer />
     </>
   );
 }

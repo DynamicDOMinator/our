@@ -221,7 +221,7 @@ export default function Footer() {
         <div className="marquee-container follow-us-marquee">
           {" "}
           {/* Added container with overflow hidden and follow-us-marquee class */}
-          <p className="text-9xl animate-marquee text-nowrap text-white">
+          <p className="lg:text-9xl md:text-7xl text-3xl animate-marquee text-nowrap text-white">
             <span 
               className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105" 
               data-cursor-text="Follow Us" 
@@ -277,7 +277,7 @@ export default function Footer() {
       </div>
 
       <div className="">
-        <h6 className="text-white text-2xl pt-30 px-20 ">
+        <h6 className="text-white md:text-2xl text-lg pt-30 md:px-20 pl-7 ">
           Social Media and contacts
         </h6>
 
@@ -286,15 +286,15 @@ export default function Footer() {
 
           <div className="absolute top-[79px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 instagram-hover-container social-hover-container">
             {/* Instagram header - always visible and positioned above the marquee */}
-            <div className="text-white text-4xl py-10 absolute w-full left-0 top-0 z-20 social-text">
-              <div className="px-20 flex items-center justify-between">
+            <div className="text-white md:text-4xl text-2xl py-10 absolute w-full left-0 top-0 z-20 social-text">
+              <div className="md:px-20 px-7 flex items-center justify-between">
                 <p data-cursor-text="Instagram" data-cursor-stick="#instagram-text" id="instagram-text">Instagram</p>
                 <GoArrowUpRight />
               </div>
             </div>
 
             {/* Marquee animation that appears on hover - positioned behind the Instagram text */}
-            <div className="marquee-container instagram-links px-20 text-black text-4xl py-10 bg-white absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+            <div className="marquee-container instagram-links px-20 text-black  md:text-4xl text-2xl py-10 bg-white absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
               <div className="animate-marquee flex items-center gap-5">
                 {/* Instagram links - first set */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
@@ -358,15 +358,15 @@ export default function Footer() {
           {/* Facebook Section */}
           <div className="absolute top-[40px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 facebook-hover-container social-hover-container">
             {/* Facebook header - always visible and positioned above the marquee */}
-            <div className="text-white text-4xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
-              <div className="px-20 flex items-center justify-between">
+            <div className="text-white md:text-4xl text-2xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
+              <div className="md:px-20 px-7 flex items-center justify-between">
                 <p data-cursor-text="Facebook" data-cursor-stick="#facebook-text" id="facebook-text">Facebook</p>
                 <GoArrowUpRight />
               </div>
             </div>
 
             {/* Marquee animation that appears on hover - positioned behind the Facebook text */}
-            <div className="marquee-container facebook-links px-20 text-black text-4xl py-10 bg-[#1877F2] absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+            <div className="marquee-container facebook-links px-20 text-black lg:text-4xl text-2xl py-10 bg-[#1877F2] absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
               <div className="animate-marquee flex items-center gap-5">
                 {/* Facebook links - first set */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
@@ -430,15 +430,15 @@ export default function Footer() {
           {/* Twitter/X Section */}
           <div className="absolute top-[0px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 twitter-hover-container social-hover-container">
             {/* Twitter header - always visible and positioned above the marquee */}
-            <div className="text-white text-4xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
-              <div className="px-20 flex items-center justify-between">
+            <div className="text-white lg:text-4xl text-2xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
+              <div className="md:px-20 px-7 flex items-center justify-between">
                 <p data-cursor-text="Twitter / X" data-cursor-stick="#twitter-text" id="twitter-text">Twitter / X</p>
                 <GoArrowUpRight />
               </div>
             </div>
 
             {/* Marquee animation that appears on hover - positioned behind the Twitter text */}
-            <div className="marquee-container twitter-links px-20 text-white text-4xl py-10  absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+            <div className="marquee-container twitter-links px-20 text-white md:text-4xl text-2xl py-10  absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
               <div className="animate-marquee flex items-center gap-5">
                 {/* Twitter links - first set */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
