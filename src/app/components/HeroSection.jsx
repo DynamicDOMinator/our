@@ -12,18 +12,45 @@ export default function HeroSection() {
   ];
   
   useEffect(() => {
-    // Force autoplay when component mounts
-    if (mobileVideoRef.current) {
-      mobileVideoRef.current.play().catch(error => {
-        console.log("Mobile video autoplay failed:", error);
+    // More robust video initialization and autoplay
+    const initVideo = (videoElement, videoName) => {
+      if (!videoElement) return;
+      
+      // Make sure video is properly loaded
+      videoElement.load();
+      
+      // Set up event listeners
+      const handleCanPlay = () => {
+        // Try to play when it's ready
+        videoElement.play().catch(error => {
+          console.log(`${videoName} video autoplay failed:`, error);
+          // If autoplay fails, try again with user interaction simulation
+          videoElement.muted = true; // Ensure muted to allow autoplay
+          videoElement.play().catch(e => console.log(`${videoName} second attempt failed:`, e));
+        });
+      };
+      
+      videoElement.addEventListener('canplaythrough', handleCanPlay);
+      
+      // Try to play immediately as well
+      videoElement.play().catch(() => {
+        // Silent catch - we'll try again on canplaythrough
       });
-    }
+      
+      return () => {
+        videoElement.removeEventListener('canplaythrough', handleCanPlay);
+      };
+    };
     
-    if (desktopVideoRef.current) {
-      desktopVideoRef.current.play().catch(error => {
-        console.log("Desktop video autoplay failed:", error);
-      });
-    }
+    // Initialize both videos
+    const cleanupMobile = initVideo(mobileVideoRef.current, 'Mobile');
+    const cleanupDesktop = initVideo(desktopVideoRef.current, 'Desktop');
+    
+    // Cleanup
+    return () => {
+      if (cleanupMobile) cleanupMobile();
+      if (cleanupDesktop) cleanupDesktop();
+    };
   }, []);
 
 
