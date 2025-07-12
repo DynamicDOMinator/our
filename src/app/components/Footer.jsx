@@ -1,6 +1,57 @@
+"use client";
 import { GoArrowUpRight } from "react-icons/go";
+import { useEffect } from "react";
+import Cursor from "mouse-follower";
+import gsap from "gsap";
+import "mouse-follower/dist/mouse-follower.min.css";
 
 export default function Footer() {
+  useEffect(() => {
+    // Initialize mouse-follower cursor only on non-mobile devices
+    Cursor.registerGSAP(gsap);
+    
+    let cursor = null;
+    
+    const initializeCursor = () => {
+      // Check if device is not mobile or tablet
+      if (window.innerWidth > 1024) {
+        // Only initialize if not already initialized
+        if (!cursor) {
+          cursor = new Cursor({
+            container: document.body,
+            speed: 0.5,
+            ease: "expo.out",
+            visibleTimeout: 300,
+            hideNativeCursor: true,
+          });
+        }
+      } else {
+        // Destroy cursor if it exists and we're on mobile/tablet
+        if (cursor) {
+          cursor.destroy();
+          cursor = null;
+          // Restore native cursor
+          document.body.style.cursor = 'auto';
+        }
+      }
+    };
+    
+    // Initialize after a short delay
+    const timeout = setTimeout(initializeCursor, 300);
+    
+    // Re-initialize on resize (handles orientation changes)
+    window.addEventListener('resize', initializeCursor);
+
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', initializeCursor);
+      // Clean up cursor if it exists
+      if (cursor) {
+        cursor.destroy();
+        cursor = null;
+      }
+    };
+  }, []);
   return (
     <div className="bg-black pt-10">
       <div className="overflow-hidden w-full">
@@ -171,24 +222,54 @@ export default function Footer() {
           {" "}
           {/* Added container with overflow hidden and follow-us-marquee class */}
           <p className="text-9xl animate-marquee text-nowrap text-white">
-            <span className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105">
+            <span 
+              className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105" 
+              data-cursor-text="Follow Us" 
+              data-cursor-stick="#follow-us-1"
+              id="follow-us-1"
+            >
               Follow Us
             </span>
-            <span className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105">
+            <span 
+              className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
+              data-cursor-text="Follow Us" 
+              data-cursor-stick="#follow-us-2"
+              id="follow-us-2"
+            >
               Follow Us
             </span>
-            <span className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105">
+            <span 
+              className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
+              data-cursor-text="Follow Us" 
+              data-cursor-stick="#follow-us-3"
+              id="follow-us-3"
+            >
               Follow Us
             </span>
             {/* Duplicate content for continuous scrolling */}
 
-            <span className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105">
+            <span 
+              className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
+              data-cursor-text="Follow Us" 
+              data-cursor-stick="#follow-us-4"
+              id="follow-us-4"
+            >
               Follow Us
             </span>
-            <span className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105">
+            <span 
+              className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
+              data-cursor-text="Follow Us" 
+              data-cursor-stick="#follow-us-5"
+              id="follow-us-5"
+            >
               Follow Us
             </span>
-            <span className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105">
+            <span 
+              className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
+              data-cursor-text="Follow Us" 
+              data-cursor-stick="#follow-us-6"
+              id="follow-us-6"
+            >
               Follow Us
             </span>
           </p>
@@ -196,18 +277,18 @@ export default function Footer() {
       </div>
 
       <div className="">
-        <h6 className="text-white text-2xl pt-20 px-20 ">
+        <h6 className="text-white text-2xl pt-30 px-20 ">
           Social Media and contacts
         </h6>
 
         <div className="relative">
           {/* We've moved the marquee animation to be in the same position as the Instagram text */}
 
-          <div className="absolute top-0 right-0 w-full my-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 instagram-hover-container social-hover-container">
+          <div className="absolute top-[79px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 instagram-hover-container social-hover-container">
             {/* Instagram header - always visible and positioned above the marquee */}
             <div className="text-white text-4xl py-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="px-20 flex items-center justify-between">
-                <p>Instagram</p>
+                <p data-cursor-text="Instagram" data-cursor-stick="#instagram-text" id="instagram-text">Instagram</p>
                 <GoArrowUpRight />
               </div>
             </div>
@@ -275,11 +356,11 @@ export default function Footer() {
           </div>
 
           {/* Facebook Section */}
-          <div className="absolute top-[0px] right-0 w-full my-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 facebook-hover-container social-hover-container">
+          <div className="absolute top-[40px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 facebook-hover-container social-hover-container">
             {/* Facebook header - always visible and positioned above the marquee */}
-            <div className="text-white text-4xl py-10 absolute w-full left-0 top-0 z-20 social-text">
+            <div className="text-white text-4xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="px-20 flex items-center justify-between">
-                <p>Facebook</p>
+                <p data-cursor-text="Facebook" data-cursor-stick="#facebook-text" id="facebook-text">Facebook</p>
                 <GoArrowUpRight />
               </div>
             </div>
@@ -347,17 +428,17 @@ export default function Footer() {
           </div>
 
           {/* Twitter/X Section */}
-          <div className="absolute top-[0px] right-0 w-full my-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 twitter-hover-container social-hover-container">
+          <div className="absolute top-[0px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 twitter-hover-container social-hover-container">
             {/* Twitter header - always visible and positioned above the marquee */}
-            <div className="text-white text-4xl py-10 absolute w-full left-0 top-0 z-20 social-text">
+            <div className="text-white text-4xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="px-20 flex items-center justify-between">
-                <p>Twitter / X</p>
+                <p data-cursor-text="Twitter / X" data-cursor-stick="#twitter-text" id="twitter-text">Twitter / X</p>
                 <GoArrowUpRight />
               </div>
             </div>
 
             {/* Marquee animation that appears on hover - positioned behind the Twitter text */}
-            <div className="marquee-container twitter-links px-20 text-white text-4xl py-10 bg-black absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+            <div className="marquee-container twitter-links px-20 text-white text-4xl py-10  absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
               <div className="animate-marquee flex items-center gap-5">
                 {/* Twitter links - first set */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
