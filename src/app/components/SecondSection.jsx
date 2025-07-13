@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useEffect } from "react";
+import LazyVideo from "./LazyVideo";
 
 export default function SecondSection() {
     const videoRef = useRef(null);
@@ -40,16 +41,16 @@ export default function SecondSection() {
     
     return (
         <div id="second-section" className="py-10">
-            <video 
+            <LazyVideo 
                 ref={videoRef}
                 className="w-full" 
                 src="/short.mp4" 
+                webmSrc="/short.webm"
                 autoPlay 
                 loop 
                 muted
                 playsInline
-                
-            ></video>
+            />
         </div>
     )
 }

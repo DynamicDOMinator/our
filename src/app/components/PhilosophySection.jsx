@@ -1,5 +1,6 @@
 'use client';
 import { useRef, useEffect } from 'react';
+import LazyVideo from './LazyVideo';
 
 export default function Philosophy() {
   const videoRef = useRef(null);
@@ -46,7 +47,7 @@ export default function Philosophy() {
       </div>
       <div className="flex lg:flex-row flex-col items-center pt-20 bg-white">
         <div className="lg:w-1/2 relative">
-          <video ref={videoRef} className="object-cover w-full lg:p-20" autoPlay loop muted playsInline src="/ta2.mp4"> </video>
+          <LazyVideo ref={videoRef} className="object-cover w-full lg:p-20" autoPlay loop muted playsInline src="/ta2.mp4" webmSrc="/ta2.webm" />
         </div>
         <div className="lg:w-1/2 pb-10 lg:pb-0">
           <p className="lg:text-2xl text-xl lg:pr-40 px-10 lg:px-0">

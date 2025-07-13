@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import Cursor from "mouse-follower";
 import gsap from "gsap";
 import "mouse-follower/dist/mouse-follower.min.css";
+import LazyVideo from "./LazyVideo";
 
 // Add a style tag to hide video controls
 const hideVideoControlsStyle = `
@@ -267,6 +268,24 @@ export default function FifthSection() {
       }
     };
   }, []);
+  
+  // Ensure the featured video plays automatically
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true; // Ensure muted to allow autoplay
+      const playPromise = videoRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log("Featured video autoplay failed:", error);
+          // Try again after a short delay
+          setTimeout(() => {
+            videoRef.current.play().catch(e => console.log("Second attempt failed:", e));
+          }, 1000);
+        });
+      }
+    }
+  }, []);
 
   // Modified to prevent default behavior on mobile
   const handleVideoClick = (e) => {
@@ -410,22 +429,24 @@ export default function FifthSection() {
                 videoRef.current = el;
                 addToVideoRefs(el);
               }}
+              src="/our-1.mp4"
               loop
+              autoPlay
               muted
               playsInline
               preload="auto"
               onClick={(e) => handleVideoClick(e)}
               onTouchStart={(e) => handleVideoTouch(e, e.target)}
               className="w-full h-full rounded-full cursor-pointer object-cover"
-              src="/our-1.mp4"
               data-cursor="text"
               data-cursor-text="Explore"
-              onMouseEnter={(e) => handleVideoHover(e.target)}
-              onMouseLeave={(e) => handleVideoLeave(e.target)}
               controlsList="nodownload nofullscreen noremoteplayback"
               disablePictureInPicture
               controls={false}
               style={{ backgroundColor: "#000" }} // Add background color as fallback
+              onLoadedData={(e) => {
+                e.target.play().catch(err => console.log("Video play error:", err));
+              }}
             ></video>
           </motion.div>
 

@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import LazyVideo from "./LazyVideo";
 
 export default function HeroSection() {
   const mobileVideoRef = useRef(null);
@@ -112,14 +113,15 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 1.0 }}
               className="block lg:hidden ml-2"
             >
-              <video
+              <LazyVideo
                 ref={mobileVideoRef}
                 src="/header.mp4"
+                webmSrc="/header.webm"
                 autoPlay
                 loop
                 muted
                 playsInline
-                
+                priority={true}
                 className="h-[70px] w-[100px] md:h-[100px] md:w-[150px] rounded-full object-cover"
               />
             </motion.div>
@@ -147,14 +149,15 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.0 }}
             >
-              <video
+              <LazyVideo
                 ref={desktopVideoRef}
                 src="/header.mp4"
+                webmSrc="/header.webm"
                 autoPlay
                 loop
                 muted
                 playsInline
-                
+                priority={true}
                 className="min-w-1 h-[200px] w-full lg:w-auto rounded-full object-cover"
               />
             </motion.div>

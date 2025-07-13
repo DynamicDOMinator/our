@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import LazyImage from "./LazyImage";
 
 export default function FourthSection() {
   // Create separate opacity states for each section
@@ -168,13 +169,16 @@ export default function FourthSection() {
             
             {/* Image appears here on mobile, between text and list items */}
             <div className="block md:hidden w-full my-6">
-              <Image
+              <LazyImage
                 src={section.image}
+                videoSrc={section.image.replace('.gif', '.mp4')}
+                webmSrc={section.image.replace('.gif', '.webm')}
                 width={500}
                 height={500}
                 alt={section.title}
                 className="w-full"
-                priority
+                priority={false}
+                isGif={section.image.endsWith('.gif')}
               />
             </div>
 
@@ -198,13 +202,16 @@ export default function FourthSection() {
 
           {/* Image appears here on desktop */}
           <div className="hidden md:block md:basis-1/2">
-            <Image
+            <LazyImage
               src={section.image}
+              videoSrc={section.image.replace('.gif', '.mp4')}
+              webmSrc={section.image.replace('.gif', '.webm')}
               width={500}
               height={500}
               alt={section.title}
               className="w-full h-full"
-              priority
+              priority={false}
+              isGif={section.image.endsWith('.gif')}
             />
           </div>
         </div>
