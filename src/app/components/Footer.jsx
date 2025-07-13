@@ -294,7 +294,7 @@ export default function Footer() {
             </div>
 
             {/* Marquee animation that appears on hover - positioned behind the Instagram text */}
-            <div className="marquee-container instagram-links px-20 text-white md:text-4xl text-2xl py-10 bg-gradient-to-r from-[#405DE6] via-[#5851DB] via-[#833AB4] via-[#C13584] via-[#E1306C] via-[#FD1D1D] to-[#F56040] absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+            <div className="marquee-container instagram-links px-20 text-white md:text-4xl text-2xl py-10 bg-gradient-to-r from-[#405DE6] via-[#C13584] to-[#F56040] absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
               <div className="animate-marquee flex items-center gap-5">
                 {/* Instagram links - first set */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
