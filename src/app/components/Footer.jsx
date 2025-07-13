@@ -294,7 +294,7 @@ export default function Footer() {
             </div>
 
             {/* Marquee animation that appears on hover - positioned behind the Instagram text */}
-            <div className="marquee-container instagram-links px-20 text-black  md:text-4xl text-2xl py-10 bg-white absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+            <div className="marquee-container instagram-links px-20 text-white md:text-4xl text-2xl py-10 bg-gradient-to-r from-[#405DE6] via-[#5851DB] via-[#833AB4] via-[#C13584] via-[#E1306C] via-[#FD1D1D] to-[#F56040] absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
               <div className="animate-marquee flex items-center gap-5">
                 {/* Instagram links - first set */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
@@ -432,7 +432,7 @@ export default function Footer() {
             {/* Twitter header - always visible and positioned above the marquee */}
             <div className="text-white lg:text-4xl text-2xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="md:px-20 px-7 flex items-center justify-between">
-                <p data-cursor-text="Twitter / X" data-cursor-stick="#twitter-text" id="twitter-text">Twitter / X</p>
+                <p data-cursor-text="Twitter" data-cursor-stick="#twitter-text" id="twitter-text">Twitter</p>
                 <GoArrowUpRight />
               </div>
             </div>
@@ -442,53 +442,53 @@ export default function Footer() {
               <div className="animate-marquee flex items-center gap-5">
                 {/* Twitter links - first set */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
 
                 {/* Twitter links - duplicated for continuous scrolling */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter / X</p>
+                  <p>Twitter</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
               </div>
