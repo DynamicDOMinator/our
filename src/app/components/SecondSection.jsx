@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useEffect } from "react";
-import LazyVideo from "./LazyVideo";
+
 
 export default function SecondSection() {
     const videoRef = useRef(null);
@@ -41,16 +41,19 @@ export default function SecondSection() {
     
     return (
         <div id="second-section" className="py-10">
-            <LazyVideo 
+            <video 
                 ref={videoRef}
                 className="w-full" 
-                src="/short.mp4" 
-                webmSrc="/short.webm"
                 autoPlay 
                 loop 
                 muted
                 playsInline
-            />
+                preload="auto"
+            >
+                <source src="/short.webm" type="video/webm" />
+                <source src="/short.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
         </div>
     )
 }
