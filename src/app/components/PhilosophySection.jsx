@@ -16,10 +16,9 @@ export default function Philosophy() {
       const handleCanPlay = () => {
         // Try to play when it's ready
         videoElement.play().catch(error => {
-          console.log("Video autoplay failed:", error);
           // If autoplay fails, try again with user interaction simulation
           videoElement.muted = true; // Ensure muted to allow autoplay
-          videoElement.play().catch(e => console.log("Second attempt failed:", e));
+          videoElement.play().catch(e => {/* Second attempt failed */});
         });
       };
       
@@ -47,7 +46,7 @@ export default function Philosophy() {
       </div>
       <div className="flex lg:flex-row flex-col items-center pt-20 bg-white">
         <div className="lg:w-1/2 relative">
-          <LazyVideo ref={videoRef} className="object-cover w-full lg:p-20" autoPlay loop muted playsInline src="/ta2.mp4" webmSrc="/ta2.webm" />
+          <LazyVideo ref={videoRef} className="object-cover w-full lg:p-20" autoPlay loop muted playsInline src="/ta2.mp4" />
         </div>
         <div className="lg:w-1/2 pb-10 lg:pb-0">
           <p className="lg:text-2xl text-xl lg:pr-40 px-10 lg:px-0">

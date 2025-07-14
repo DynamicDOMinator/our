@@ -268,19 +268,21 @@ export default function FifthSection() {
       }
     };
   }, []);
-  
+
   // Ensure the featured video plays automatically
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = true; // Ensure muted to allow autoplay
       const playPromise = videoRef.current.play();
-      
+
       if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Featured video autoplay failed:", error);
+        playPromise.catch((error) => {
+          // Featured video autoplay failed, error
           // Try again after a short delay
           setTimeout(() => {
-            videoRef.current.play().catch(e => console.log("Second attempt failed:", e));
+            videoRef.current
+              .play()
+              .catch((e) => {/* Second attempt failed */});
           }, 1000);
         });
       }
@@ -358,12 +360,11 @@ export default function FifthSection() {
       if (playPromise !== undefined) {
         playPromise.catch((error) => {
           // Auto-play was prevented or interrupted
-          console.log("Video play error:", error);
           // Try again with user interaction flag
           videoElement.muted = true; // Ensure muted to allow autoplay
           videoElement
             .play()
-            .catch((e) => console.log("Second attempt failed:", e));
+            .catch((e) => {/* Second attempt failed */});
         });
       }
     }
@@ -445,7 +446,9 @@ export default function FifthSection() {
               controls={false}
               style={{ backgroundColor: "#000" }} // Add background color as fallback
               onLoadedData={(e) => {
-                e.target.play().catch(err => console.log("Video play error:", err));
+                e.target
+                  .play()
+                  .catch((err) => console.log("Video play error:", err));
               }}
             ></video>
           </motion.div>

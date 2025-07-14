@@ -129,7 +129,7 @@ export default function Header() {
 
       <div className="flex fixed lg:top-9 w-full items-center justify-between pt-10 md:px-16 px-8 font-medium text-lg z-50">
         <div className={`transition-all duration-500 ${isScrolled ? 'opacity-0 transform -translate-y-10' : 'opacity-100 transform-none'}`}>
-          <Image src={"/Techshun.png"} height={40} width={140} alt="Techshun" />
+          <Image src={"/Techshun.png"} height={40} width={140} priority alt="Techshun" />
         </div>
 
         <div className="flex items-center gap-[40px]">

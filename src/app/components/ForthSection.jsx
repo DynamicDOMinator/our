@@ -172,7 +172,6 @@ export default function FourthSection() {
               <LazyImage
                 src={section.image}
                 videoSrc={section.image.replace('.gif', '.mp4')}
-                webmSrc={section.image.replace('.gif', '.webm')}
                 width={500}
                 height={500}
                 alt={section.title}
@@ -205,7 +204,6 @@ export default function FourthSection() {
             <LazyImage
               src={section.image}
               videoSrc={section.image.replace('.gif', '.mp4')}
-              webmSrc={section.image.replace('.gif', '.webm')}
               width={500}
               height={500}
               alt={section.title}

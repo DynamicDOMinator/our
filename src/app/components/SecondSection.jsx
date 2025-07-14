@@ -16,10 +16,9 @@ export default function SecondSection() {
             const handleCanPlay = () => {
                 // Try to play when it's ready
                 videoElement.play().catch(error => {
-                    console.log("Video autoplay failed:", error);
                     // If autoplay fails, try again with user interaction simulation
                     videoElement.muted = true; // Ensure muted to allow autoplay
-                    videoElement.play().catch(e => console.log("Second attempt failed:", e));
+                    videoElement.play().catch(e => {/* Second attempt failed */});
                 });
             };
             
@@ -50,7 +49,6 @@ export default function SecondSection() {
                 playsInline
                 preload="auto"
             >
-                <source src="/short.webm" type="video/webm" />
                 <source src="/short.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>

@@ -2,51 +2,61 @@
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 
-
 export default function HeroSection() {
   const mobileVideoRef = useRef(null);
   const desktopVideoRef = useRef(null);
-  
+
   const lines = [
     { text: "Your ideas our code", highlight: false },
     { text: " built to scale", highlight: true },
   ];
-  
+
   useEffect(() => {
-    // More robust video initialization and autoplay
+    // Enhanced video initialization to prevent lazy loading
     const initVideo = (videoElement, videoName) => {
       if (!videoElement) return;
-      
-      // Make sure video is properly loaded
+
+      // Force immediate loading of video
       videoElement.load();
-      
-      // Set up event listeners
+      videoElement.preload = "auto";
+
+      // Disable any browser lazy loading behavior
+      if ("loading" in videoElement) {
+        videoElement.loading = "eager";
+      }
+
+      // Set up event listeners with priority on immediate playback
       const handleCanPlay = () => {
-        // Try to play when it's ready
-        videoElement.play().catch(error => {
-          console.log(`${videoName} video autoplay failed:`, error);
+        videoElement.play().catch((error) => {
           // If autoplay fails, try again with user interaction simulation
           videoElement.muted = true; // Ensure muted to allow autoplay
-          videoElement.play().catch(e => console.log(`${videoName} second attempt failed:`, e));
+          videoElement
+            .play()
+            .catch((e) => {
+              /* ${videoName} second attempt failed */
+            });
         });
       };
-      
-      videoElement.addEventListener('canplaythrough', handleCanPlay);
-      
+
+      // Listen for the loadedmetadata event which fires earlier than canplaythrough
+      videoElement.addEventListener("loadedmetadata", handleCanPlay);
+      videoElement.addEventListener("canplaythrough", handleCanPlay);
+
       // Try to play immediately as well
       videoElement.play().catch(() => {
-        // Silent catch - we'll try again on canplaythrough
+        // Silent catch - we'll try again on events
       });
-      
+
       return () => {
-        videoElement.removeEventListener('canplaythrough', handleCanPlay);
+        videoElement.removeEventListener("loadedmetadata", handleCanPlay);
+        videoElement.removeEventListener("canplaythrough", handleCanPlay);
       };
     };
-    
+
     // Initialize both videos
-    const cleanupMobile = initVideo(mobileVideoRef.current, 'Mobile');
-    const cleanupDesktop = initVideo(desktopVideoRef.current, 'Desktop');
-    
+    const cleanupMobile = initVideo(mobileVideoRef.current, "Mobile");
+    const cleanupDesktop = initVideo(desktopVideoRef.current, "Desktop");
+
     // Cleanup
     return () => {
       if (cleanupMobile) cleanupMobile();
@@ -54,10 +64,11 @@ export default function HeroSection() {
     };
   }, []);
 
-
-
   return (
-    <div id="hero-section" className="relative md:pt-28 pt-36 lg:min-h-screen flex flex-col justify-center px-8 md:px-20 overflow-hidden">
+    <div
+      id="hero-section"
+      className="relative md:pt-28 pt-36 lg:min-h-screen flex flex-col justify-center px-8 md:px-20 overflow-hidden"
+    >
       {/* Main content */}
       <div className="relative z-10">
         {/* Grid layout */}
@@ -77,7 +88,6 @@ export default function HeroSection() {
                 position: "relative",
                 zIndex: 2,
                 fontWeight: 300,
-               
               }}
             >
               Your ideas our code
@@ -86,7 +96,6 @@ export default function HeroSection() {
 
           {/* Second div - spans 2 columns in row 2 */}
           <div className="col-span-1 2xl:text-[128px] md:text-7xl text-3xl  md:col-span-2 lg:col-span-2 lg:row-start-2 flex flex-row items-center gap-4">
-
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -100,12 +109,11 @@ export default function HeroSection() {
                 position: "relative",
                 zIndex: 2,
                 fontWeight: 300,
-               
               }}
             >
               built to scale
             </motion.h2>
-            
+
             {/* Video for mobile and tablet - inline with text */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -120,10 +128,14 @@ export default function HeroSection() {
                 muted
                 playsInline
                 preload="auto"
+                loading="eager"
                 className="h-[70px] w-[100px] md:h-[100px] md:w-[150px] rounded-full object-cover"
               >
-                <source src="/header.webm" type="video/webm" />
-                <source src="/header.mp4" type="video/mp4" />
+                <source
+                  src="/header.mp4"
+                  type="video/mp4"
+                  fetchPriority="high"
+                />
                 Your browser does not support the video tag.
               </video>
             </motion.div>
@@ -158,31 +170,20 @@ export default function HeroSection() {
                 muted
                 playsInline
                 preload="auto"
+                loading="eager"
                 className="min-w-1 h-[200px] w-full lg:w-auto rounded-full object-cover"
               >
-                <source src="/header.webm" type="video/webm" />
-                <source src="/header.mp4" type="video/mp4" />
+                <source
+                  src="/header.mp4"
+                  type="video/mp4"
+                  fetchPriority="high"
+                />
                 Your browser does not support the video tag.
               </video>
             </motion.div>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
   );
 }
