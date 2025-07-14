@@ -67,7 +67,8 @@ export default function HeroSection() {
   return (
     <div
       id="hero-section"
-      className="relative md:pt-28 pt-36 lg:min-h-screen flex flex-col justify-center px-8 md:px-20 overflow-hidden"
+      className="relative min-h-screen  lg:min-h-screen flex flex-col justify-center px-8 md:px-20 overflow-hidden"
+
     >
       {/* Main content */}
       <div className="relative z-10">
