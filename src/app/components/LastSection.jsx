@@ -5,7 +5,7 @@ export default function LastSection() {
   const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <div className="bg-zinc-950 md:py-38 py-20 flex flex-col text-center gap-10 items-center relative">
+    <div className="bg-zinc-950 h-screen flex flex-col text-center gap-10 items-center justify-center relative">
       {/* Background that appears when hovering over the button */}
       <div
         className={`absolute inset-0 bg-[url('/noisy.gif')] bg-repeat transition-opacity duration-500 pointer-events-none z-[1] ${
