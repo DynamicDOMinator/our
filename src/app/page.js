@@ -6,6 +6,8 @@ import FourthSection from "./components/ForthSection";
 import FifthSection from "./components/FifthSection";
 import Footer from "./components/Footer";
 import Philosophy from "./components/PhilosophySection";
+import LastSection from "./components/LastSection";
+
 export default function Home() {
   return (
     <>
@@ -17,6 +19,7 @@ export default function Home() {
       <FifthSection />
       <Philosophy />
       <Footer />
+      <LastSection />
     </>
   );
 }
