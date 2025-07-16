@@ -1,7 +1,10 @@
 import "./fonts/font-imports.css";
 import "./globals.css";
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import SmoothScroll from "./components/SmoothScroll";
+import PageTransition from "./components/PageTransition";
+import ConditionalLastSection from "./components/ConditionalLastSection";
 // Define the font stack with Arial and sans-serif as fallbacks
 
 export const metadata = {
@@ -19,7 +22,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <PageTransition>
+            <Header />
+            {children}
+            <Footer />
+            <ConditionalLastSection />
+          </PageTransition>
+        </SmoothScroll>
       </body>
     </html>
   );

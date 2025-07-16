@@ -2,7 +2,7 @@
 import { FaArrowRight } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-
+import Link from "next/link";
 import Cursor from "mouse-follower";
 import gsap from "gsap";
 import "mouse-follower/dist/mouse-follower.min.css";
@@ -38,48 +38,48 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
+
   // Use Intersection Observer to detect when FifthSection is in viewport
   useEffect(() => {
-    const fifthSection = document.getElementById('fifth-section');
-    
+    const fifthSection = document.getElementById("fifth-section");
+
     if (!fifthSection) {
       // If the section doesn't exist yet, try again after a short delay
       const checkTimer = setTimeout(() => {
-        const retrySection = document.getElementById('fifth-section');
+        const retrySection = document.getElementById("fifth-section");
         if (retrySection) {
           setupObserver(retrySection);
         }
       }, 1000);
       return () => clearTimeout(checkTimer);
     }
-    
+
     function setupObserver(element) {
       const observer = new IntersectionObserver(
         (entries) => {
           const [entry] = entries;
           setIsInFifthSection(entry.isIntersecting);
-          console.log('Fifth section intersection:', entry.isIntersecting);
+          console.log("Fifth section intersection:", entry.isIntersecting);
         },
         { threshold: 0.1 } // Trigger when at least 10% of the element is visible
       );
-      
+
       observer.observe(element);
-      
+
       return () => {
         if (element) observer.unobserve(element);
       };
     }
-    
+
     return setupObserver(fifthSection);
   }, []);
 
   useEffect(() => {
     // Initialize mouse-follower cursor only on non-mobile devices
     Cursor.registerGSAP(gsap);
-    
+
     let cursor = null;
-    
+
     const initializeCursor = () => {
       // Check if device is not mobile or tablet
       if (window.innerWidth > 1024) {
@@ -99,20 +99,20 @@ export default function Header() {
           cursor.destroy();
           cursor = null;
           // Restore native cursor
-          document.body.style.cursor = 'auto';
+          document.body.style.cursor = "auto";
         }
       }
     };
-    
+
     // Initialize after a short delay
     const timeout = setTimeout(initializeCursor, 300);
-    
+
     // Re-initialize on resize (handles orientation changes)
-    window.addEventListener('resize', initializeCursor);
+    window.addEventListener("resize", initializeCursor);
 
     return () => {
       clearTimeout(timeout);
-      window.removeEventListener('resize', initializeCursor);
+      window.removeEventListener("resize", initializeCursor);
       // Clean up cursor if it exists
       if (cursor) {
         cursor.destroy();
@@ -128,8 +128,22 @@ export default function Header() {
       )}
 
       <div className="flex fixed lg:top-9 w-full items-center justify-between pt-10 md:px-16 px-8 font-medium text-lg z-50">
-        <div className={`transition-all duration-500 ${isScrolled ? 'opacity-0 transform -translate-y-10' : 'opacity-100 transform-none'}`}>
-          <Image src={"/Techshun.png"} height={40} width={140} priority alt="Techshun" />
+        <div
+          className={`transition-all duration-500 ${
+            isScrolled
+              ? "opacity-0 transform -translate-y-10"
+              : "opacity-100 transform-none"
+          }`}
+        >
+          <Link href={"/"}>
+            <Image
+              src={"/Techshun.png"}
+              height={40}
+              width={140}
+              priority
+              alt="Techshun"
+            />
+          </Link>
         </div>
 
         <div className="flex items-center gap-[40px]">
@@ -185,6 +199,7 @@ export default function Header() {
               </li>
             </ul>
           </div>
+<Link href={"/contacts"}>   
 
           <div
             className={`lg:flex hidden items-center text-xl font-[400]  gap-5 transition-all duration-500 delay-800 cursor-pointer ${
@@ -199,6 +214,7 @@ export default function Header() {
             get in touch
             <FaArrowRight className="bg-black text-white w-[30px] p-1.5 h-[30px] rounded-full" />
           </div>
+            </Link>
         </div>
       </div>
 
@@ -221,14 +237,26 @@ export default function Header() {
               className={`h-[4px] w-full mt-0.5 rounded-full transition-all duration-300 ${
                 isMenuOpen ? "transform rotate-45 translate-y-[4px]" : ""
               }`}
-              style={{ backgroundColor: isMenuOpen ? 'black' : (isInFifthSection ? 'white' : 'black') }}
+              style={{
+                backgroundColor: isMenuOpen
+                  ? "black"
+                  : isInFifthSection
+                  ? "white"
+                  : "black",
+              }}
             ></div>
             {/* Second line of the hamburger/X icon */}
             <div
               className={`h-[4px] w-full rounded-full mt-1 transition-all duration-300 ${
                 isMenuOpen ? "transform -rotate-45 -translate-y-[4px]" : ""
               }`}
-              style={{ backgroundColor: isMenuOpen ? 'black' : (isInFifthSection ? 'white' : 'black') }}
+              style={{
+                backgroundColor: isMenuOpen
+                  ? "black"
+                  : isInFifthSection
+                  ? "white"
+                  : "black",
+              }}
             ></div>
           </div>
         </div>
@@ -264,14 +292,26 @@ export default function Header() {
                 className={`h-[4px] w-full mt-0.5 rounded-full transition-all duration-300 ${
                   isMenuOpen ? "transform rotate-45 translate-y-[4px]" : ""
                 }`}
-                style={{ backgroundColor: isMenuOpen ? 'black' : (isInFifthSection ? 'white' : 'black') }}
+                style={{
+                  backgroundColor: isMenuOpen
+                    ? "black"
+                    : isInFifthSection
+                    ? "white"
+                    : "black",
+                }}
               ></div>
               {/* Second line of the hamburger/X icon */}
               <div
                 className={`h-[4px] w-full rounded-full mt-1 transition-all duration-300 ${
                   isMenuOpen ? "transform -rotate-45 -translate-y-[4px]" : ""
                 }`}
-                style={{ backgroundColor: isMenuOpen ? 'black' : (isInFifthSection ? 'white' : 'black') }}
+                style={{
+                  backgroundColor: isMenuOpen
+                    ? "black"
+                    : isInFifthSection
+                    ? "white"
+                    : "black",
+                }}
               ></div>
             </div>
           </div>
@@ -353,6 +393,7 @@ export default function Header() {
                   Tutorials
                 </span>
               </li>
+              <Link href={"/contacts"}>
               <li
                 onClick={() => {
                   setIsMenuOpen(false);
@@ -369,6 +410,7 @@ export default function Header() {
                   Contacts
                 </span>
               </li>
+              </Link>
             </ul>
           </div>
           <div>
