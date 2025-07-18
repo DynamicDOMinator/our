@@ -2,7 +2,7 @@
 import Image from "next/image";
 import MarqueeSection from "../components/MarqueeSection";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+
 
 export default function () {
   return (
@@ -75,7 +75,7 @@ export default function () {
         </motion.div>
       </div>
 
-      <div className="flex pt-30 lg:flex-row flex-col items-center gap-10 pb-30 max-w-[1200px] justify-center mx-auto">
+      <div className="flex  px-10 lg:px-0 pt-30 lg:flex-row flex-col items-center gap-10 pb-30 max-w-[1200px] justify-center mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -181,7 +181,7 @@ export default function () {
         </div>
       </div>
 
-      <div className="pt-20 px-20 ">
+      <div className="pt-20 md:px-20 px-10 ">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -193,7 +193,7 @@ export default function () {
           viewport={{ once: true }}
         >
           <Image
-            className="w-full h-full rounded-[70px] object-cover"
+            className="w-full h-full rounded-[70px]  object-cover"
             src="/team4.jpg"
             alt="team"
             width={1000}
@@ -201,7 +201,7 @@ export default function () {
           />
         </motion.div>
       </div>
-   <MarqueeSection />
+      <MarqueeSection />
       <div className="mt-7 bg-black rounded-r-[300px] ">
         <motion.h4
           initial={{ opacity: 0, y: 30 }}
@@ -305,8 +305,6 @@ export default function () {
           </p>
         </motion.div>
       </div>
-
-   
     </div>
   );
 }

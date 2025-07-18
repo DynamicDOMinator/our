@@ -6,7 +6,7 @@ export default function ConditionalLastSection() {
   const pathname = usePathname();
 
   // Only render LastSection on the home page
-  if (pathname === "/") {
+  if (pathname === "/" || pathname === "/about") {
     return <LastSection />;
   }
 
