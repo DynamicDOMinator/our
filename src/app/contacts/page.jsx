@@ -338,22 +338,22 @@ export default function Contacts() {
                   className={`inline-block transition-transform duration-500 ${
                     isSelected
                       ? "translate-y-[-155%]"
-                      : "group-hover:translate-y-[-155%]"
-                  } relative z-10`}
+                      : "group-hover:translate-y-[-170%]"
+                  } relative z-10 w-full text-center`}
                 >
                   {interest}
                 </span>
                 <span
-                  className={`inline-block absolute top-full left-4 w-full transition-transform duration-500 text-white ${
+                  className={`inline-block absolute top-full left-0 w-full transition-transform duration-500 text-white ${
                     isSelected
-                      ? "translate-y-[-160%]"
+                      ? "translate-y-[-170%]"
                       : "group-hover:translate-y-[-160%]"
-                  } z-10`}
+                  } z-10 text-center`}
                 >
                   {interest}
                 </span>
                 <span
-                  className={`absolute bottom-0 left-4 right-0 rounded-full bg-black transition-all duration-500 z-[1] ${
+                  className={`absolute bottom-0 left-0 right-0 rounded-full bg-black transition-all duration-500 z-[1] ${
                     isSelected ? "h-full" : "h-0 group-hover:h-full"
                   }`}
                 ></span>

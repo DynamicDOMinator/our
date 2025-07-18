@@ -41,6 +41,33 @@ export default function LastSection() {
           </button>
         </div>
       </Link>
+
+
+
+<div>
+  <a href="mailto:info@Prosental.com">
+    <div 
+      className="relative border-2 border-white px-6 py-1 rounded-full text-xl cursor-pointer overflow-hidden group"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Primary text layer */}
+      <span className="inline-block transition-transform duration-500 text-white md:group-hover:translate-y-[-100%] relative z-10">
+        info@Prosental.com
+      </span>
+
+      {/* Secondary text layer */}
+      <span className="inline-block absolute top-full left-0 w-full transition-transform duration-500 text-black md:group-hover:translate-y-[-120%] z-10">
+        info@Prosental.com
+      </span>
+
+      {/* White background animation */}
+      <span className="absolute bottom-0 left-0 right-0 h-0 rounded-full bg-white transition-all duration-500 md:group-hover:h-full z-[1]"></span>
+    </div>
+  </a>
+</div>
+
+
     </div>
   );
 }
