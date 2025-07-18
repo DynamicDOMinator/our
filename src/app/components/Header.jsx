@@ -149,18 +149,21 @@ export default function Header() {
         <div className="flex items-center gap-[40px]">
           <div>
             <ul className="lg:flex text-xl font-[400] items-center gap-5 hidden ">
-              <li
-                className={`transition-all duration-500 cursor-pointer ${
-                  animationStage >= 1
-                    ? "opacity-0 transform translate-x-20 scale-0"
-                    : "opacity-100 transform translate-x-0 scale-100"
-                }`}
-                data-cursor-text="About"
-                data-cursor-stick="#about-item"
-                id="about-item"
-              >
-                about
-              </li>
+              <Link href={"/about"}>
+                <li
+                  className={`transition-all duration-500 cursor-pointer ${
+                    animationStage >= 1
+                      ? "opacity-0 transform translate-x-20 scale-0"
+                      : "opacity-100 transform translate-x-0 scale-100"
+                  }`}
+                  data-cursor-text="About"
+                  data-cursor-stick="#about-item"
+                  id="about-item"
+                >
+                  about
+                </li>
+              </Link>
+
               <li
                 className={`transition-all duration-500 delay-200 cursor-pointer ${
                   animationStage >= 1
@@ -199,22 +202,21 @@ export default function Header() {
               </li>
             </ul>
           </div>
-<Link href={"/contacts"}>   
-
-          <div
-            className={`lg:flex hidden items-center text-xl font-[400]  gap-5 transition-all duration-500 delay-800 cursor-pointer ${
-              animationStage >= 1
-                ? "opacity-0 transform translate-x-20 scale-0"
-                : "opacity-100 transform translate-x-0 scale-100"
-            }`}
-            data-cursor-stick="#get-in-touch"
-            id="get-in-touch"
-            data-cursor-text="Contact"
-          >
-            get in touch
-            <FaArrowRight className="bg-black text-white w-[30px] p-1.5 h-[30px] rounded-full" />
-          </div>
-            </Link>
+          <Link href={"/contacts"}>
+            <div
+              className={`lg:flex hidden items-center text-xl font-[400]  gap-5 transition-all duration-500 delay-800 cursor-pointer ${
+                animationStage >= 1
+                  ? "opacity-0 transform translate-x-20 scale-0"
+                  : "opacity-100 transform translate-x-0 scale-100"
+              }`}
+              data-cursor-stick="#get-in-touch"
+              id="get-in-touch"
+              data-cursor-text="Contact"
+            >
+              get in touch
+              <FaArrowRight className="bg-black text-white w-[30px] p-1.5 h-[30px] rounded-full" />
+            </div>
+          </Link>
         </div>
       </div>
 
@@ -361,22 +363,24 @@ export default function Header() {
                   Projects
                 </span>
               </li>
-              <li
-                onClick={() => {
-                  setIsMenuOpen(false);
-                }}
-                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                data-cursor-stick="#company"
-                id="company"
-                data-cursor-text="Company"
-              >
-                <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  Company
-                </span>
-                <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  Company
-                </span>
-              </li>
+              <Link href={"/about"}>
+                <li
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                  }}
+                  className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                  data-cursor-stick="#company"
+                  id="company"
+                  data-cursor-text="Company"
+                >
+                  <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
+                    Company
+                  </span>
+                  <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
+                    Company
+                  </span>
+                </li>
+              </Link>
               <li
                 onClick={() => {
                   setIsMenuOpen(false);
@@ -394,22 +398,22 @@ export default function Header() {
                 </span>
               </li>
               <Link href={"/contacts"}>
-              <li
-                onClick={() => {
-                  setIsMenuOpen(false);
-                }}
-                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                data-cursor-stick="#contacts"
-                id="contacts"
-                data-cursor-text="Contact Us"
-              >
-                <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  Contacts
-                </span>
-                <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  Contacts
-                </span>
-              </li>
+                <li
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                  }}
+                  className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                  data-cursor-stick="#contacts"
+                  id="contacts"
+                  data-cursor-text="Contact Us"
+                >
+                  <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
+                    Contacts
+                  </span>
+                  <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
+                    Contacts
+                  </span>
+                </li>
               </Link>
             </ul>
           </div>

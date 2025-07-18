@@ -225,7 +225,7 @@ export default function Footer() {
             <span 
               className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105" 
               data-cursor-text="Follow Us" 
-              data-cursor-stick="#follow-us-1"
+           
               id="follow-us-1"
             >
               Follow Us
@@ -233,7 +233,7 @@ export default function Footer() {
             <span 
               className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
               data-cursor-text="Follow Us" 
-              data-cursor-stick="#follow-us-2"
+          
               id="follow-us-2"
             >
               Follow Us
@@ -241,7 +241,7 @@ export default function Footer() {
             <span 
               className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
               data-cursor-text="Follow Us" 
-              data-cursor-stick="#follow-us-3"
+         
               id="follow-us-3"
             >
               Follow Us
@@ -251,7 +251,7 @@ export default function Footer() {
             <span 
               className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
               data-cursor-text="Follow Us" 
-              data-cursor-stick="#follow-us-4"
+        
               id="follow-us-4"
             >
               Follow Us
@@ -259,7 +259,7 @@ export default function Footer() {
             <span 
               className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
               data-cursor-text="Follow Us" 
-              data-cursor-stick="#follow-us-5"
+           
               id="follow-us-5"
             >
               Follow Us
@@ -267,7 +267,7 @@ export default function Footer() {
             <span 
               className="pr-10 inline-block transition-all duration-300 hover:text-[#ff3366] hover:scale-105"
               data-cursor-text="Follow Us" 
-              data-cursor-stick="#follow-us-6"
+     
               id="follow-us-6"
             >
               Follow Us
