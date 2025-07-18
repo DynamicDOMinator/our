@@ -395,7 +395,7 @@ export default function FifthSection() {
     <motion.div
       ref={sectionRef}
       id="fifth-section"
-      className="mt-10 pt-10 md:pb-38 pb-20 lg:pl-38 px-10 bg-black "
+      className="lg:mt-30 pt-10 md:pb-38 pb-20 lg:pl-38 pl-10 "
       style={{
         borderTopLeftRadius: isMobile
           ? mobileBorderRadius
@@ -405,7 +405,7 @@ export default function FifthSection() {
           : desktopBorderRadius,
       }}
     >
-      <div className="pt-20 max-w-[1500px] mx-auto ">
+      <div className="pt-20  max-w-[1500px] mx-auto ">
         <motion.h5
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -414,9 +414,11 @@ export default function FifthSection() {
             delay: 0.2,
             ease: [0.25, 0.1, 0.25, 1.0],
           }}
-          className="text-white md:text-9xl text-5xl "
+          className="text-black italic md:text-9xl text-5xl "
         >
-          Featured
+          What We
+
+
         </motion.h5>
         <div className="flex items-center max-w-[1500px] mx-auto">
           <motion.div
@@ -430,7 +432,7 @@ export default function FifthSection() {
                 videoRef.current = el;
                 addToVideoRefs(el);
               }}
-              src="/our-1.mp4"
+              src="/about-v.mp4"
               loop
               autoPlay
               muted
@@ -461,14 +463,14 @@ export default function FifthSection() {
               delay: 0.4,
               ease: [0.25, 0.1, 0.25, 1.0],
             }}
-            className="text-white md:text-9xl text-5xl"
+            className="text-black md:text-9xl text-5xl"
           >
-            projects
+          Have Built
           </motion.h5>
         </div>
       </div>
 
-      <div className="pt-20 max-w-[1500px] mx-auto">
+      <div className="pt-20 max-w-[1500px] mx-auto pr-10 lg:pr-0">
         <div className="flex lg:flex-row flex-col justify-center items-center lg:justify-start   gap-20">
           <div className="flex flex-col gap-24">
             {[0, 1, 2].map((index) => (
