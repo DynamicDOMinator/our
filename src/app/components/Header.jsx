@@ -12,6 +12,10 @@ export default function Header() {
   const [animationStage, setAnimationStage] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isInFifthSection, setIsInFifthSection] = useState(false);
+  const [isInBlogHero, setIsInBlogHero] = useState(false);
+  const [isInForthSection, setIsInForthSection] = useState(false);
+  const [isInLastSection, setIsInLastSection] = useState(false);
+  const [isInFooter, setIsInFooter] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,27 +43,54 @@ export default function Header() {
     };
   }, []);
 
-  // Use Intersection Observer to detect when FifthSection is in viewport
+  // Use Intersection Observer to detect when specific sections are in viewport
   useEffect(() => {
     const fifthSection = document.getElementById("fifth-section");
+    const blogHero = document.querySelector(".blogs-hero-section");
+    const forthSection = document.querySelector(".section-1, .section-2, .section-3, .section-4"); // ForthSection components
+    const lastSection = document.querySelector(".bg-zinc-950.h-screen"); // LastSection
+    const footer = document.querySelector(".bg-black.pt-10"); // Footer
 
-    if (!fifthSection) {
-      // If the section doesn't exist yet, try again after a short delay
+    if (!fifthSection && !blogHero && !forthSection && !lastSection && !footer) {
+      // If the sections don't exist yet, try again after a short delay
       const checkTimer = setTimeout(() => {
         const retrySection = document.getElementById("fifth-section");
+        const retryBlogHero = document.querySelector(".blogs-hero-section");
+        const retryForthSection = document.querySelector(".section-1, .section-2, .section-3, .section-4");
+        const retryLastSection = document.querySelector(".bg-zinc-950.h-screen");
+        const retryFooter = document.querySelector(".bg-black.pt-10");
+        
         if (retrySection) {
-          setupObserver(retrySection);
+          setupObserver(retrySection, setIsInFifthSection);
+        }
+        
+        if (retryBlogHero) {
+          setupObserver(retryBlogHero, setIsInBlogHero);
+        }
+
+        if (retryForthSection) {
+          setupObserver(retryForthSection, setIsInForthSection);
+        }
+
+        if (retryLastSection) {
+          setupObserver(retryLastSection, setIsInLastSection);
+        }
+
+        if (retryFooter) {
+          setupObserver(retryFooter, setIsInFooter);
         }
       }, 1000);
       return () => clearTimeout(checkTimer);
     }
 
-    function setupObserver(element) {
+    function setupObserver(element, setterFunction) {
+      if (!element) return () => {};
+      
       const observer = new IntersectionObserver(
         (entries) => {
           const [entry] = entries;
-          setIsInFifthSection(entry.isIntersecting);
-          console.log("Fifth section intersection:", entry.isIntersecting);
+          setterFunction(entry.isIntersecting);
+          console.log("Section intersection:", entry.isIntersecting);
         },
         { threshold: 0.1 } // Trigger when at least 10% of the element is visible
       );
@@ -71,7 +102,20 @@ export default function Header() {
       };
     }
 
-    return setupObserver(fifthSection);
+    // Setup observers for all sections
+    const cleanup1 = fifthSection ? setupObserver(fifthSection, setIsInFifthSection) : () => {};
+    const cleanup2 = blogHero ? setupObserver(blogHero, setIsInBlogHero) : () => {};
+    const cleanup3 = forthSection ? setupObserver(forthSection, setIsInForthSection) : () => {};
+    const cleanup4 = lastSection ? setupObserver(lastSection, setIsInLastSection) : () => {};
+    const cleanup5 = footer ? setupObserver(footer, setIsInFooter) : () => {};
+    
+    return () => {
+      cleanup1();
+      cleanup2();
+      cleanup3();
+      cleanup4();
+      cleanup5();
+    };
   }, []);
 
   useEffect(() => {
@@ -81,26 +125,32 @@ export default function Header() {
     let cursor = null;
 
     const initializeCursor = () => {
-      // Check if device is not mobile or tablet
-      if (window.innerWidth > 1024) {
-        // Only initialize if not already initialized
-        if (!cursor) {
-          cursor = new Cursor({
-            container: document.body,
-            speed: 0.5,
-            ease: "expo.out",
-            visibleTimeout: 300,
-            hideNativeCursor: true,
-          });
+      try {
+        // Check if device is not mobile or tablet
+        if (window.innerWidth > 1024) {
+          // Only initialize if not already initialized
+          if (!cursor) {
+            cursor = new Cursor({
+              container: document.body,
+              speed: 0.5,
+              ease: "expo.out",
+              visibleTimeout: 300,
+              hideNativeCursor: true,
+            });
+          }
+        } else {
+          // Destroy cursor if it exists and we're on mobile/tablet
+          if (cursor) {
+            cursor.destroy();
+            cursor = null;
+            // Restore native cursor
+            document.body.style.cursor = "auto";
+          }
         }
-      } else {
-        // Destroy cursor if it exists and we're on mobile/tablet
-        if (cursor) {
-          cursor.destroy();
-          cursor = null;
-          // Restore native cursor
-          document.body.style.cursor = "auto";
-        }
+      } catch (error) {
+        console.error("Error initializing cursor:", error);
+        // Ensure native cursor is visible if there's an error
+        document.body.style.cursor = "auto";
       }
     };
 
@@ -155,6 +205,8 @@ export default function Header() {
                     animationStage >= 1
                       ? "opacity-0 transform translate-x-20 scale-0"
                       : "opacity-100 transform translate-x-0 scale-100"
+                  } ${
+                    isInBlogHero ? "text-white" : ""
                   }`}
                   data-cursor-text="About"
                   data-cursor-stick="#about-item"
@@ -170,6 +222,8 @@ export default function Header() {
                     animationStage >= 1
                       ? "opacity-0 transform translate-x-20 scale-0"
                       : "opacity-100 transform translate-x-0 scale-100"
+                  } ${
+                    isInBlogHero ? "text-white" : ""
                   }`}
                   data-cursor-text="projects"
                   data-cursor-stick="#cases-item"
@@ -178,18 +232,22 @@ export default function Header() {
                   projects
                 </li>
               </Link>
-              <li
-                className={`transition-all duration-500 delay-600 cursor-pointer ${
-                  animationStage >= 1
-                    ? "opacity-0 transform translate-x-20 scale-0"
-                    : "opacity-100 transform translate-x-0 scale-100"
-                }`}
-                data-cursor-text="blogs"
-                data-cursor-stick="#careers-item"
-                id="careers-item"
-              >
-                blogs
-              </li>
+              <Link href={"/blogs"}>
+                <li
+                  className={`transition-all duration-500 delay-600 cursor-pointer ${
+                    animationStage >= 1
+                      ? "opacity-0 transform translate-x-20 scale-0"
+                      : "opacity-100 transform translate-x-0 scale-100"
+                  } ${
+                    isInBlogHero ? "text-white" : ""
+                  }`}
+                  data-cursor-text="blogs"
+                  data-cursor-stick="#blogs-item"
+                  id="blogs-item"
+                >
+                  blogs
+                </li>
+              </Link>
             </ul>
           </div>
           <Link href={"/contacts"}>
@@ -198,6 +256,8 @@ export default function Header() {
                 animationStage >= 1
                   ? "opacity-0 transform translate-x-20 scale-0"
                   : "opacity-100 transform translate-x-0 scale-100"
+              } ${
+                isInBlogHero ? "text-white" : ""
               }`}
               data-cursor-stick="#get-in-touch"
               id="get-in-touch"
@@ -287,7 +347,7 @@ export default function Header() {
                 style={{
                   backgroundColor: isMenuOpen
                     ? "black"
-                    : isInFifthSection
+                    : isInFifthSection || isInBlogHero || isInForthSection || isInLastSection || isInFooter
                     ? "white"
                     : "black",
                 }}
@@ -300,7 +360,7 @@ export default function Header() {
                 style={{
                   backgroundColor: isMenuOpen
                     ? "black"
-                    : isInFifthSection
+                    : isInFifthSection || isInBlogHero || isInForthSection || isInLastSection || isInFooter
                     ? "white"
                     : "black",
                 }}
@@ -353,20 +413,22 @@ export default function Header() {
                   </span>
                 </li>
               </Link>
-              <li
-                onClick={() => {
-                  setIsMenuOpen(false);
-                }}
-                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                id="tutorials"
-              >
-                <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  Blogs
-                </span>
-                <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  Blogs
-                </span>
-              </li>
+              <Link href={"/blogs"}>
+                <li
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                  }}
+                  className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                  id="blogs"
+                >
+                  <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
+                    Blogs
+                  </span>
+                  <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
+                    Blogs
+                  </span>
+                </li>
+              </Link>
               <Link href={"/contacts"}>
                 <li
                   onClick={() => {
@@ -389,28 +451,32 @@ export default function Header() {
             <h3 className="text-gray-400">Social media</h3>
 
             <ul className="pt-7 text-xl flex flex-col gap-3">
-              <li
-                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                id="facebook-item"
-              >
-                <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  Facebook
-                </span>
-                <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  Facebook
-                </span>
-              </li>
-              <li
-                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                id="instagram-item"
-              >
-                <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  Instagram
-                </span>
-                <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  Instagram
-                </span>
-              </li>
+              <a href="https://www.facebook.com/prosentalagency/" target="_blank" rel="noopener noreferrer">
+                <li
+                  className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                  id="facebook-item"
+                >
+                  <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
+                    Facebook
+                  </span>
+                  <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
+                    Facebook
+                  </span>
+                </li>
+              </a>
+              <a href="https://www.instagram.com/prosental_agency/" target="_blank" rel="noopener noreferrer">
+                <li
+                  className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                  id="instagram-item"
+                >
+                  <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
+                    Instagram
+                  </span>
+                  <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
+                    Instagram
+                  </span>
+                </li>
+              </a>
               <li
                 className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
                 id="twitter-item"

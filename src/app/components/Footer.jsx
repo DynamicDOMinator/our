@@ -288,7 +288,7 @@ export default function Footer() {
             {/* Instagram header - always visible and positioned above the marquee */}
             <div className="text-white md:text-4xl text-2xl py-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="md:px-20 px-7 flex items-center justify-between">
-                <p data-cursor-text="Instagram" data-cursor-stick="#instagram-text" id="instagram-text">Instagram</p>
+                <a href="https://www.instagram.com/prosental_agency/" target="_blank" rel="noopener noreferrer" data-cursor-text="Instagram" data-cursor-stick="#instagram-text" id="instagram-text">Instagram</a>
                 <GoArrowUpRight />
               </div>
             </div>
@@ -298,7 +298,7 @@ export default function Footer() {
               <div className="animate-marquee flex items-center gap-5">
                 {/* Instagram links - first set */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Instagram</p>
+                  <a href="https://www.instagram.com/prosental_agency/" target="_blank" rel="noopener noreferrer">Instagram</a>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
@@ -360,7 +360,7 @@ export default function Footer() {
             {/* Facebook header - always visible and positioned above the marquee */}
             <div className="text-white md:text-4xl text-2xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="md:px-20 px-7 flex items-center justify-between">
-                <p data-cursor-text="Facebook" data-cursor-stick="#facebook-text" id="facebook-text">Facebook</p>
+                <a href="https://www.facebook.com/prosentalagency/" target="_blank" rel="noopener noreferrer" data-cursor-text="Facebook" data-cursor-stick="#facebook-text" id="facebook-text">Facebook</a>
                 <GoArrowUpRight />
               </div>
             </div>
@@ -370,7 +370,7 @@ export default function Footer() {
               <div className="animate-marquee flex items-center gap-5">
                 {/* Facebook links - first set */}
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Facebook</p>
+                  <a href="https://www.facebook.com/prosentalagency/" target="_blank" rel="noopener noreferrer">Facebook</a>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
                 <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
