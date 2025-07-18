@@ -164,41 +164,31 @@ export default function Header() {
                 </li>
               </Link>
 
-              <li
-                className={`transition-all duration-500 delay-200 cursor-pointer ${
-                  animationStage >= 1
-                    ? "opacity-0 transform translate-x-20 scale-0"
-                    : "opacity-100 transform translate-x-0 scale-100"
-                }`}
-                data-cursor-text="Services"
-                data-cursor-stick="#services-item"
-                id="services-item"
-              >
-                services
-              </li>
-              <li
-                className={`transition-all duration-500 delay-400 cursor-pointer ${
-                  animationStage >= 1
-                    ? "opacity-0 transform translate-x-20 scale-0"
-                    : "opacity-100 transform translate-x-0 scale-100"
-                }`}
-                data-cursor-text="Studies"
-                data-cursor-stick="#cases-item"
-                id="cases-item"
-              >
-                cases
-              </li>
+              <Link href={"/projects"}>
+                <li
+                  className={`transition-all duration-500 delay-400 cursor-pointer ${
+                    animationStage >= 1
+                      ? "opacity-0 transform translate-x-20 scale-0"
+                      : "opacity-100 transform translate-x-0 scale-100"
+                  }`}
+                  data-cursor-text="projects"
+                  data-cursor-stick="#cases-item"
+                  id="cases-item"
+                >
+                  projects
+                </li>
+              </Link>
               <li
                 className={`transition-all duration-500 delay-600 cursor-pointer ${
                   animationStage >= 1
                     ? "opacity-0 transform translate-x-20 scale-0"
                     : "opacity-100 transform translate-x-0 scale-100"
                 }`}
-                data-cursor-text="Careers"
+                data-cursor-text="blogs"
                 data-cursor-stick="#careers-item"
                 id="careers-item"
               >
-                careers
+                blogs
               </li>
             </ul>
           </div>
@@ -331,30 +321,13 @@ export default function Header() {
             <h3 className="text-gray-400">Menu</h3>
 
             <ul className="pt-7 2xl:text-[40px] text-2xl">
+              <Link href={"/projects"}>
               <li
                 onClick={() => {
                   setIsMenuOpen(false);
                 }}
                 className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                data-cursor-stick="#what-we-do"
-                id="what-we-do"
-                data-cursor-text="What We Do"
-              >
-                <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  What we do
-                </span>
-                <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  What we do
-                </span>
-              </li>
-              <li
-                onClick={() => {
-                  setIsMenuOpen(false);
-                }}
-                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                data-cursor-stick="#projects"
                 id="projects"
-                data-cursor-text="Projects"
               >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Projects
@@ -363,15 +336,14 @@ export default function Header() {
                   Projects
                 </span>
               </li>
+              </Link>
               <Link href={"/about"}>
                 <li
                   onClick={() => {
                     setIsMenuOpen(false);
                   }}
                   className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                  data-cursor-stick="#company"
                   id="company"
-                  data-cursor-text="Company"
                 >
                   <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                     Company
@@ -386,15 +358,13 @@ export default function Header() {
                   setIsMenuOpen(false);
                 }}
                 className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                data-cursor-stick="#tutorials"
                 id="tutorials"
-                data-cursor-text="Tutorials"
               >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  Tutorials
+                  Blogs
                 </span>
                 <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  Tutorials
+                  Blogs
                 </span>
               </li>
               <Link href={"/contacts"}>
@@ -403,9 +373,7 @@ export default function Header() {
                     setIsMenuOpen(false);
                   }}
                   className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                  data-cursor-stick="#contacts"
                   id="contacts"
-                  data-cursor-text="Contact Us"
                 >
                   <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                     Contacts
@@ -423,9 +391,7 @@ export default function Header() {
             <ul className="pt-7 text-xl flex flex-col gap-3">
               <li
                 className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                data-cursor-stick="#facebook-item"
                 id="facebook-item"
-                data-cursor-text="Facebook"
               >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Facebook
@@ -436,9 +402,7 @@ export default function Header() {
               </li>
               <li
                 className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                data-cursor-stick="#instagram-item"
                 id="instagram-item"
-                data-cursor-text="Instagram"
               >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Instagram
@@ -449,9 +413,7 @@ export default function Header() {
               </li>
               <li
                 className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                data-cursor-stick="#twitter-item"
                 id="twitter-item"
-                data-cursor-text="Twitter"
               >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Twitter
@@ -462,9 +424,7 @@ export default function Header() {
               </li>
               <li
                 className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                data-cursor-stick="#linkedin-item"
                 id="linkedin-item"
-                data-cursor-text="LinkedIn"
               >
                 <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
                   Linkedin

@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import Cursor from "mouse-follower";
 import gsap from "gsap";
 import "mouse-follower/dist/mouse-follower.min.css";
-import LazyVideo from "./LazyVideo";
+import LazyVideo from "../components/LazyVideo";
 
 // Add a style tag to hide video controls
 const hideVideoControlsStyle = `
@@ -395,7 +395,7 @@ export default function FifthSection() {
     <motion.div
       ref={sectionRef}
       id="fifth-section"
-      className="mt-10 pt-10 md:pb-38  pb-20 lg:pl-38 px-10 bg-black "
+      className="mt-10 pt-10 md:pb-38 pb-20 lg:pl-38 px-10 bg-black "
       style={{
         borderTopLeftRadius: isMobile
           ? mobileBorderRadius
