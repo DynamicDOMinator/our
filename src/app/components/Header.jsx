@@ -292,7 +292,7 @@ export default function Header() {
               style={{
                 backgroundColor: isMenuOpen
                   ? "black"
-                  : isInFifthSection
+                  : isInFifthSection || isInBlogHero
                   ? "white"
                   : "black",
               }}
@@ -305,7 +305,7 @@ export default function Header() {
               style={{
                 backgroundColor: isMenuOpen
                   ? "black"
-                  : isInFifthSection
+                  : isInFifthSection || isInBlogHero
                   ? "white"
                   : "black",
               }}
