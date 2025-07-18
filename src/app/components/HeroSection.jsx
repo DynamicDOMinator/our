@@ -81,7 +81,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.7,
-                delay: 0.2,
+                delay: 1.0,
                 ease: [0.25, 0.1, 0.25, 1.0],
               }}
               className="tracking-tight 2xl:text-[128px] md:text-7xl text-3xl leading-tight"
@@ -102,7 +102,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.7,
-                delay: 0.5,
+                delay: 1.3,
                 ease: [0.25, 0.1, 0.25, 1.0],
               }}
               className="tracking-tight leading-tight"
@@ -119,7 +119,7 @@ export default function HeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.0 }}
+              transition={{ duration: 0.6, delay: 1.8 }}
               className="block lg:hidden ml-2"
             >
               <video
@@ -147,7 +147,7 @@ export default function HeroSection() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ duration: 0.6, delay: 1.6 }}
               className=" md:text-xl text-left text-gray-400 max-w-2xl"
             >
               We transform your vision into exceptional digital experiences with
@@ -162,7 +162,7 @@ export default function HeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.0 }}
+              transition={{ duration: 0.6, delay: 1.8 }}
             >
               <video
                 ref={desktopVideoRef}
