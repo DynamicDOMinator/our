@@ -257,10 +257,9 @@ export default function FourthSection() {
           key={section.id}
           className={`flex flex-col md:flex-row items-start sticky section-${section.id} px-4 sm:px-8 md:px-12 lg:px-16 z-${
             10 - section.id
-          } top-0 bg-white gap-6 md:gap-12 lg:gap-28 py-8 md:py-12 lg:py-16 border-t-2 border-gray-300 relative overflow-hidden`}
+          } top-0 bg-white gap-6  md:gap-12 h-screen lg:gap-28 py-8 md:py-12 lg:py-16  border-t-2 border-gray-300 relative overflow-hidden`}
           style={{ 
-            height: 'auto', 
-            minHeight: '100vh',
+           
             scrollMarginTop: '0px',
             scrollSnapAlign: 'start'
           }}
@@ -283,7 +282,7 @@ export default function FourthSection() {
             <p className="text-base md:text-lg lg:text-xl pt-6 md:pt-10 lg:pt-16">{section.description}</p>
             
             {/* Image appears here on mobile, between text and list items */}
-            <div className="block md:hidden w-full my-6">
+            <div className="block md:hidden w-full ">
               <LazyImage
                 src={section.image}
                 videoSrc={section.image.replace('.gif', '.mp4')}
@@ -298,14 +297,14 @@ export default function FourthSection() {
 
             <div className="flex  items-start sm:items-center justify-start gap-8 sm:gap-16 md:gap-24 lg:gap-40 pt-6 md:pt-7 lg:pt-16">
               <div>
-                <ul className="space-y-2">
+                <ul className="">
                   {section.leftItems.map((item, index) => (
                     <li key={index} className="text-sm md:text-base">{item}</li>
                   ))}
                 </ul>
               </div>
               <div>
-                <ul className="space-y-2">
+                <ul className="">
                   {section.rightItems.map((item, index) => (
                     <li key={index} className="text-sm md:text-base">{item}</li>
                   ))}
