@@ -284,7 +284,7 @@ export default function Footer() {
         <div className="relative">
           {/* We've moved the marquee animation to be in the same position as the Instagram text */}
 
-          <div className="absolute top-[79px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 instagram-hover-container social-hover-container">
+          <div className="absolute top-[79px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 instagram-hover-container social-hover-container lg:block hidden">
             {/* Instagram header - always visible and positioned above the marquee */}
             <div className="text-white md:text-4xl text-2xl py-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="md:px-20 px-7 flex items-center justify-between">
@@ -294,56 +294,92 @@ export default function Footer() {
             </div>
 
             {/* Marquee animation that appears on hover - positioned behind the Instagram text */}
-            <div className="marquee-container instagram-links px-20 text-white md:text-4xl text-2xl py-10 bg-gradient-to-r from-[#405DE6] via-[#C13584] to-[#F56040] absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+            <div className="marquee-container instagram-links px-20 text-white md:text-4xl text-2xl py-10 bg-gradient-to-r from-[#405DE6] via-[#C13584] to-[#F56040] absolute w-full left-0 top-0 h-full z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
               <div className="animate-marquee flex items-center gap-5">
                 {/* Instagram links - first set */}
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <a href="https://www.instagram.com/prosental_agency/" target="_blank" rel="noopener noreferrer">Instagram</a>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
-                </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p>Instagram</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
 
                 {/* Instagram links - duplicated for continuous scrolling */}
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.instagram.com/prosental_agency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Instagram</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
@@ -356,7 +392,7 @@ export default function Footer() {
           </div>
 
           {/* Facebook Section */}
-          <div className="absolute top-[40px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 facebook-hover-container social-hover-container">
+          <div className="absolute top-[40px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 facebook-hover-container social-hover-container lg:block hidden">
             {/* Facebook header - always visible and positioned above the marquee */}
             <div className="text-white md:text-4xl text-2xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="md:px-20 px-7 flex items-center justify-between">
@@ -366,56 +402,80 @@ export default function Footer() {
             </div>
 
             {/* Marquee animation that appears on hover - positioned behind the Facebook text */}
-            <div className="marquee-container facebook-links px-20 text-black lg:text-4xl text-2xl py-10 bg-[#1877F2] absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+            <div className="marquee-container  facebook-links px-20 text-black lg:text-4xl text-2xl py-10 bg-[#1877F2] absolute w-full left-0 top-0 h-full z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
               <div className="animate-marquee flex items-center gap-5">
                 {/* Facebook links - first set */}
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <a href="https://www.facebook.com/prosentalagency/" target="_blank" rel="noopener noreferrer">Facebook</a>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
-                </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.facebook.com/prosentalagency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.facebook.com/prosentalagency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.facebook.com/prosentalagency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.facebook.com/prosentalagency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.facebook.com/prosentalagency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p>Facebook</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.facebook.com/prosentalagency/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
 
                 {/* Facebook links - duplicated for continuous scrolling */}
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={() => window.open('https://www.facebook.com/prosentalagency/', '_blank')} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={() => window.open('https://www.facebook.com/prosentalagency/', '_blank')} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={() => window.open('https://www.facebook.com/prosentalagency/', '_blank')} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={() => window.open('https://www.facebook.com/prosentalagency/', '_blank')} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={() => window.open('https://www.facebook.com/prosentalagency/', '_blank')} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                <div onClick={() => window.open('https://www.facebook.com/prosentalagency/', '_blank')} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+
                   <p>Facebook</p>
                   <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
                 </div>
@@ -428,7 +488,7 @@ export default function Footer() {
           </div>
 
           {/* Twitter/X Section */}
-          <div className="absolute top-[0px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 twitter-hover-container social-hover-container">
+          <div className="absolute top-[0px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 twitter-hover-container social-hover-container lg:block hidden">
             {/* Twitter header - always visible and positioned above the marquee */}
             <div className="text-white lg:text-4xl text-2xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="md:px-20 px-7 flex items-center justify-between">
@@ -497,6 +557,49 @@ export default function Footer() {
             {/* Add the reveal animation elements */}
             <div className="social-reveal-top"></div>
             <div className="social-reveal-bottom"></div>
+          </div>
+        </div>
+        
+        {/* Mobile Social Media Section - only visible on mobile and tablet */}
+        <div className="lg:hidden block w-full mt-5 ">
+          <div className="flex flex-col gap-6 py-10 px-7">
+            
+            
+            {/* Mobile Instagram Link */}
+            <div 
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open('https://www.instagram.com/prosental_agency/', '_blank');
+              }}
+              className="flex items-center justify-between cursor-pointer hover:bg-white/10 p-4 rounded-lg transition-all duration-300"
+            >
+              <p className="text-white text-xl">Instagram</p>
+              <GoArrowUpRight className="text-white text-xl" />
+            </div>
+            
+            {/* Mobile Facebook Link */}
+            <div 
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open('https://www.facebook.com/prosentalagency/', '_blank');
+              }}
+              className="flex items-center justify-between cursor-pointer hover:bg-white/10 p-4 rounded-lg transition-all duration-300"
+            >
+              <p className="text-white text-xl">Facebook</p>
+              <GoArrowUpRight className="text-white text-xl" />
+            </div>
+            
+            {/* Mobile Twitter Link */}
+            <div 
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open('https://twitter.com/prosental_agency', '_blank');
+              }}
+              className="flex items-center justify-between cursor-pointer hover:bg-white/10 p-4 rounded-lg transition-all duration-300"
+            >
+              <p className="text-white text-xl">Twitter</p>
+              <GoArrowUpRight className="text-white text-xl" />
+            </div>
           </div>
         </div>
       </div>

@@ -547,7 +547,6 @@ export default function FifthSection() {
                 Super-App <br /> passwordless authentication
               </p>
             </motion.div>
-
             {[1, 2].map((index) => (
               <motion.div
                 key={`right-${index}`}
