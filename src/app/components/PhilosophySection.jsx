@@ -44,9 +44,9 @@ export default function Philosophy() {
           philosophy
         </h4>
       </div>
-      <div className="flex lg:flex-row flex-col items-center pt-20 bg-white">
+      <div className="flex lg:flex-row flex-col items-center pt-10 bg-white">
         <div className="lg:w-1/2 relative">
-          <LazyVideo ref={videoRef} className="object-cover w-full lg:p-20" autoPlay loop muted playsInline src="/ta2.mp4" />
+          <LazyVideo ref={videoRef} className="object-cover w-full lg:p-10" autoPlay loop muted playsInline src="/ta2.mp4" />
         </div>
         <div className="lg:w-1/2 pb-10 lg:pb-0">
           <p className="lg:text-2xl text-xl lg:pr-40 px-10 lg:px-0">
