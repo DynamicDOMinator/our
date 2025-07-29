@@ -6,35 +6,57 @@ export default function SecondSection() {
     const videoRef = useRef(null);
     
     useEffect(() => {
-        // More robust video initialization and autoplay
         const videoElement = videoRef.current;
         if (videoElement) {
-            // Make sure video is properly loaded
-            videoElement.load();
-            
-            // Set up event listeners
-            const handleCanPlay = () => {
-                // Try to play when it's ready
-                videoElement.play().catch(error => {
-                    // If autoplay fails, try again with user interaction simulation
-                    videoElement.muted = true; // Ensure muted to allow autoplay
-                    videoElement.play().catch(e => {/* Second attempt failed */});
-                });
+            const playVideo = async () => {
+                try {
+                    videoElement.muted = true;
+                    await videoElement.play();
+                } catch (error) {
+                    console.log('Autoplay failed, will try on user interaction');
+                }
             };
             
-            videoElement.addEventListener('canplaythrough', handleCanPlay);
+            // Multiple attempts to ensure autoplay
+            const attemptAutoplay = () => {
+                playVideo();
+                
+                // Try again after a short delay
+                setTimeout(() => {
+                    if (videoElement.paused) {
+                        playVideo();
+                    }
+                }, 100);
+            };
             
-            // Try to play immediately as well
-            videoElement.play().catch(() => {
-                // Silent catch - we'll try again on canplaythrough
-            });
+            // Try immediately
+            attemptAutoplay();
             
-            // Cleanup
+            // Try when video metadata is loaded
+            videoElement.addEventListener('loadedmetadata', attemptAutoplay, { once: true });
+            
+            // Try when video data is loaded
+            videoElement.addEventListener('loadeddata', attemptAutoplay, { once: true });
+            
+            // Try when video can start playing
+            videoElement.addEventListener('canplay', attemptAutoplay, { once: true });
+            
+            // Fallback: play on any user interaction
+            const handleUserInteraction = () => {
+                if (videoElement.paused) {
+                    playVideo();
+                }
+            };
+            
+            document.addEventListener('click', handleUserInteraction, { once: true });
+            document.addEventListener('touchstart', handleUserInteraction, { once: true });
+            
             return () => {
-                videoElement.removeEventListener('canplaythrough', handleCanPlay);
+                document.removeEventListener('click', handleUserInteraction);
+                document.removeEventListener('touchstart', handleUserInteraction);
             };
         }
-    }, []);
+     }, []);
     
 
     
