@@ -157,10 +157,10 @@ export default function FourthSection() {
     sectionsRef.current = sectionsData;
   }, [sectionsData]);
 
-  // Force video autoplay
+  // Force video autoplay for desktop only
   useEffect(() => {
-    const videos = document.querySelectorAll('video');
-    videos.forEach(video => {
+    const desktopVideos = document.querySelectorAll('.hidden.md\\:block video');
+    desktopVideos.forEach(video => {
       video.muted = true;
       video.play().catch(error => {
         console.log('Video autoplay failed:', error);
@@ -298,14 +298,14 @@ export default function FourthSection() {
                 width={500}
                 height={500}
                 className="w-full"
-                autoPlay
                 loop
                 muted
                 playsInline
                 controls={false}
-                onLoadedData={(e) => {
-                  e.target.muted = true;
-                  e.target.play().catch(err => console.log('Autoplay failed:', err));
+                preload="none"
+                poster=""
+                onClick={(e) => {
+                  e.target.play().catch(err => console.log('Play failed:', err));
                 }}
               >
                 Your browser does not support the video tag.
