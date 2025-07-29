@@ -157,6 +157,9 @@ export default function FourthSection() {
     sectionsRef.current = sectionsData;
   }, [sectionsData]);
 
+  // State to track which videos should be loaded on mobile
+  const [loadedVideos, setLoadedVideos] = useState(new Set());
+
   // Force video autoplay for desktop only
   useEffect(() => {
     const desktopVideos = document.querySelectorAll('.hidden.md\\:block video');
@@ -166,6 +169,37 @@ export default function FourthSection() {
         console.log('Video autoplay failed:', error);
       });
     });
+  }, []);
+
+  // Intersection observer for mobile video lazy loading
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    if (!isMobile) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.getAttribute('data-section-id');
+            if (sectionId) {
+              setLoadedVideos(prev => new Set([...prev, parseInt(sectionId)]));
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px'
+      }
+    );
+
+    // Observe all sections
+    const sections = document.querySelectorAll('[data-section-id]');
+    sections.forEach(section => observer.observe(section));
+
+    return () => {
+      sections.forEach(section => observer.unobserve(section));
+    };
   }, []);
   
   // Add scroll event handling
@@ -293,23 +327,31 @@ export default function FourthSection() {
             
             {/* Image appears here on mobile, between text and list items */}
             <div className="block md:hidden w-full ">
-              <video
-                src={section.image}
-                width={500}
-                height={500}
-                className="w-full"
-                loop
-                muted
-                playsInline
-                controls={false}
-                preload="none"
-                poster=""
-                onClick={(e) => {
-                  e.target.play().catch(err => console.log('Play failed:', err));
-                }}
-              >
-                Your browser does not support the video tag.
-              </video>
+              {loadedVideos.has(section.id) ? (
+                <video
+                  src={section.image}
+                  width={500}
+                  height={500}
+                  className="w-full"
+                  loop
+                  muted
+                  playsInline
+                  controls={false}
+                  autoPlay
+                  onLoadedData={(e) => {
+                    e.target.play().catch(err => console.log('Play failed:', err));
+                  }}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <div 
+                  className="w-full bg-gray-200 flex items-center justify-center"
+                  style={{ height: '500px' }}
+                >
+                  <span className="text-gray-500">Loading video...</span>
+                </div>
+              )}
             </div>
 
             <div className="flex  items-start sm:items-center justify-start gap-8 sm:gap-16 md:gap-24 lg:gap-40 pt-6 md:pt-7 lg:pt-16">
