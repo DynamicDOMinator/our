@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useState, useMemo, useCallback, useRef } from "react";
-import LazyImage from "./LazyImage";
 
 export default function FourthSection() {
   // Constants for configuration
@@ -103,7 +102,7 @@ export default function FourthSection() {
         "Integration Services",
       ],
       rightItems: ["Agile Development", "DevOps Practices", "Quality Assurance", "Continuous Delivery"],
-      image: "/Film_branding-1.gif",
+      image: "/mini1.mp4",
     },
     {
       id: 2,
@@ -117,7 +116,7 @@ export default function FourthSection() {
         "Content Management",
       ],
       rightItems: ["iOS Development", "Android Development", "Cross-platform Apps", "Mobile UI/UX"],
-      image: "/Film_digital-1.gif",
+      image: "/mini2.mp4",
     },
     {
       id: 3,
@@ -131,7 +130,7 @@ export default function FourthSection() {
         "API Development",
       ],
       rightItems: ["JavaScript Frameworks", "Cloud Integration", "Microservices", "Serverless Architecture"],
-      image: "/Film_branding-1.gif",
+      image: "/mini3.mp4",
     },
    
     {
@@ -146,7 +145,7 @@ export default function FourthSection() {
         "Feature Enhancements",
       ],
       rightItems: ["24/7 Technical Support", "Code Refactoring", "Legacy System Modernization", "Documentation"],
-      image: "/Film_branding-1.gif",
+      image: "/mini4.mp4",
     },
   ], []);
 
@@ -157,6 +156,17 @@ export default function FourthSection() {
   useEffect(() => {
     sectionsRef.current = sectionsData;
   }, [sectionsData]);
+
+  // Force video autoplay
+  useEffect(() => {
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+      video.muted = true;
+      video.play().catch(error => {
+        console.log('Video autoplay failed:', error);
+      });
+    });
+  }, []);
   
   // Add scroll event handling
   useEffect(() => {
@@ -283,16 +293,23 @@ export default function FourthSection() {
             
             {/* Image appears here on mobile, between text and list items */}
             <div className="block md:hidden w-full ">
-              <LazyImage
+              <video
                 src={section.image}
-                videoSrc={section.image.replace('.gif', '.mp4')}
                 width={500}
                 height={500}
-                alt={section.title}
                 className="w-full"
-                priority={false}
-                isGif={section.image.endsWith('.gif')}
-              />
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls={false}
+                onLoadedData={(e) => {
+                  e.target.muted = true;
+                  e.target.play().catch(err => console.log('Autoplay failed:', err));
+                }}
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             <div className="flex  items-start sm:items-center justify-start gap-8 sm:gap-16 md:gap-24 lg:gap-40 pt-6 md:pt-7 lg:pt-16">
@@ -315,16 +332,23 @@ export default function FourthSection() {
 
           {/* Image appears here on desktop */}
           <div className="hidden md:block md:basis-1/2">
-            <LazyImage
+            <video
               src={section.image}
-              videoSrc={section.image.replace('.gif', '.mp4')}
               width={500}
               height={500}
-              alt={section.title}
               className="w-full h-full"
-              priority={false}
-              isGif={section.image.endsWith('.gif')}
-            />
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls={false}
+              onLoadedData={(e) => {
+                e.target.muted = true;
+                e.target.play().catch(err => console.log('Autoplay failed:', err));
+              }}
+            >
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       ))}

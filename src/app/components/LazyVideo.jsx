@@ -6,7 +6,6 @@ export default function LazyVideo({
   src,
   webmSrc,
   poster,
-  fallbackSrc, // Add fallbackSrc prop for GIF fallback
   className,
   width,
   height,
@@ -19,7 +18,7 @@ export default function LazyVideo({
   onPlay,
   onPause,
   onClick,
-  onError, // Add onError callback
+  onError,
   ...props
 }) {
   const videoRef = useRef(null);
@@ -93,45 +92,33 @@ export default function LazyVideo({
   };
 
   return (
-    <div ref={ref} className={`video-container ${className || ''}`}>
-      {hasError ? (
-        fallbackSrc ? (
-          // Display fallback image/gif if available
-          <img 
-            src={fallbackSrc}
-            alt="Video fallback"
-            className={className}
-            width={width}
-            height={height}
-            {...props}
-          />
-        ) : (
+      <div ref={ref} className={`video-container ${className || ''}`}>
+        {hasError ? (
           <div className="video-error">
             <p>Video could not be loaded</p>
           </div>
-        )
-      ) : (
-        <video
-          ref={videoRef}
-          className={className}
-          width={width}
-          height={height}
-          autoPlay={false} // We control this via useEffect
-          loop={loop}
-          muted={muted}
-          playsInline={playsInline}
-          controls={controls}
-          preload={priority ? "auto" : "none"}
-          poster={poster || fallbackSrc} // Use fallbackSrc as poster if no poster provided
-          onClick={onClick}
-          onPlay={onPlay}
-          onPause={onPause}
-          {...props}
-        >
-          {getVideoSources()}
-          Your browser does not support the video tag.
-        </video>
-      )}
-    </div>
-  );
+        ) : (
+          <video
+            ref={videoRef}
+            className={className}
+            width={width}
+            height={height}
+            autoPlay={false} // We control this via useEffect
+            loop={loop}
+            muted={muted}
+            playsInline={playsInline}
+            controls={controls}
+            preload={priority ? "auto" : "none"}
+            poster={poster}
+            onClick={onClick}
+            onPlay={onPlay}
+            onPause={onPause}
+            {...props}
+          >
+            {getVideoSources()}
+            Your browser does not support the video tag.
+          </video>
+        )}
+       </div>
+     );
 }

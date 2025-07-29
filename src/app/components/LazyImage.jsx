@@ -23,7 +23,7 @@ export default function LazyImage({
     threshold: 0.1, // Start loading when 10% of the image is in view
   });
 
-  // For GIFs, try to use video if available, otherwise fall back to original GIF
+  // For videos (MP4 files), use LazyVideo component
   if (isGif) {
     // Check if we should attempt to use video version
     const useVideoVersion = videoSrc || webmSrc;
@@ -37,7 +37,6 @@ export default function LazyImage({
               src={videoSrc}
               webmSrc={webmSrc}
               onError={() => setHasError(true)}
-              fallbackSrc={src} // Use original GIF as fallback
               autoPlay
               loop
               muted
