@@ -7,7 +7,9 @@ export default function SecondSection() {
     
     useEffect(() => {
         const videoElement = videoRef.current;
-        if (videoElement) {
+        const sectionElement = document.getElementById('second-section');
+        
+        if (videoElement && sectionElement) {
             const playVideo = async () => {
                 try {
                     videoElement.muted = true;
@@ -29,7 +31,24 @@ export default function SecondSection() {
                 }, 100);
             };
             
-            // Try immediately
+            // Intersection Observer for mobile compatibility
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting && videoElement.paused) {
+                            attemptAutoplay();
+                        }
+                    });
+                },
+                {
+                    threshold: 0.1, // Trigger when 10% of the video is visible
+                    rootMargin: '0px 0px -50px 0px' // Start playing slightly before fully visible
+                }
+            );
+            
+            observer.observe(sectionElement);
+            
+            // Try immediately on load
             attemptAutoplay();
             
             // Try when video metadata is loaded
@@ -52,6 +71,7 @@ export default function SecondSection() {
             document.addEventListener('touchstart', handleUserInteraction, { once: true });
             
             return () => {
+                observer.disconnect();
                 document.removeEventListener('click', handleUserInteraction);
                 document.removeEventListener('touchstart', handleUserInteraction);
             };
