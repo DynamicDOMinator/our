@@ -7,11 +7,23 @@ export default function HeroSection() {
   const mobileVideoRef = useRef(null);
   const desktopVideoRef = useRef(null);
   const { isLoadingComplete } = useLoading();
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
   const lines = [
     { text: "Your ideas our code", highlight: false },
     { text: " built to scale", highlight: true },
   ];
+
+  // Trigger animations only after loading is complete
+  useEffect(() => {
+    if (isLoadingComplete) {
+      // Small delay to ensure smooth transition from loading screen
+      const timer = setTimeout(() => {
+        setShouldAnimate(true);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoadingComplete]);
 
   useEffect(() => {
     // Only initialize videos after loading is complete
@@ -83,10 +95,10 @@ export default function HeroSection() {
           <div className="col-span-1 md:col-span-2 lg:col-span-4">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{
                 duration: 0.7,
-                delay: 1.0,
+                delay: 0.2,
                 ease: [0.25, 0.1, 0.25, 1.0],
               }}
               className="tracking-tight 2xl:text-[128px] md:text-7xl text-3xl leading-tight"
@@ -104,10 +116,10 @@ export default function HeroSection() {
           <div className="col-span-1 2xl:text-[128px] md:text-7xl text-3xl  md:col-span-2 lg:col-span-2 lg:row-start-2 flex flex-row items-center gap-4">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{
                 duration: 0.7,
-                delay: 1.3,
+                delay: 0.5,
                 ease: [0.25, 0.1, 0.25, 1.0],
               }}
               className="tracking-tight leading-tight"
@@ -123,8 +135,8 @@ export default function HeroSection() {
             {/* Video for mobile and tablet - inline with text */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.8 }}
+              animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
               className="block lg:hidden ml-2"
             >
               <video
@@ -150,8 +162,8 @@ export default function HeroSection() {
           <div className="col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 lg:col-start-1 lg:row-start-3">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.6 }}
+              animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
               className=" md:text-xl text-left text-gray-400 max-w-2xl"
             >
               We transform your vision into exceptional digital experiences with
@@ -165,8 +177,8 @@ export default function HeroSection() {
           <div className="hidden lg:block col-span-2 lg:col-span-2 lg:row-span-3 place-content-center lg:col-start-3 lg:row-start-2 lg:mt-0">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.8 }}
+              animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 1.0 }}
             >
               <video
                 ref={desktopVideoRef}
