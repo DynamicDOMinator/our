@@ -1,11 +1,16 @@
 "use client";
 import { useRef, useEffect } from "react";
+import { useLoading } from "../contexts/LoadingContext";
 
 
 export default function SecondSection() {
     const videoRef = useRef(null);
+    const { isLoadingComplete } = useLoading();
     
     useEffect(() => {
+        // Only initialize video after loading is complete
+        if (!isLoadingComplete) return;
+        
         const videoElement = videoRef.current;
         const sectionElement = document.getElementById('second-section');
         
@@ -76,7 +81,7 @@ export default function SecondSection() {
                 document.removeEventListener('touchstart', handleUserInteraction);
             };
         }
-     }, []);
+     }, [isLoadingComplete]);
     
 
     
@@ -85,7 +90,6 @@ export default function SecondSection() {
             <video 
                 ref={videoRef}
                 className="w-full" 
-                autoPlay 
                 loop 
                 muted
                 playsInline

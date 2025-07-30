@@ -6,10 +6,12 @@ import SmoothScroll from "./SmoothScroll";
 import PageTransition from "./PageTransition";
 import ConditionalLastSection from "./ConditionalLastSection";
 import LoadingScreen from "./LoadingScreen";
+import { LoadingProvider, useLoading } from "../contexts/LoadingContext";
 
-const ClientLayout = ({ children }) => {
+const ClientLayoutContent = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasVisited, setHasVisited] = useState(false);
+  const { markLoadingComplete } = useLoading();
 
   useEffect(() => {
     // Always show loading screen on every page load/reload
@@ -20,6 +22,7 @@ const ClientLayout = ({ children }) => {
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
+    markLoadingComplete();
   };
 
   return (
@@ -36,6 +39,14 @@ const ClientLayout = ({ children }) => {
         </PageTransition>
       </SmoothScroll>
     </>
+  );
+};
+
+const ClientLayout = ({ children }) => {
+  return (
+    <LoadingProvider>
+      <ClientLayoutContent>{children}</ClientLayoutContent>
+    </LoadingProvider>
   );
 };
 

@@ -1,10 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import { useLoading } from "../contexts/LoadingContext";
 
 export default function HeroSection() {
   const mobileVideoRef = useRef(null);
   const desktopVideoRef = useRef(null);
+  const { isLoadingComplete } = useLoading();
 
   const lines = [
     { text: "Your ideas our code", highlight: false },
@@ -12,6 +14,9 @@ export default function HeroSection() {
   ];
 
   useEffect(() => {
+    // Only initialize videos after loading is complete
+    if (!isLoadingComplete) return;
+
     // Enhanced video initialization to prevent lazy loading
     const initVideo = (videoElement, videoName) => {
       if (!videoElement) return;
@@ -62,7 +67,7 @@ export default function HeroSection() {
       if (cleanupMobile) cleanupMobile();
       if (cleanupDesktop) cleanupDesktop();
     };
-  }, []);
+  }, [isLoadingComplete]);
 
   return (
     <div
@@ -124,7 +129,6 @@ export default function HeroSection() {
             >
               <video
                 ref={mobileVideoRef}
-                autoPlay
                 loop
                 muted
                 playsInline
@@ -166,7 +170,6 @@ export default function HeroSection() {
             >
               <video
                 ref={desktopVideoRef}
-                autoPlay
                 loop
                 muted
                 playsInline
