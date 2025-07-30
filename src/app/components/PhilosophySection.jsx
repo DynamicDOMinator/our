@@ -1,9 +1,28 @@
 'use client';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import LazyVideo from './LazyVideo';
 
 export default function Philosophy() {
   const videoRef = useRef(null);
+  
+  // Create refs for the header and text paragraphs
+  const [headerRef, headerInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.1,
+    rootMargin: '-50px 0px',
+  });
+  
+  const [firstParagraphRef, firstParagraphInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2,
+  });
+  
+  const [secondParagraphRef, secondParagraphInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2,
+  });
   
   useEffect(() => {
     // More robust video initialization and autoplay
@@ -36,12 +55,82 @@ export default function Philosophy() {
     }
   }, []);
 
+  // Function to split text into words for animation
+  const splitText = (text, isHeader = false) => {
+    return text.split(' ').map((word, index) => (
+      <motion.span 
+        key={index} 
+        className="inline-block mr-[0.25em]"
+        initial={{ 
+          clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)", 
+          transform: "translateY(25px)"
+        }}
+        animate={{ 
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", 
+          transform: "translateY(0px)",
+          transition: {
+            duration: isHeader ? 0.7 : 0.9, // Slower for paragraphs
+            delay: isHeader ? index * 0.15 : 0.3 + (index * 0.08), // Wave effect with longer delays
+            ease: [0.1, 0.6, 0.2, 1] // More pronounced wave-like easing
+          }
+        }}
+      >
+        {word}
+      </motion.span>
+    ));
+  };
+
+  // Function for paragraph text with wave animation
+  const splitParagraphText = (text) => {
+    return text.split(' ').map((word, index) => {
+      // Calculate a sine-wave based delay for a true wave effect
+      const wavePosition = Math.sin(index * 0.3) * 0.2;
+      const baseDelay = 0.5; // Start after header animation
+      const waveDelay = baseDelay + (index * 0.06) + wavePosition;
+      
+      return (
+        <motion.span 
+          key={index} 
+          className="inline-block mr-[0.25em]"
+          initial={{ 
+            clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)", 
+            transform: "translateY(20px)"
+          }}
+          animate={{ 
+            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", 
+            transform: "translateY(0px)",
+            transition: {
+              duration: 0.8, // Slower, smoother animation
+              delay: waveDelay, // Wave-like delay pattern
+              ease: [0.1, 0.6, 0.2, 1] // Smooth easing
+            }
+          }}
+        >
+          {word}
+        </motion.span>
+      );
+    });
+  };
+
   return (
     <div className="bg-black">
       <div className="bg-white lg:rounded-t-[170px] rounded-t-[100]">
-        <h4 className="lg:text-9xl text-4xl md:text-8xl md:pt-38 pt-20 lg:pl-30 pl-10">
-          Our <br />
-          philosophy
+        <h4 
+          ref={headerRef}
+          className="lg:text-9xl text-4xl md:text-8xl md:pt-38 pt-20 lg:pl-30 pl-10"
+        >
+          {headerInView ? (
+            <>
+              {splitText("Our", true)}
+              <br />
+              {splitText("philosophy", true)}
+            </>
+          ) : (
+            <>
+              Our <br />
+              philosophy
+            </>
+          )}
         </h4>
       </div>
       <div className="flex lg:flex-row flex-col items-center pt-10 bg-white">
@@ -49,18 +138,26 @@ export default function Philosophy() {
           <LazyVideo ref={videoRef} className="object-cover w-full lg:p-10" autoPlay loop muted playsInline src="/ta2.mp4" />
         </div>
         <div className="lg:w-1/2 pb-10 lg:pb-0">
-          <p className="lg:text-2xl text-xl lg:pr-40 px-10 lg:px-0">
-            In our team, developers work alongside designers, strategists and
-            analysts. Cuberto doesn't do cookie-cutter solutions and we build
-            products exactly as they were during the design phase, no short cuts
-            or simplifications. 
-          </p>
-          <p className="lg:text-2xl text-xl pt-7 lg:pr-40 px-10 lg:px-0">
-             We're driven by user‑centered design that drives
-            productivity and increases revenue. Our expertise and ingenuity are
-            remarkable, yet we always strive to outdo and outperform our
-            previous achievements.
-          </p>
+          <motion.p 
+            ref={firstParagraphRef}
+            className="lg:text-2xl text-xl lg:pr-40 px-10 lg:px-0"
+          >
+            {firstParagraphInView ? splitParagraphText(
+              "In our team, developers work alongside designers, strategists and analysts. Cuberto doesn't do cookie-cutter solutions and we build products exactly as they were during the design phase, no short cuts or simplifications."
+            ) : (
+              "In our team, developers work alongside designers, strategists and analysts. Cuberto doesn't do cookie-cutter solutions and we build products exactly as they were during the design phase, no short cuts or simplifications."
+            )}
+          </motion.p>
+          <motion.p 
+            ref={secondParagraphRef}
+            className="lg:text-2xl text-xl pt-7 lg:pr-40 px-10 lg:px-0"
+          >
+            {secondParagraphInView ? splitParagraphText(
+              "We're driven by user‑centered design that drives productivity and increases revenue. Our expertise and ingenuity are remarkable, yet we always strive to outdo and outperform our previous achievements."
+            ) : (
+              "We're driven by user‑centered design that drives productivity and increases revenue. Our expertise and ingenuity are remarkable, yet we always strive to outdo and outperform our previous achievements."
+            )}
+          </motion.p>
         </div>
       </div>
     </div>
