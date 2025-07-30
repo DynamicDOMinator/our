@@ -82,6 +82,20 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['framer-motion', 'gsap'],
   },
+  // Disable browser caching in production to ensure latest version is always served
+  headers: async () => {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store, max-age=0, must-revalidate',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
