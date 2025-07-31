@@ -6,8 +6,10 @@ import Link from "next/link";
 import Cursor from "mouse-follower";
 import gsap from "gsap";
 import "mouse-follower/dist/mouse-follower.min.css";
+import { useAssetCache } from "../hooks/useAssetCache";
 
 export default function Header() {
+  const { preloadPageAssets } = useAssetCache();
   const [isScrolled, setIsScrolled] = useState(false);
   const [animationStage, setAnimationStage] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +18,13 @@ export default function Header() {
   const [isInForthSection, setIsInForthSection] = useState(false);
   const [isInLastSection, setIsInLastSection] = useState(false);
   const [isInFooter, setIsInFooter] = useState(false);
+
+  // Preload header assets
+  useEffect(() => {
+    preloadPageAssets([
+      { type: 'image', url: '/Techshun.png' }
+    ]);
+  }, [preloadPageAssets]);
 
   useEffect(() => {
     const handleScroll = () => {

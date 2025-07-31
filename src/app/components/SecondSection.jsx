@@ -1,15 +1,34 @@
 "use client";
 import { useRef, useEffect } from "react";
 import { useLoading } from "../contexts/LoadingContext";
+import { useAssetCache } from "../hooks/useAssetCache";
 
 
 export default function SecondSection() {
     const videoRef = useRef(null);
     const { isLoadingComplete } = useLoading();
+    const { preloadPageAssets } = useAssetCache();
     
     useEffect(() => {
         // Only initialize video after loading is complete
         if (!isLoadingComplete) return;
+        
+        // Preload second section video assets using caching system
+        const preloadSecondSectionAssets = async () => {
+            try {
+                const secondSectionAssets = {
+                    videos: [{ src: "/short.mp4" }],
+                    images: [],
+                    critical: []
+                };
+                await preloadPageAssets(secondSectionAssets);
+                console.log('SecondSection videos preloaded via cache system');
+            } catch (error) {
+                console.error('Error preloading second section assets:', error);
+            }
+        };
+
+        preloadSecondSectionAssets();
         
         const videoElement = videoRef.current;
         const sectionElement = document.getElementById('second-section');

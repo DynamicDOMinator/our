@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useCache } from '../contexts/CacheContext';
 
 export default function LazyVideo({
   src,
@@ -24,14 +25,15 @@ export default function LazyVideo({
   const videoRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const { preloadVideo, isVideoCached, getCachedVideo } = useCache();
   const { ref, inView } = useInView({
     triggerOnce: false,
     threshold: 0.1, // Start loading when 10% of the video is in view
   });
 
-  // Handle video loading
+  // Handle video loading with caching
   useEffect(() => {
-    if (!videoRef.current) return;
+    if (!videoRef.current || !src) return;
 
     const videoElement = videoRef.current;
     
@@ -45,6 +47,16 @@ export default function LazyVideo({
       if (onError) onError(error);
     };
 
+    // Check if video is already cached
+    if (isVideoCached(src)) {
+      setIsLoaded(true);
+    } else if (priority || inView) {
+      // Preload video if it's priority or in view
+      preloadVideo(src, webmSrc).then(() => {
+        setIsLoaded(true);
+      }).catch(handleError);
+    }
+
     videoElement.addEventListener('loadeddata', handleLoadedData);
     videoElement.addEventListener('error', handleError);
 
@@ -52,7 +64,7 @@ export default function LazyVideo({
       videoElement.removeEventListener('loadeddata', handleLoadedData);
       videoElement.removeEventListener('error', handleError);
     };
-  }, []);
+  }, [src, webmSrc, priority, inView, isVideoCached, preloadVideo, onError]);
 
   // Handle video playback based on visibility
   useEffect(() => {

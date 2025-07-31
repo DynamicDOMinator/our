@@ -1,10 +1,12 @@
 "use client";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Cursor from "mouse-follower";
 import gsap from "gsap";
 import "mouse-follower/dist/mouse-follower.min.css";
 import LazyVideo from "../components/LazyVideo";
+import { useAssetCache } from "../hooks/useAssetCache";
 
 // Add a style tag to hide video controls
 const hideVideoControlsStyle = `
@@ -39,6 +41,7 @@ const hideVideoControlsStyle = `
 `;
 
 export default function FifthSection() {
+  const router = useRouter();
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
@@ -46,6 +49,16 @@ export default function FifthSection() {
   const [isMobile, setIsMobile] = useState(false);
   const [activeVideoIndex, setActiveVideoIndex] = useState(null);
   const videoRefs = useRef([]);
+  const { preloadPageAssets } = useAssetCache();
+
+  // Team videos array
+  const teamVideos = [
+    { id: "CyberXbytes", src: "/team3.webm", title: "CyberXbytes", description: "CTF platform " },
+    { id: "Yoodydiet", src: "/team2.webm", title: "Yoodydiet", description: "Health & Care" },
+    { id: "Design", src: "/team1.mp4", title: "Design", description: "Desinging & Branding" },
+    { id: "NOCTURA", src: "/team4.webm", title: "NOCTURA", description: "SOFTWEAR AGANCY" },
+    { id: "Electroniqo", src: "/team5.webm",  title: "Electroniqo", description: "E-commerce & Branding" }
+  ];
 
   // Add refs for all videos
   const addToVideoRefs = (el) => {
@@ -112,15 +125,20 @@ export default function FifthSection() {
     // Wait for DOM to be fully loaded
     const setupVideos = async () => {
       if (typeof window !== "undefined") {
-        // Preload all video sources
+        // Preload all video sources using the new caching system
         try {
-          if (isMobile) {
-            await Promise.all([
-              preloadVideo("/our-1.mp4"),
-              preloadVideo("/cover.mp4"),
-              preloadVideo("/cover-1.mp4"),
-            ]);
-          }
+          const projectsAssets = {
+            videos: [
+              { src: "/about-v.mp4" },
+              ...teamVideos.map(video => ({ src: video.src }))
+            ],
+            images: [],
+            critical: []
+          };
+          
+          // Use the new caching system for preloading
+          await preloadPageAssets(projectsAssets);
+          console.log('Projects page videos preloaded via cache system');
         } catch (error) {
           console.error("Error preloading videos:", error);
         }
@@ -289,8 +307,18 @@ export default function FifthSection() {
     }
   }, []);
 
-  // Modified to prevent default behavior on mobile
-  const handleVideoClick = (e) => {
+  // Navigate to project page on video click
+  const handleVideoClick = (e, projectId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (projectId) {
+      router.push(`/projects/${projectId}`);
+    }
+  };
+
+  // Handle featured video click (main video)
+  const handleFeaturedVideoClick = (e) => {
     // Prevent default behavior which might open video in fullscreen on mobile
     e.preventDefault();
     e.stopPropagation();
@@ -438,7 +466,7 @@ export default function FifthSection() {
               muted
               playsInline
               preload="auto"
-              onClick={(e) => handleVideoClick(e)}
+              onClick={(e) => handleFeaturedVideoClick(e)}
               onTouchStart={(e) => handleVideoTouch(e, e.target)}
               className="w-full h-full rounded-full cursor-pointer object-cover"
               data-cursor="text"
@@ -473,7 +501,7 @@ export default function FifthSection() {
       <div className="pt-20 max-w-[1500px] mx-auto pr-10 lg:pr-0">
         <div className="flex lg:flex-row flex-col justify-center items-center lg:justify-start   gap-20">
           <div className="flex flex-col gap-24">
-            {[0, 1, 2].map((index) => (
+            {teamVideos.slice(0, 3).map((video, index) => (
               <motion.div
                 key={`left-${index}`}
                 className="relative"
@@ -489,12 +517,12 @@ export default function FifthSection() {
                 <video
                   ref={addToVideoRefs}
                   className="w-[400px]  h-[535px] rounded-[45px] object-cover cursor-pointer"
-                  src="/cover.mp4"
+                  src={video.src}
                   data-cursor="-text"
                   data-cursor-text="Explore"
                   onMouseEnter={(e) => handleVideoHover(e.target)}
                   onMouseLeave={(e) => handleVideoLeave(e.target)}
-                  onClick={(e) => e.preventDefault()}
+                  onClick={(e) => handleVideoClick(e, video.id)}
                   onTouchStart={(e) => handleVideoTouch(e, e.target)}
                   loop
                   muted
@@ -505,59 +533,22 @@ export default function FifthSection() {
                   controls={false}
                   style={{ backgroundColor: "#000" }} // Add background color as fallback
                 ></video>
-                <p className="text-white text-xl pt-5">
-                  <span className="font-semibold">Punto Pago</span> – The First
-                  Super-App <br /> in Latin America
+                <p className="text-black text-xl pt-5">
+                  <span className="font-semibold">{video.title}</span> – {video.description}
                 </p>
               </motion.div>
             ))}
           </div>
 
           <div className="flex flex-col">
-            <motion.div
-              className="lg:pt-[280px] "
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 1.2,
-                delay: 0.3,
-                ease: [0.25, 0.1, 0.25, 1.0],
-              }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <video
-                ref={addToVideoRefs}
-                className="w-[400px]  h-[535px] rounded-[45px] object-cover cursor-pointer"
-                src="/cover-1.mp4"
-                data-cursor="-text"
-                data-cursor-text="Explore"
-                onMouseEnter={(e) => handleVideoHover(e.target)}
-                onMouseLeave={(e) => handleVideoLeave(e.target)}
-                onClick={(e) => e.preventDefault()}
-                onTouchStart={(e) => handleVideoTouch(e, e.target)}
-                loop
-                muted
-                playsInline
-                preload="auto"
-                controlsList="nodownload nofullscreen noremoteplayback"
-                disablePictureInPicture
-                controls={false}
-                style={{ backgroundColor: "#000" }} // Add background color as fallback
-              ></video>
-              <p className="text-white text-xl pt-5">
-                <span className="font-semibold">Kelvin Zero –</span> The First
-                Super-App <br /> passwordless authentication
-              </p>
-            </motion.div>
-
-            {[1, 2].map((index) => (
+            {teamVideos.slice(3, 5).map((video, index) => (
               <motion.div
                 key={`right-${index}`}
-                className="lg:pt-[120px] pt-[90px]"
+                className={index === 0 ? "lg:pt-[280px]" : "lg:pt-[120px] pt-[90px]"}
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.8,
+                  duration: index === 0 ? 1.2 : 0.8,
                   delay: 0.3 + 0.2 * index,
                   ease: [0.25, 0.1, 0.25, 1.0],
                 }}
@@ -566,12 +557,12 @@ export default function FifthSection() {
                 <video
                   ref={addToVideoRefs}
                   className="w-[400px] h-[535px] rounded-[45px] object-cover cursor-pointer"
-                  src="/cover-1.mp4"
+                  src={video.src}
                   data-cursor="-text"
                   data-cursor-text="Explore"
                   onMouseEnter={(e) => handleVideoHover(e.target)}
                   onMouseLeave={(e) => handleVideoLeave(e.target)}
-                  onClick={(e) => e.preventDefault()}
+                  onClick={(e) => handleVideoClick(e, video.id)}
                   onTouchStart={(e) => handleVideoTouch(e, e.target)}
                   loop
                   muted
@@ -582,9 +573,8 @@ export default function FifthSection() {
                   controls={false}
                   style={{ backgroundColor: "#000" }} // Add background color as fallback
                 ></video>
-                <p className="text-white text-xl pt-5">
-                  <span className="font-semibold">Kelvin Zero –</span> The First
-                  Super-App <br /> passwordless authentication
+                <p className="text-black text-xl pt-5">
+                  <span className="font-semibold">{video.title}</span> – {video.description}
                 </p>
               </motion.div>
             ))}

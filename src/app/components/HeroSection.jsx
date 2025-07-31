@@ -2,11 +2,13 @@
 import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { useLoading } from "../contexts/LoadingContext";
+import { useAssetCache } from "../hooks/useAssetCache";
 
 export default function HeroSection() {
   const mobileVideoRef = useRef(null);
   const desktopVideoRef = useRef(null);
   const { isLoadingComplete } = useLoading();
+  const { preloadPageAssets } = useAssetCache();
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   const lines = [
@@ -28,6 +30,23 @@ export default function HeroSection() {
   useEffect(() => {
     // Only initialize videos after loading is complete
     if (!isLoadingComplete) return;
+
+    // Preload hero video assets using caching system
+    const preloadHeroAssets = async () => {
+      try {
+        const heroAssets = {
+          videos: [{ src: "/header.mp4" }],
+          images: [],
+          critical: []
+        };
+        await preloadPageAssets(heroAssets);
+        console.log('HeroSection videos preloaded via cache system');
+      } catch (error) {
+        console.error('Error preloading hero assets:', error);
+      }
+    };
+
+    preloadHeroAssets();
 
     // Enhanced video initialization to prevent lazy loading
     const initVideo = (videoElement, videoName) => {
