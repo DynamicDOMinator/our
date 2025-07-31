@@ -3,35 +3,13 @@ import Image from "next/image";
 import MarqueeSection from "../components/MarqueeSection";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { useAssetCache } from "../hooks/useAssetCache";
+
 
 
 export default function () {
-  const { preloadPageAssets } = useAssetCache();
 
-  // Preload about page image assets using caching system
-  useEffect(() => {
-    const preloadAboutAssets = async () => {
-      try {
-        const aboutAssets = {
-          videos: [],
-          images: [
-            '/team.jpg',
-            '/team1.jpg',
-            '/team2.jpg',
-            '/team4.jpg'
-          ],
-          critical: []
-        };
-        await preloadPageAssets(aboutAssets);
-        console.log('About page images preloaded via cache system');
-      } catch (error) {
-        console.error('Error preloading about assets:', error);
-      }
-    };
 
-    preloadAboutAssets();
-  }, [preloadPageAssets]);
+
 
   return (
     <div>

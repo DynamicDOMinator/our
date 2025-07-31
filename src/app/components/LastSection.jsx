@@ -1,18 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useAssetCache } from "../hooks/useAssetCache";
+
 
 export default function LastSection() {
-  const { preloadPageAssets } = useAssetCache();
+
   const [isHovering, setIsHovering] = useState(false);
 
-  // Preload background assets
-  useEffect(() => {
-    preloadPageAssets([
-      { type: 'image', url: '/noisy.gif' }
-    ]);
-  }, [preloadPageAssets]);
+
 
   return (
     <div className="bg-zinc-950 h-screen flex flex-col text-center gap-10 items-center justify-center relative">

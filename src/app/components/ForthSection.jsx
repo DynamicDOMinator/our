@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState, useMemo, useCallback, useRef } from "react";
-import { useAssetCache } from "../hooks/useAssetCache";
+
 
 export default function FourthSection() {
   // Constants for configuration
@@ -11,7 +11,7 @@ export default function FourthSection() {
   const SCROLL_THRESHOLD_MOBILE_FACTOR = 0.1; // Percentage of section height on mobile
   const THROTTLE_MS = 16;                     // ~60fps for smooth animations
   const MOBILE_BREAKPOINT = 768;              // Breakpoint for mobile devices
-  const { preloadPageAssets } = useAssetCache();
+
   // Create separate opacity states for each section
   const [sectionOpacities, setSectionOpacities] = useState({
     1: 0,
@@ -159,29 +159,7 @@ export default function FourthSection() {
     sectionsRef.current = sectionsData;
   }, [sectionsData]);
 
-  // Preload ForthSection video assets using caching system
-  useEffect(() => {
-    const preloadForthSectionAssets = async () => {
-      try {
-        const forthSectionAssets = {
-          videos: [
-            { src: "/mini1.mp4" },
-            { src: "/mini2.mp4" },
-            { src: "/mini3.mp4" },
-            { src: "/mini4.mp4" }
-          ],
-          images: [],
-          critical: []
-        };
-        await preloadPageAssets(forthSectionAssets);
-        console.log('ForthSection videos preloaded via cache system');
-      } catch (error) {
-        console.error('Error preloading forth section assets:', error);
-      }
-    };
 
-    preloadForthSectionAssets();
-  }, [preloadPageAssets]);
 
   // State to track which videos should be loaded on mobile
   const [loadedVideos, setLoadedVideos] = useState(new Set());
