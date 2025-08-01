@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getBlogPostById, getRelatedPosts } from '@/app/utils/blogUtils';
+import { getBlogPostById, getRelatedPosts } from '../../utils/blogUtils';
 import BlogHeader from '../components/BlogHeader';
 import BlogContent from '../components/BlogContent';
 import RelatedPosts from '../components/RelatedPosts';

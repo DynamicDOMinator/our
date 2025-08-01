@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useCache } from '../contexts/CacheContext';
+
 import Image from 'next/image';
 import LazyVideo from './LazyVideo';
 
@@ -19,20 +19,18 @@ export default function LazyImage({
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const { preloadImage, isImageCached } = useCache();
+
   const { ref, inView } = useInView({
     triggerOnce: false,
     threshold: 0.1, // Start loading when 10% of the image is in view
   });
 
-  // Preload image when it comes into view or is priority
+  // Load image when it comes into view or is priority
   useEffect(() => {
-    if (src && (priority || inView) && !isImageCached(src)) {
-      preloadImage(src).catch(error => {
-        console.warn('Failed to preload image:', src, error);
-      });
+    if (src && (priority || inView)) {
+      // Image will be loaded naturally when rendered
     }
-  }, [src, priority, inView, preloadImage, isImageCached]);
+  }, [src, priority, inView]);
 
   // For videos (MP4 files), use LazyVideo component
   if (isGif) {

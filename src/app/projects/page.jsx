@@ -6,7 +6,7 @@ import Cursor from "mouse-follower";
 import gsap from "gsap";
 import "mouse-follower/dist/mouse-follower.min.css";
 import LazyVideo from "../components/LazyVideo";
-import { useAssetCache } from "../hooks/useAssetCache";
+
 
 // Add a style tag to hide video controls
 const hideVideoControlsStyle = `
@@ -49,7 +49,7 @@ export default function FifthSection() {
   const [isMobile, setIsMobile] = useState(false);
   const [activeVideoIndex, setActiveVideoIndex] = useState(null);
   const videoRefs = useRef([]);
-  const { preloadPageAssets } = useAssetCache();
+
 
   // Team videos array
   const teamVideos = [
@@ -125,24 +125,6 @@ export default function FifthSection() {
     // Wait for DOM to be fully loaded
     const setupVideos = async () => {
       if (typeof window !== "undefined") {
-        // Preload all video sources using the new caching system
-        try {
-          const projectsAssets = {
-            videos: [
-              { src: "/about-v.mp4" },
-              ...teamVideos.map(video => ({ src: video.src }))
-            ],
-            images: [],
-            critical: []
-          };
-          
-          // Use the new caching system for preloading
-          await preloadPageAssets(projectsAssets);
-          console.log('Projects page videos preloaded via cache system');
-        } catch (error) {
-          console.error("Error preloading videos:", error);
-        }
-
         // Find all video elements and ensure they have proper attributes
         const allVideos = document.querySelectorAll("video");
         allVideos.forEach((video) => {

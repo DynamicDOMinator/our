@@ -3,11 +3,11 @@ import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import LazyVideo from './LazyVideo';
-import { useAssetCache } from '../hooks/useAssetCache';
+
 
 export default function Philosophy() {
   const videoRef = useRef(null);
-  const { preloadPageAssets } = useAssetCache();
+
   
   // Create refs for the header and text paragraphs
   const [headerRef, headerInView] = useInView({
@@ -27,23 +27,6 @@ export default function Philosophy() {
   });
   
   useEffect(() => {
-    // Preload philosophy section video assets using caching system
-    const preloadPhilosophyAssets = async () => {
-      try {
-        const philosophyAssets = {
-          videos: [{ src: "/ta2.mp4" }],
-          images: [],
-          critical: []
-        };
-        await preloadPageAssets(philosophyAssets);
-        console.log('PhilosophySection videos preloaded via cache system');
-      } catch (error) {
-        console.error('Error preloading philosophy assets:', error);
-      }
-    };
-
-    preloadPhilosophyAssets();
-
     // More robust video initialization and autoplay
     const videoElement = videoRef.current;
     if (videoElement) {

@@ -1,28 +1,11 @@
 "use client";
 import { useEffect } from 'react';
-import { useAssetCache } from '../hooks/useAssetCache';
+
 
 export default function MarqueeSection() {
-  const { preloadPageAssets } = useAssetCache();
 
-  useEffect(() => {
-    // Preload marquee section video assets using caching system
-    const preloadMarqueeAssets = async () => {
-      try {
-        const marqueeAssets = {
-          videos: [{ src: "/about-v.mp4" }],
-          images: [],
-          critical: []
-        };
-        await preloadPageAssets(marqueeAssets);
-        console.log('MarqueeSection videos preloaded via cache system');
-      } catch (error) {
-        console.error('Error preloading marquee assets:', error);
-      }
-    };
 
-    preloadMarqueeAssets();
-  }, [preloadPageAssets]);
+
 
   useEffect(() => {
     // Function to ensure videos autoplay on mobile

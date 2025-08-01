@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getBlogPosts } from '@/app/utils/blogUtils';
+import { getBlogPosts } from '../../utils/blogUtils';
 
 export default async function BlogList() {
   // Fetch blog posts using server component
