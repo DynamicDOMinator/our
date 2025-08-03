@@ -1,16 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState, useMemo, useCallback, useRef } from "react";
-
 
 export default function FourthSection() {
   // Constants for configuration
-  const OPACITY_MAX = 0.4;                    // Maximum opacity for the overlay
-  const SCROLL_THRESHOLD_DESKTOP = 200;       // Pixels to scroll on desktop before full opacity
+  const OPACITY_MAX = 0.4; // Maximum opacity for the overlay
+  const SCROLL_THRESHOLD_DESKTOP = 200; // Pixels to scroll on desktop before full opacity
   const SCROLL_THRESHOLD_MOBILE_FACTOR = 0.1; // Percentage of section height on mobile
-  const THROTTLE_MS = 16;                     // ~60fps for smooth animations
-  const MOBILE_BREAKPOINT = 768;              // Breakpoint for mobile devices
+  const THROTTLE_MS = 16; // ~60fps for smooth animations
+  const MOBILE_BREAKPOINT = 768; // Breakpoint for mobile devices
 
   // Create separate opacity states for each section
   const [sectionOpacities, setSectionOpacities] = useState({
@@ -19,20 +17,20 @@ export default function FourthSection() {
     3: 0,
     4: 0,
   });
-  
+
   // Throttle function to limit how often the scroll handler fires
   const throttle = useCallback((func, limit) => {
     let inThrottle;
     let lastFunc;
     let lastRan;
-    return function() {
+    return function () {
       const args = arguments;
       const context = this;
       if (!inThrottle) {
         func.apply(context, args);
         inThrottle = true;
         lastRan = Date.now();
-        setTimeout(() => inThrottle = false, limit);
+        setTimeout(() => (inThrottle = false), limit);
       } else {
         // Clear previous scheduled execution
         clearTimeout(lastFunc);
@@ -46,166 +44,225 @@ export default function FourthSection() {
       }
     };
   }, []);
-  
+
   // Custom hook for smooth scrolling
   const useScrollSmoothing = () => {
     const isScrolling = useRef(false);
     const scrollTimeout = useRef(null);
-    
+
     const handleScrollStart = useCallback(() => {
       isScrolling.current = true;
     }, []);
-    
+
     const handleScrollEnd = useCallback(() => {
       if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-      
+
       scrollTimeout.current = setTimeout(() => {
         isScrolling.current = false;
-        
+
         // Find the nearest section to snap to
-        const sections = document.querySelectorAll('[data-section-id]');
+        const sections = document.querySelectorAll("[data-section-id]");
         let closestSection = null;
         let minDistance = Infinity;
-        
-        sections.forEach(section => {
+
+        sections.forEach((section) => {
           const rect = section.getBoundingClientRect();
           const distance = Math.abs(rect.top);
-          
+
           if (distance < minDistance) {
             minDistance = distance;
             closestSection = section;
           }
         });
-        
+
         // Only snap if we're close enough to a section boundary
         if (closestSection && minDistance < 100) {
-          closestSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          closestSection.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       }, 150); // Wait a bit to ensure scrolling has actually stopped
     }, []);
-    
+
     return { handleScrollStart, handleScrollEnd, isScrolling };
   };
-  
+
   // Initialize scroll smoothing
-  const { handleScrollStart, handleScrollEnd, isScrolling } = useScrollSmoothing();
+  const { handleScrollStart, handleScrollEnd, isScrolling } =
+    useScrollSmoothing();
 
   // Define section data with useMemo to prevent unnecessary re-renders
-  const sectionsData = useMemo(() => [
-    {
-      id: 1,
-      title: "Custom Software Development",
-      description:
-        "We build tailored software solutions that perfectly align with your unique business requirements. Our development team transforms your ideas into powerful, scalable applications using the latest technologies and industry best practices to drive innovation and efficiency.",
-      leftItems: [
-        "Enterprise Applications",
-        "SaaS Solutions",
-        "Process Automation",
-        "Integration Services",
-      ],
-      rightItems: ["Agile Development", "DevOps Practices", "Quality Assurance", "Continuous Delivery"],
-      image: "/mini1.mp4",
-    },
-    {
-      id: 2,
-      title: "Web & Mobile Development",
-      description:
-        "We create responsive web applications and mobile solutions that deliver exceptional user experiences across all devices. Our development approach ensures your digital products are fast, secure, and scalable while maintaining intuitive interfaces that engage your users.",
-      leftItems: [
-        "Progressive Web Apps",
-        "Responsive Websites",
-        "E-commerce Solutions",
-        "Content Management",
-      ],
-      rightItems: ["iOS Development", "Android Development", "Cross-platform Apps", "Mobile UI/UX"],
-      image: "/mini2.mp4",
-    },
-    {
-      id: 3,
-      title: "Full-Stack Development",
-      description:
-        "Our full-stack development services cover both front-end and back-end technologies to deliver complete, end-to-end solutions. We combine attractive interfaces with robust server-side logic to create seamless applications that meet all your business requirements.",
-      leftItems: [
-        "Front-end Development",
-        "Back-end Systems",
-        "Database Design",
-        "API Development",
-      ],
-      rightItems: ["JavaScript Frameworks", "Cloud Integration", "Microservices", "Serverless Architecture"],
-      image: "/mini3.mp4",
-    },
-   
-    {
-      id: 4,
-      title: "Software Maintenance & Support",
-      description:
-        "We provide comprehensive maintenance and support services to ensure your software remains secure, efficient, and up-to-date. Our dedicated team handles everything from bug fixes and performance optimization to feature enhancements and technology upgrades.",
-      leftItems: [
-        "Bug Fixing",
-        "Performance Tuning",
-        "Security Updates",
-        "Feature Enhancements",
-      ],
-      rightItems: ["24/7 Technical Support", "Code Refactoring", "Legacy System Modernization", "Documentation"],
-      image: "/mini4.mp4",
-    },
-  ], []);
+  const sectionsData = useMemo(
+    () => [
+      {
+        id: 1,
+        title: "Custom Software Development",
+        description:
+          "We build tailored software solutions that perfectly align with your unique business requirements. Our development team transforms your ideas into powerful, scalable applications using the latest technologies and industry best practices to drive innovation and efficiency.",
+        leftItems: [
+          "Enterprise Applications",
+          "SaaS Solutions",
+          "Process Automation",
+          "Integration Services",
+        ],
+        rightItems: [
+          "Agile Development",
+          "DevOps Practices",
+          "Quality Assurance",
+          "Continuous Delivery",
+        ],
+        image: "/mini1.mp4",
+      },
+      {
+        id: 2,
+        title: "Web & Mobile Development",
+        description:
+          "We create responsive web applications and mobile solutions that deliver exceptional user experiences across all devices. Our development approach ensures your digital products are fast, secure, and scalable while maintaining intuitive interfaces that engage your users.",
+        leftItems: [
+          "Progressive Web Apps",
+          "Responsive Websites",
+          "E-commerce Solutions",
+          "Content Management",
+        ],
+        rightItems: [
+          "iOS Development",
+          "Android Development",
+          "Cross-platform Apps",
+          "Mobile UI/UX",
+        ],
+        image: "/mini2.mp4",
+      },
+      {
+        id: 3,
+        title: "Full-Stack Development",
+        description:
+          "Our full-stack development services cover both front-end and back-end technologies to deliver complete, end-to-end solutions. We combine attractive interfaces with robust server-side logic to create seamless applications that meet all your business requirements.",
+        leftItems: [
+          "Front-end Development",
+          "Back-end Systems",
+          "Database Design",
+          "API Development",
+        ],
+        rightItems: [
+          "JavaScript Frameworks",
+          "Cloud Integration",
+          "Microservices",
+          "Serverless Architecture",
+        ],
+        image: "/mini3.mp4",
+      },
+
+      {
+        id: 4,
+        title: "Software Maintenance & Support",
+        description:
+          "We provide comprehensive maintenance and support services to ensure your software remains secure, efficient, and up-to-date. Our dedicated team handles everything from bug fixes and performance optimization to feature enhancements and technology upgrades.",
+        leftItems: [
+          "Bug Fixing",
+          "Performance Tuning",
+          "Security Updates",
+          "Feature Enhancements",
+        ],
+        rightItems: [
+          "24/7 Technical Support",
+          "Code Refactoring",
+          "Legacy System Modernization",
+          "Documentation",
+        ],
+        image: "/mini4.mp4",
+      },
+    ],
+    []
+  );
 
   // Store sections in a ref to avoid dependency issues
   const sectionsRef = useRef(sectionsData);
-  
+
   // Update ref when sectionsData changes
   useEffect(() => {
     sectionsRef.current = sectionsData;
   }, [sectionsData]);
 
-
-
-  // State to track which videos should be loaded on mobile
+  // State to track which videos should be loaded and playing
   const [loadedVideos, setLoadedVideos] = useState(new Set());
+  const [playingVideos, setPlayingVideos] = useState(new Set());
+  const videoRefs = useRef({});
 
-  // Force video autoplay for desktop only
+  // Intersection observer for video loading and playing control
   useEffect(() => {
-    const desktopVideos = document.querySelectorAll('.hidden.md\\:block video');
-    desktopVideos.forEach(video => {
-      video.muted = true;
-      video.play().catch(error => {
-        console.log('Video autoplay failed:', error);
-      });
-    });
-  }, []);
-
-  // Intersection observer for mobile video lazy loading
-  useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    if (!isMobile) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const sectionId = entry.target.getAttribute('data-section-id');
-            if (sectionId) {
-              setLoadedVideos(prev => new Set([...prev, parseInt(sectionId)]));
+          const sectionId = entry.target.getAttribute("data-section-id");
+          if (sectionId) {
+            const id = parseInt(sectionId);
+
+            if (entry.isIntersecting) {
+              // Load video when section comes into view
+              setLoadedVideos((prev) => new Set([...prev, id]));
+
+              // Play video when section is sufficiently visible
+              if (entry.intersectionRatio > 0.3) {
+                setPlayingVideos((prev) => new Set([...prev, id]));
+
+                // Ensure video plays
+                setTimeout(() => {
+                  const desktopVideo = videoRefs.current[`desktop-${id}`];
+                  const mobileVideo = videoRefs.current[`mobile-${id}`];
+
+                  if (desktopVideo) {
+                    desktopVideo.muted = true;
+                    desktopVideo
+                      .play()
+                      .catch((err) =>
+                        console.log("Desktop video play failed:", err)
+                      );
+                  }
+                  if (mobileVideo) {
+                    mobileVideo.muted = true;
+                    mobileVideo
+                      .play()
+                      .catch((err) =>
+                        console.log("Mobile video play failed:", err)
+                      );
+                  }
+                }, 100);
+              }
+            } else {
+              // Pause video when section is out of view
+              setPlayingVideos((prev) => {
+                const newSet = new Set(prev);
+                newSet.delete(id);
+                return newSet;
+              });
+
+              // Pause the actual video elements
+              const desktopVideo = videoRefs.current[`desktop-${id}`];
+              const mobileVideo = videoRefs.current[`mobile-${id}`];
+
+              if (desktopVideo) {
+                desktopVideo.pause();
+              }
+              if (mobileVideo) {
+                mobileVideo.pause();
+              }
             }
           }
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: '50px'
+        threshold: [0.1, 0.3, 0.7],
+        rootMargin: "50px",
       }
     );
 
     // Observe all sections
-    const sections = document.querySelectorAll('[data-section-id]');
-    sections.forEach(section => observer.observe(section));
+    const sections = document.querySelectorAll("[data-section-id]");
+    sections.forEach((section) => observer.observe(section));
 
     return () => {
-      sections.forEach(section => observer.unobserve(section));
+      sections.forEach((section) => observer.unobserve(section));
     };
   }, []);
-  
+
   // Add scroll event handling
   useEffect(() => {
     const handleScroll = () => {
@@ -220,14 +277,14 @@ export default function FourthSection() {
           newOpacities[i] = 0;
           return;
         }
-        
+
         const stickyElement = document.querySelector(`.section-${i}`);
 
         if (stickyElement) {
           const rect = stickyElement.getBoundingClientRect();
           const viewportHeight = window.innerHeight;
           const isSticky = rect.top <= 0;
-          
+
           // Calculate how much of the section is visible in the viewport
           const visiblePercentage = Math.min(
             Math.max(0, (viewportHeight - Math.max(0, rect.top)) / rect.height),
@@ -240,16 +297,16 @@ export default function FourthSection() {
 
             // Calculate how far we've scrolled past this specific section
             const scrolledPastSection = window.scrollY - sectionTop;
-            
+
             // Get section height for responsive calculation
             const sectionHeight = stickyElement.offsetHeight;
-            
+
             // Use a smaller threshold on mobile devices
             const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-            const scrollThreshold = isMobile 
-              ? sectionHeight * SCROLL_THRESHOLD_MOBILE_FACTOR 
+            const scrollThreshold = isMobile
+              ? sectionHeight * SCROLL_THRESHOLD_MOBILE_FACTOR
               : SCROLL_THRESHOLD_DESKTOP;
-            
+
             // Calculate progress (0 to 1) based on how far we've scrolled in this section
             // Use a more gradual progression on mobile
             const scrollProgress = Math.min(
@@ -273,7 +330,7 @@ export default function FourthSection() {
 
     // Initial check
     handleScroll();
-    
+
     // Use throttled scroll handler to improve performance, especially on mobile
     const throttledScrollHandler = throttle(handleScroll, THROTTLE_MS);
 
@@ -286,10 +343,12 @@ export default function FourthSection() {
 
     // Use passive event listener for better performance on mobile
     window.addEventListener("scroll", scrollHandler, { passive: true });
-    
+
     // Handle resize events to recalculate dimensions when orientation changes
-    window.addEventListener("resize", throttledScrollHandler, { passive: true });
-    
+    window.addEventListener("resize", throttledScrollHandler, {
+      passive: true,
+    });
+
     return () => {
       window.removeEventListener("scroll", scrollHandler);
       window.removeEventListener("resize", throttledScrollHandler);
@@ -299,17 +358,21 @@ export default function FourthSection() {
   // No need for individual scroll effects as we're using a single overlay
 
   return (
-    <div className="pt-5 md:pt-10 relative max-w-[2500px] mx-auto" style={{ scrollSnapType: 'y proximity' }}>
+    <div
+      className="pt-5 md:pt-10 relative max-w-[2500px] mx-auto"
+      style={{ scrollSnapType: "y proximity" }}
+    >
       {sectionsData.map((section) => (
         <div
           key={section.id}
-          className={`flex flex-col md:flex-row items-start sticky section-${section.id} px-4 sm:px-8 md:px-12 lg:px-16 z-${
+          className={`flex flex-col md:flex-row items-start sticky section-${
+            section.id
+          } px-4 sm:px-8 md:px-12 lg:px-16 z-${
             10 - section.id
           } top-0 bg-white gap-6  md:gap-12 h-screen lg:gap-28 py-8 md:py-12 lg:py-16  border-t-2 border-gray-300 relative overflow-hidden`}
-          style={{ 
-           
-            scrollMarginTop: '0px',
-            scrollSnapAlign: 'start'
+          style={{
+            scrollMarginTop: "0px",
+            scrollSnapAlign: "start",
           }}
           data-section-id={section.id}
         >
@@ -325,14 +388,21 @@ export default function FourthSection() {
           )}
 
           <div className="w-full md:basis-1/2 mb-6 md:mb-0">
-            <h4 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold">{section.title}</h4>
+            <h4 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold">
+              {section.title}
+            </h4>
 
-            <p className="text-base md:text-lg lg:text-xl pt-6 md:pt-10 lg:pt-16">{section.description}</p>
-            
+            <p className="text-base md:text-lg lg:text-xl pt-6 md:pt-10 lg:pt-16">
+              {section.description}
+            </p>
+
             {/* Image appears here on mobile, between text and list items */}
             <div className="block md:hidden w-full ">
               {loadedVideos.has(section.id) ? (
                 <video
+                  ref={(el) => {
+                    if (el) videoRefs.current[`mobile-${section.id}`] = el;
+                  }}
                   src={section.image}
                   width={500}
                   height={500}
@@ -341,17 +411,14 @@ export default function FourthSection() {
                   muted
                   playsInline
                   controls={false}
-                  autoPlay
-                  onLoadedData={(e) => {
-                    e.target.play().catch(err => console.log('Play failed:', err));
-                  }}
+                  preload="metadata"
                 >
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                <div 
+                <div
                   className="w-full bg-gray-200 flex items-center justify-center"
-                  style={{ height: '500px' }}
+                  style={{ height: "500px" }}
                 >
                   <span className="text-gray-500">Loading video...</span>
                 </div>
@@ -362,14 +429,18 @@ export default function FourthSection() {
               <div>
                 <ul className="">
                   {section.leftItems.map((item, index) => (
-                    <li key={index} className="text-sm md:text-base">{item}</li>
+                    <li key={index} className="text-sm md:text-base">
+                      {item}
+                    </li>
                   ))}
                 </ul>
               </div>
               <div>
                 <ul className="">
                   {section.rightItems.map((item, index) => (
-                    <li key={index} className="text-sm md:text-base">{item}</li>
+                    <li key={index} className="text-sm md:text-base">
+                      {item}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -379,19 +450,18 @@ export default function FourthSection() {
           {/* Image appears here on desktop */}
           <div className="hidden md:block md:basis-1/2">
             <video
+              ref={(el) => {
+                if (el) videoRefs.current[`desktop-${section.id}`] = el;
+              }}
               src={section.image}
               width={500}
               height={500}
               className="w-full h-full"
-              autoPlay
               loop
               muted
               playsInline
               controls={false}
-              onLoadedData={(e) => {
-                e.target.muted = true;
-                e.target.play().catch(err => console.log('Autoplay failed:', err));
-              }}
+              preload="metadata"
             >
               Your browser does not support the video tag.
             </video>
