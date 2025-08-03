@@ -15,7 +15,9 @@ const LoadingScreen = ({ onComplete }) => {
     const progressBar = progressRef.current;
     const circle = circleRef.current;
     const startTime = Date.now();
-    const minLoadTime = 3000; // 3 seconds minimum
+    // Responsive minimum load time - shorter for mobile devices
+    const isMobile = window.innerWidth <= 768;
+    const minLoadTime = isMobile ? 2000 : 3000; // 2 seconds for mobile, 3 for desktop
     let isPageLoaded = false;
     let canComplete = false;
     let circleAnimation;
@@ -38,35 +40,35 @@ const LoadingScreen = ({ onComplete }) => {
       opacity: 1
     });
 
-    // Create timeline
+    // Create timeline with mobile optimization
     const tl = gsap.timeline();
 
-    // Creative text animation with morphing and glitch effects
+    // Unified animation for both mobile and desktop with mobile optimizations
     tl.to(text.children, {
       y: 0,
       opacity: 1,
       scale: 1,
       rotation: 0,
       filter: "blur(0px)",
-      duration: 1.5,
+      duration: isMobile ? 1.2 : 1.5, // Slightly faster on mobile
       stagger: {
-        amount: 0.8,
+        amount: isMobile ? 0.6 : 0.8, // Reduced stagger on mobile
         from: "random"
       },
       ease: "elastic.out(1, 0.8)",
     })
-    // Glitch effect
+    // Glitch effect - reduced intensity on mobile
     .to(text.children, {
-      x: gsap.utils.random(-10, 10),
+      x: gsap.utils.random(isMobile ? -5 : -10, isMobile ? 5 : 10),
       duration: 0.1,
       stagger: 0.02,
-      repeat: 3,
+      repeat: isMobile ? 2 : 3, // Fewer repeats on mobile
       yoyo: true,
       ease: "power2.inOut"
     }, "-=0.5")
     // Wave animation
     .to(text.children, {
-      y: -30,
+      y: isMobile ? -20 : -30, // Reduced movement on mobile
       duration: 0.6,
       stagger: 0.08,
       ease: "sine.inOut",
@@ -75,7 +77,7 @@ const LoadingScreen = ({ onComplete }) => {
     }, "-=0.3")
     // Breathing effect
     .to(text.children, {
-      scale: 1.05,
+      scale: isMobile ? 1.03 : 1.05, // Reduced scale on mobile
       duration: 2,
       stagger: 0.1,
       ease: "sine.inOut",
@@ -83,7 +85,7 @@ const LoadingScreen = ({ onComplete }) => {
       repeat: -1,
     }, "-=0.5");
 
-    // Create bouncing circle animation
+    // Create bouncing circle animation with mobile optimization
     const createCircleBounce = () => {
       const bounceTimeline = gsap.timeline({ repeat: -1 });
       
@@ -93,49 +95,50 @@ const LoadingScreen = ({ onComplete }) => {
       const maxX = Math.min(vw * 0.4, 400); // 40% of viewport width, max 400px
       const maxY = Math.min(vh * 0.3, 250); // 30% of viewport height, max 250px
       
-      // First fall down with bounce
-      bounceTimeline.to(circle, {
-        y: maxY * 0.8,
-        duration: 0.8,
-        ease: "bounce.out",
-        rotation: "+=180",
-      })
-      // Then bounce around the entire screen responsively
-      .to(circle, {
-        x: gsap.utils.random(-maxX, maxX),
-        y: gsap.utils.random(-maxY * 0.8, maxY),
-        duration: 0.6,
-        ease: "power2.inOut",
-        rotation: "+=360",
-      })
-      .to(circle, {
-        x: gsap.utils.random(-maxX, maxX),
-        y: gsap.utils.random(-maxY * 0.8, maxY),
-        duration: 0.5,
-        ease: "power2.inOut",
-        rotation: "+=270",
-      })
-      .to(circle, {
-        x: gsap.utils.random(-maxX, maxX),
-        y: gsap.utils.random(-maxY * 0.8, maxY),
-        duration: 0.7,
-        ease: "power2.inOut",
-        rotation: "+=180",
-      })
-      .to(circle, {
-        x: gsap.utils.random(-maxX, maxX),
-        y: gsap.utils.random(-maxY * 0.8, maxY),
-        duration: 0.4,
-        ease: "power2.inOut",
-        rotation: "+=360",
-      })
-      .to(circle, {
-        x: gsap.utils.random(-maxX, maxX),
-        y: gsap.utils.random(-maxY * 0.8, maxY),
-        duration: 0.6,
-        ease: "power2.inOut",
-        rotation: "+=270",
-      });
+      // Unified circle animation with mobile optimizations
+       // First fall down with bounce
+       bounceTimeline.to(circle, {
+         y: maxY * 0.8,
+         duration: isMobile ? 1.0 : 0.8, // Slightly slower on mobile
+         ease: "bounce.out",
+         rotation: "+=180",
+       })
+       // Then bounce around the screen with mobile-friendly ranges
+       .to(circle, {
+         x: gsap.utils.random(isMobile ? -maxX * 0.7 : -maxX, isMobile ? maxX * 0.7 : maxX),
+         y: gsap.utils.random(-maxY * 0.8, maxY),
+         duration: isMobile ? 0.8 : 0.6,
+         ease: "power2.inOut",
+         rotation: "+=360",
+       })
+       .to(circle, {
+         x: gsap.utils.random(isMobile ? -maxX * 0.7 : -maxX, isMobile ? maxX * 0.7 : maxX),
+         y: gsap.utils.random(-maxY * 0.8, maxY),
+         duration: isMobile ? 0.7 : 0.5,
+         ease: "power2.inOut",
+         rotation: "+=270",
+       })
+       .to(circle, {
+         x: gsap.utils.random(isMobile ? -maxX * 0.7 : -maxX, isMobile ? maxX * 0.7 : maxX),
+         y: gsap.utils.random(-maxY * 0.8, maxY),
+         duration: isMobile ? 0.9 : 0.7,
+         ease: "power2.inOut",
+         rotation: "+=180",
+       })
+       .to(circle, {
+         x: gsap.utils.random(isMobile ? -maxX * 0.7 : -maxX, isMobile ? maxX * 0.7 : maxX),
+         y: gsap.utils.random(-maxY * 0.8, maxY),
+         duration: isMobile ? 0.6 : 0.4,
+         ease: "power2.inOut",
+         rotation: "+=360",
+       })
+       .to(circle, {
+         x: gsap.utils.random(isMobile ? -maxX * 0.7 : -maxX, isMobile ? maxX * 0.7 : maxX),
+         y: gsap.utils.random(-maxY * 0.8, maxY),
+         duration: isMobile ? 0.8 : 0.6,
+         ease: "power2.inOut",
+         rotation: "+=270",
+       });
       
       return bounceTimeline;
     };

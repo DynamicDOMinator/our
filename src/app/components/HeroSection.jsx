@@ -31,19 +31,30 @@ export default function HeroSection() {
     // Only initialize videos after loading is complete
     if (!isLoadingComplete) return;
 
+    // Check if device is mobile for optimized loading
+    const isMobile = window.innerWidth <= 768;
 
-
-    // Enhanced video initialization to prevent lazy loading
+    // Enhanced video initialization with mobile optimization
     const initVideo = (videoElement, videoName) => {
       if (!videoElement) return;
 
-      // Force immediate loading of video
-      videoElement.load();
-      videoElement.preload = "auto";
+      // Mobile-specific optimizations
+      if (isMobile) {
+        // Use lighter preload strategy for mobile
+        videoElement.preload = "metadata";
+        // Add loading delay for mobile to prevent blocking
+        setTimeout(() => {
+          videoElement.load();
+        }, 500);
+      } else {
+        // Desktop can handle immediate loading
+        videoElement.load();
+        videoElement.preload = "auto";
+      }
 
       // Disable any browser lazy loading behavior
       if ("loading" in videoElement) {
-        videoElement.loading = "eager";
+        videoElement.loading = isMobile ? "lazy" : "eager";
       }
 
       // Set up event listeners with priority on immediate playback
@@ -63,10 +74,12 @@ export default function HeroSection() {
       videoElement.addEventListener("loadedmetadata", handleCanPlay);
       videoElement.addEventListener("canplaythrough", handleCanPlay);
 
-      // Try to play immediately as well
-      videoElement.play().catch(() => {
-        // Silent catch - we'll try again on events
-      });
+      // Try to play immediately only for desktop
+      if (!isMobile) {
+        videoElement.play().catch(() => {
+          // Silent catch - we'll try again on events
+        });
+      }
 
       return () => {
         videoElement.removeEventListener("loadedmetadata", handleCanPlay);
@@ -148,14 +161,19 @@ export default function HeroSection() {
                 loop
                 muted
                 playsInline
-                preload="auto"
-                loading="eager"
+                preload="metadata"
+                loading="lazy"
                 className="h-[70px] w-[100px] md:h-[100px] md:w-[150px] rounded-full object-cover"
               >
                 <source
+                  src="/optimized/header-mobile.webm"
+                  type="video/webm"
+                  media="(max-width: 768px)"
+                />
+                <source
                   src="/header.mp4"
                   type="video/mp4"
-                  fetchPriority="high"
+                  fetchPriority="low"
                 />
                 Your browser does not support the video tag.
               </video>
@@ -193,6 +211,11 @@ export default function HeroSection() {
                 loading="eager"
                 className="min-w-1 h-[200px] w-full lg:w-auto rounded-full object-cover"
               >
+                <source
+                  src="/optimized/header-desktop.webm"
+                  type="video/webm"
+                  media="(min-width: 769px)"
+                />
                 <source
                   src="/header.mp4"
                   type="video/mp4"
