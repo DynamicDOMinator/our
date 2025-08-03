@@ -10,7 +10,8 @@ export default function ConditionalLastSection() {
     pathname === "/" ||
     pathname === "/about" ||
     pathname === "/projects" ||
-    pathname === "/blogs"
+    pathname === "/blogs" ||
+    pathname.startsWith("/projects/")
   ) {
     return <LastSection />;
   }

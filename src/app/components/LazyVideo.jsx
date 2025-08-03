@@ -1,9 +1,9 @@
 'use client';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, forwardRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 
-export default function LazyVideo({
+const LazyVideo = forwardRef(function LazyVideo({
   src,
   webmSrc,
   poster,
@@ -21,8 +21,9 @@ export default function LazyVideo({
   onClick,
   onError,
   ...props
-}) {
+}, forwardedRef) {
   const videoRef = useRef(null);
+  const actualVideoRef = forwardedRef || videoRef;
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -33,9 +34,9 @@ export default function LazyVideo({
 
   // Handle video loading with caching
   useEffect(() => {
-    if (!videoRef.current || !src) return;
+    if (!actualVideoRef.current || !src) return;
 
-    const videoElement = videoRef.current;
+    const videoElement = actualVideoRef.current;
     
     const handleLoadedData = () => {
       setIsLoaded(true);
@@ -47,9 +48,18 @@ export default function LazyVideo({
       if (onError) onError(error);
     };
 
-    // Load video naturally when in view or priority
+    // Load video when priority or in view
     if (priority || inView) {
-      videoElement.load();
+      // Simple video loading without cache
+      const tempVideo = document.createElement('video');
+      tempVideo.preload = 'auto';
+      tempVideo.muted = true;
+      tempVideo.src = src;
+      tempVideo.onloadeddata = () => {
+        setIsLoaded(true);
+      };
+      tempVideo.onerror = handleError;
+      tempVideo.load();
     }
 
     videoElement.addEventListener('loadeddata', handleLoadedData);
@@ -59,13 +69,13 @@ export default function LazyVideo({
       videoElement.removeEventListener('loadeddata', handleLoadedData);
       videoElement.removeEventListener('error', handleError);
     };
-  }, [src, webmSrc, priority, inView, onError]);
+  }, [src, webmSrc, priority, inView, onError, actualVideoRef]);
 
   // Handle video playback based on visibility
   useEffect(() => {
-    if (!videoRef.current || !isLoaded) return;
+    if (!actualVideoRef.current || !isLoaded) return;
 
-    const videoElement = videoRef.current;
+    const videoElement = actualVideoRef.current;
 
     if (inView && autoPlay) {
       // Try to play when in view
@@ -82,7 +92,7 @@ export default function LazyVideo({
         videoElement.currentTime = 0;
       }
     }
-  }, [inView, isLoaded, autoPlay, loop]);
+  }, [inView, isLoaded, autoPlay, loop, actualVideoRef]);
 
   // Determine which source to use (WebM or MP4)
   const getVideoSources = () => {
@@ -106,7 +116,7 @@ export default function LazyVideo({
           </div>
         ) : (
           <video
-            ref={videoRef}
+            ref={actualVideoRef}
             className={className}
             width={width}
             height={height}
@@ -128,4 +138,6 @@ export default function LazyVideo({
         )}
        </div>
      );
-}
+});
+
+export default LazyVideo;
