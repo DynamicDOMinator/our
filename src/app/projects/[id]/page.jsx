@@ -28,9 +28,11 @@ export default function ProjectDetail() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-          <p className="text-xl mb-8">The project you're looking for doesn't exist.</p>
-          <button 
-            onClick={() => router.push('/projects')}
+          <p className="text-xl mb-8">
+            The project you're looking for doesn't exist.
+          </p>
+          <button
+            onClick={() => router.push("/projects")}
             className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
           >
             Back to Projects
@@ -81,7 +83,7 @@ export default function ProjectDetail() {
   useEffect(() => {
     if (videoRef.current) {
       const video = videoRef.current;
-      
+
       // Ensure video plays automatically
       const playVideo = () => {
         video.play().catch((err) => {
@@ -91,14 +93,14 @@ export default function ProjectDetail() {
 
       // Try to play immediately
       playVideo();
-      
+
       // Also try when video is loaded
-      video.addEventListener('loadeddata', playVideo);
-      video.addEventListener('canplay', playVideo);
-      
+      video.addEventListener("loadeddata", playVideo);
+      video.addEventListener("canplay", playVideo);
+
       return () => {
-        video.removeEventListener('loadeddata', playVideo);
-        video.removeEventListener('canplay', playVideo);
+        video.removeEventListener("loadeddata", playVideo);
+        video.removeEventListener("canplay", playVideo);
       };
     }
   }, [projectData]);
@@ -167,7 +169,6 @@ export default function ProjectDetail() {
         <video
           ref={videoRef}
           src={projectData.mainVideo}
-          
           autoPlay
           loop
           muted
@@ -216,7 +217,7 @@ export default function ProjectDetail() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.8,
-              delay: 0.1 + (index * 0.1),
+              delay: 0.1 + index * 0.1,
               ease: [0.25, 0.1, 0.25, 1.0],
             }}
             viewport={{ once: true, amount: 0.3 }}
@@ -247,19 +248,21 @@ export default function ProjectDetail() {
         className="pt-40 max-w-[900px] mx-auto font-semibold"
       >
         <h2 className="lg:text-7xl md:text-5xl text-3xl  mx-5 lg:mx-0  border-b-2 border-black pb-10">
-          {projectData.sections[0]?.title.split(' ').map((word, index, array) => {
-            const isLastWord = index === array.length - 1;
-            const shouldBreak = index === Math.floor(array.length / 2);
-            return (
-              <span key={index}>
-                <span className="inline-block transition-transform duration-500 hover:translate-y-[-10px]">
-                  {word}
+          {projectData.sections[0]?.title
+            .split(" ")
+            .map((word, index, array) => {
+              const isLastWord = index === array.length - 1;
+              const shouldBreak = index === Math.floor(array.length / 2);
+              return (
+                <span key={index}>
+                  <span className="inline-block transition-transform duration-500 hover:translate-y-[-10px]">
+                    {word}
+                  </span>
+                  {shouldBreak && <br />}
+                  {!isLastWord && !shouldBreak && " "}
                 </span>
-                {shouldBreak && <br />}
-                {!isLastWord && !shouldBreak && ' '}
-              </span>
-            );
-          })}
+              );
+            })}
         </h2>
       </motion.div>
 
@@ -278,9 +281,7 @@ export default function ProjectDetail() {
           <p>{projectData.sections[0]?.subtitle}</p>
         </div>
         <div className="">
-          <p>
-            {projectData.sections[0]?.content}
-          </p>
+          <p>{projectData.sections[0]?.content}</p>
         </div>
       </motion.div>
 
@@ -305,60 +306,61 @@ export default function ProjectDetail() {
           data-cursor-text="View"
         />
       </motion.div>
+      <div className="">
+        <div className="flex flex-col items-center px-5 md:px-0   lg:flex-row gap-10 max-w-[1000px] mx-auto pb-30 ">
+          <div className="flex flex-col gap-10 mt-20 ">
+            {projectData.gallery.slice(0, 3).map((item, index) => (
+              <motion.div
+                key={`left-${index}`}
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.1 + index * 0.1,
+                  ease: [0.25, 0.1, 0.25, 1.0],
+                }}
+                viewport={{ once: true, amount: 0.3 }}
+                className={`md:w-[450px] rounded-4xl h-[750px] relative ${item.bgColor} p-10`}
+              >
+                <Image
+                  className="w-full h-full rounded-3xl pt-10 cursor-pointer"
+                  src={item.image}
+                  alt={`${projectData.title}-gallery-${index + 1}`}
+                  width={1000}
+                  height={1000}
+                  data-cursor="text"
+                  data-cursor-text="View"
+                />
+              </motion.div>
+            ))}
+          </div>
 
-      <div className="flex flex-col items-center lg:flex-row gap-10 max-w-[1000px] mx-auto pb-30">
-        <div className="flex flex-col gap-10 mt-20">
-          {projectData.gallery.slice(0, 3).map((item, index) => (
-            <motion.div
-              key={`left-${index}`}
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.1 + (index * 0.1),
-                ease: [0.25, 0.1, 0.25, 1.0],
-              }}
-              viewport={{ once: true, amount: 0.3 }}
-              className={`w-[450px] rounded-4xl h-[750px] relative ${item.bgColor} p-10`}
-            >
-              <Image
-                className="w-full h-full rounded-3xl pt-10 cursor-pointer"
-                src={item.image}
-                alt={`${projectData.title}-gallery-${index + 1}`}
-                width={1000}
-                height={1000}
-                data-cursor="text"
-                data-cursor-text="View"
-              />
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="flex flex-col gap-10 lg:mt-20 lg:pt-50">
-          {projectData.gallery.slice(3, 6).map((item, index) => (
-            <motion.div
-              key={`right-${index}`}
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.4 + (index * 0.1),
-                ease: [0.25, 0.1, 0.25, 1.0],
-              }}
-              viewport={{ once: true, amount: 0.3 }}
-              className={`w-[450px] rounded-4xl h-[750px] relative ${item.bgColor} p-10`}
-            >
-              <Image
-                className="w-full h-full rounded-3xl pt-10 cursor-pointer"
-                src={item.image}
-                alt={`${projectData.title}-gallery-${index + 4}`}
-                width={1000}
-                height={1000}
-                data-cursor="text"
-                data-cursor-text="View"
-              />
-            </motion.div>
-          ))}
+          <div className="flex flex-col gap-10 lg:mt-20 lg:pt-50">
+            {projectData.gallery.slice(3, 6).map((item, index) => (
+              <motion.div
+                key={`right-${index}`}
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.4 + index * 0.1,
+                  ease: [0.25, 0.1, 0.25, 1.0],
+                }}
+                viewport={{ once: true, amount: 0.3 }}
+                className={`md:w-[450px] rounded-4xl h-[750px] relative ${item.bgColor} p-10`}
+              >
+                <Image
+                  className="w-full h-full rounded-3xl pt-10 cursor-pointer"
+                  src={item.image}
+                  alt={`${projectData.title}-gallery-${index + 4}`}
+                  width={1000}
+                  height={1000}
+                  data-cursor="text"
+                  data-cursor-text="View"
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>
