@@ -5,7 +5,7 @@ export const projectsData = {
     title: "CyberXbytes",
     subtitle: "CTF Platform for Cybersecurity Enthusiasts",
     description: "A comprehensive Capture The Flag (CTF) platform designed for cybersecurity enthusiasts to practice and enhance their skills through various challenges and competitions.",
-    mainVideo: "/p1-v.mp4",
+    mainVideo: "/P1/1.webm",
     previewVideo: "/team3.webm",
     challenge: {
       title: "The challenge",
@@ -15,10 +15,10 @@ export const projectsData = {
       ]
     },
     images: [
-      "/p1-1.png",
-      "/p1-2.png",
-      "/p1-3.png",
-      "/p1-4.png"
+      "/P1/img1.png",
+      "/P1/img2.png",
+      "/P1/img3.png",
+      "/P1/img4.png"
     ],
     sections: [
       {
@@ -28,12 +28,12 @@ export const projectsData = {
       }
     ],
     gallery: [
-      { image: "/p1-5.png", bgColor: "bg-red-200" },
-      { image: "/p1-6.png", bgColor: "bg-amber-200" },
-      { image: "/p1-7.png", bgColor: "bg-cyan-200" },
-      { image: "/p1-8.png", bgColor: "bg-blue-200" },
-      { image: "/p1-9.png", bgColor: "bg-green-200" },
-      { image: "/p1-10.png", bgColor: "bg-orange-200" }
+      { image: "/P1/phone1.png", bgColor: "bg-neutral-200" },
+      { image: "/P1/phone2.png", bgColor: "bg-neutral-200" },
+      { image: "/P1/phone3.png", bgColor: "bg-neutral-200" },
+      { image: "/P1/phone4.png", bgColor: "bg-neutral-200" },
+      { image: "/P1/phone5.png", bgColor: "bg-neutral-200" },
+      { image: "/P1/phone6.png", bgColor: "bg-neutral-200" }
     ]
   },
   "Yoodydiet": {
@@ -41,7 +41,7 @@ export const projectsData = {
     title: "Yoodydiet",
     subtitle: "Health & Care Platform",
     description: "A comprehensive health and nutrition platform that helps users track their dietary habits, plan meals, and achieve their wellness goals through personalized recommendations.",
-    mainVideo: "/p1-v.mp4", // You can replace with actual video
+    mainVideo: "/P2/v1.webm", // You can replace with actual video
     previewVideo: "/team2.webm",
     challenge: {
       title: "The challenge",
@@ -51,10 +51,10 @@ export const projectsData = {
       ]
     },
     images: [
-      "/p1-1.png", // Replace with actual Yoodydiet images
-      "/p1-2.png",
-      "/p1-3.png",
-      "/p1-4.png"
+      "/P2/img1.png",
+      "/P2/img2.png",
+      "/P2/img3.png",
+      "/P2/img4.png"
     ],
     sections: [
       {
@@ -64,12 +64,12 @@ export const projectsData = {
       }
     ],
     gallery: [
-      { image: "/p1-5.png", bgColor: "bg-green-200" },
-      { image: "/p1-6.png", bgColor: "bg-blue-200" },
-      { image: "/p1-7.png", bgColor: "bg-yellow-200" },
-      { image: "/p1-8.png", bgColor: "bg-purple-200" },
-      { image: "/p1-9.png", bgColor: "bg-pink-200" },
-      { image: "/p1-10.png", bgColor: "bg-indigo-200" }
+      { image: "/P2/phone1.png", bgColor: "bg-neutral-200" },
+      { image: "/P2/phone4.png", bgColor: "bg-neutral-200" },
+      { image: "/P2/phone5.png", bgColor: "bg-neutral-200" },
+      { image: "/P2/phone3.png", bgColor: "bg-neutral-200" },
+      { image: "/P2/phone2.png", bgColor: "bg-neutral-200" },
+      { image: "/P2/phone6.png", bgColor: "bg-neutral-200" }
     ]
   },
   "Design": {
@@ -77,7 +77,7 @@ export const projectsData = {
     title: "Design",
     subtitle: "Designing & Branding Solutions",
     description: "A comprehensive design and branding service that helps businesses create compelling visual identities and user experiences that resonate with their target audience.",
-    mainVideo: "/p1-v.mp4",
+    mainVideo: "/P5/v1.webm",
     previewVideo: "/team1.mp4",
     challenge: {
       title: "The challenge",
@@ -87,10 +87,10 @@ export const projectsData = {
       ]
     },
     images: [
-      "/p1-1.png",
-      "/p1-2.png",
-      "/p1-3.png",
-      "/p1-4.png"
+      "/P5/image1.png",
+      "/P5/image2.png",
+      "/P5/image3.png",
+      "/P5/image4.png"
     ],
     sections: [
       {
@@ -100,12 +100,12 @@ export const projectsData = {
       }
     ],
     gallery: [
-      { image: "/p1-5.png", bgColor: "bg-purple-200" },
-      { image: "/p1-6.png", bgColor: "bg-pink-200" },
-      { image: "/p1-7.png", bgColor: "bg-indigo-200" },
-      { image: "/p1-8.png", bgColor: "bg-teal-200" },
-      { image: "/p1-9.png", bgColor: "bg-orange-200" },
-      { image: "/p1-10.png", bgColor: "bg-lime-200" }
+      { image: "/P5/phone1.png", bgColor: "bg-neutral-200" },
+      { image: "/P5/phone5.png", bgColor: "bg-neutral-200" },
+      { image: "/P5/phone3.png", bgColor: "bg-neutral-200" },
+      { image: "/P5/phone2.png", bgColor: "bg-neutral-200" },
+      { image: "/P5/phone6.png", bgColor: "bg-neutral-200" },
+      { image: "/P5/phone4.png", bgColor: "bg-neutral-200" }
     ]
   },
   "NOCTURA": {
