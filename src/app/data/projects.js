@@ -113,7 +113,7 @@ export const projectsData = {
     title: "NOCTURA",
     subtitle: "Software Agency Platform",
     description: "A modern software agency platform that streamlines project management, client communication, and development workflows for digital agencies and software development teams.",
-    mainVideo: "/p1-v.mp4",
+    mainVideo: "/noochi.webm",
     previewVideo: "/team4.webm",
     challenge: {
       title: "The challenge",
