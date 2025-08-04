@@ -5,7 +5,7 @@ export const projectsData = {
     title: "CyberXbytes",
     subtitle: "CTF Platform for Cybersecurity Enthusiasts",
     description: "A comprehensive Capture The Flag (CTF) platform designed for cybersecurity enthusiasts to practice and enhance their skills through various challenges and competitions.",
-    mainVideo: "/cyberX.webm",
+    mainVideo: "/p1-v.mp4",
     previewVideo: "/team3.webm",
     challenge: {
       title: "The challenge",
@@ -41,7 +41,7 @@ export const projectsData = {
     title: "Yoodydiet",
     subtitle: "Health & Care Platform",
     description: "A comprehensive health and nutrition platform that helps users track their dietary habits, plan meals, and achieve their wellness goals through personalized recommendations.",
-    mainVideo: "/yoodi.webm", // You can replace with actual video
+    mainVideo: "/p1-v.mp4", // You can replace with actual video
     previewVideo: "/team2.webm",
     challenge: {
       title: "The challenge",
@@ -123,10 +123,10 @@ export const projectsData = {
       ]
     },
     images: [
-      "/p1-1.png",
-      "/p1-2.png",
-      "/p1-3.png",
-      "/p1-4.png"
+      "/P3/imageone.png",
+      "/P3/image2.png",
+      "/P3/image3.png",
+      "/P3/image4.png"
     ],
     sections: [
       {
@@ -136,12 +136,12 @@ export const projectsData = {
       }
     ],
     gallery: [
-      { image: "/p1-5.png", bgColor: "bg-gray-200" },
-      { image: "/p1-6.png", bgColor: "bg-slate-200" },
-      { image: "/p1-7.png", bgColor: "bg-zinc-200" },
-      { image: "/p1-8.png", bgColor: "bg-neutral-200" },
-      { image: "/p1-9.png", bgColor: "bg-stone-200" },
-      { image: "/p1-10.png", bgColor: "bg-red-200" }
+      { image: "/P3/phone1.png", bgColor: "bg-neutral-200" },
+      { image: "/P3/phone2.png", bgColor: "bg-neutral-200" },
+      { image: "/P3/phone3.png", bgColor: "bg-neutral-200" },
+      { image: "/P3/phone4.png", bgColor: "bg-neutral-200" },
+      { image: "/P3/phone5.png", bgColor: "bg-neutral-200" },
+      { image: "/P3/phone7.png", bgColor: "bg-neutral-200" }
     ]
   },
   "Electroniqo": {
