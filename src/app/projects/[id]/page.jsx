@@ -164,7 +164,7 @@ export default function ProjectDetail() {
           delay: 2.0,
           ease: [0.25, 0.1, 0.25, 1.0],
         }}
-        className="relative w-full lg:h-[700px] h-[350px] lg:pt-40 mt-20 lg:px-20 px-10"
+        className="relative w-full lg:h-[900px] xl:h-[1200px] h-[350px] lg:pt-40 mt-20 lg:px-20 px-10"
       >
         <video
           ref={videoRef}

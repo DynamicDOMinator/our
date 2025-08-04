@@ -5,7 +5,7 @@ export const projectsData = {
     title: "CyberXbytes",
     subtitle: "CTF Platform for Cybersecurity Enthusiasts",
     description: "A comprehensive Capture The Flag (CTF) platform designed for cybersecurity enthusiasts to practice and enhance their skills through various challenges and competitions.",
-    mainVideo: "/p1-v.mp4",
+    mainVideo: "/cyberX.webm",
     previewVideo: "/team3.webm",
     challenge: {
       title: "The challenge",
