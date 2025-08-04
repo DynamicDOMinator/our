@@ -41,7 +41,7 @@ export const projectsData = {
     title: "Yoodydiet",
     subtitle: "Health & Care Platform",
     description: "A comprehensive health and nutrition platform that helps users track their dietary habits, plan meals, and achieve their wellness goals through personalized recommendations.",
-    mainVideo: "/p1-v.mp4", // You can replace with actual video
+    mainVideo: "/yoodi.webm", // You can replace with actual video
     previewVideo: "/team2.webm",
     challenge: {
       title: "The challenge",
