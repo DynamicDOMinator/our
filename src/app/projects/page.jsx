@@ -59,7 +59,7 @@ export default function FifthSection() {
     },
     {
       id: "Yoodydiet",
-      src: "/team2.webm",
+      src: "/yoodyvideooutside.webm",
       title: "Yoodydiet",
       description: "Health & Care",
     },
@@ -74,7 +74,6 @@ export default function FifthSection() {
       src: "/team4.webm",
       title: "NOCTURA",
       description: "Software Agency",
-
     },
     {
       id: "Electroniqo",
@@ -465,7 +464,6 @@ export default function FifthSection() {
                 addToVideoRefs(el);
               }}
               src="/about-v.webm"
-
               loop
               autoPlay
               muted
