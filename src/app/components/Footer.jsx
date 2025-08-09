@@ -142,6 +142,10 @@ export default function Footer() {
             color: white;
           }
           
+          .linkedin-hover-container .social-text {
+            color: white;
+          }
+          
           /* Make social media text disappear on hover */
           .social-text {
             transition: opacity 0.3s ease; /* Add transition for smooth effect */
@@ -176,12 +180,28 @@ export default function Footer() {
             width: max-content;
           }
           
+          @keyframes linkedin-marquee {
+            0%   { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+          }
+          
+          .linkedin-links .animate-marquee {
+            animation: linkedin-marquee 15s linear infinite;
+            display: flex;
+            flex-wrap: nowrap;
+            width: max-content;
+          }
+          
           /* Slow down social media marquees on hover */
           .facebook-links:hover .animate-marquee {
             animation-duration: 30s;
           }
           
           .twitter-links:hover .animate-marquee {
+            animation-duration: 30s;
+          }
+          
+          .linkedin-links:hover .animate-marquee {
             animation-duration: 30s;
           }
           
@@ -489,67 +509,211 @@ export default function Footer() {
 
           {/* Twitter/X Section */}
           <div className="absolute top-[0px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 twitter-hover-container social-hover-container lg:block hidden">
-            {/* Twitter header - always visible and positioned above the marquee */}
+            {/* Twitter/X header - always visible and positioned above the marquee */}
             <div className="text-white lg:text-4xl text-2xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
               <div className="md:px-20 px-7 flex items-center justify-between">
-                <p data-cursor-text="Twitter" data-cursor-stick="#twitter-text" id="twitter-text">Twitter</p>
+                <a href="https://x.com/prosental_" target="_blank" rel="noopener noreferrer" data-cursor-text="X (Twitter)" data-cursor-stick="#twitter-text" id="twitter-text">X (Twitter)</a>
                 <GoArrowUpRight />
               </div>
             </div>
 
             {/* Marquee animation that appears on hover - positioned behind the Twitter text */}
-            <div className="marquee-container twitter-links px-20 text-white md:text-4xl text-2xl py-10  absolute w-full left-0 top-0 h-full z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+            <div className="marquee-container twitter-links px-20 text-black md:text-4xl text-2xl py-10 bg-black absolute w-full left-0 top-0 h-full z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
               <div className="animate-marquee flex items-center gap-5">
-                {/* Twitter links - first set */}
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                {/* Twitter/X links - first set */}
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
 
-                {/* Twitter links - duplicated for continuous scrolling */}
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                {/* Twitter/X links - duplicated for continuous scrolling */}
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
-                <div className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
-                  <p>Twitter</p>
-                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45" />
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://x.com/prosental_', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">X (Twitter)</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+              </div>
+            </div>
+
+            {/* Add the reveal animation elements */}
+            <div className="social-reveal-top"></div>
+            <div className="social-reveal-bottom"></div>
+          </div>
+
+          {/* LinkedIn Section */}
+          <div className="absolute top-[-40px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 linkedin-hover-container social-hover-container lg:block hidden">
+            {/* LinkedIn header - always visible and positioned above the marquee */}
+            <div className="text-white lg:text-4xl text-2xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
+              <div className="md:px-20 px-7 flex items-center justify-between">
+                <a href="https://www.linkedin.com/company/prosental/" target="_blank" rel="noopener noreferrer" data-cursor-text="LinkedIn" data-cursor-stick="#linkedin-text" id="linkedin-text">LinkedIn</a>
+                <GoArrowUpRight />
+              </div>
+            </div>
+
+            {/* Marquee animation that appears on hover - positioned behind the LinkedIn text */}
+            <div className="marquee-container linkedin-links px-20 text-white md:text-4xl text-2xl py-10 bg-[#0077B5] absolute w-full left-0 top-0 h-full z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+              <div className="animate-marquee flex items-center gap-5">
+                {/* LinkedIn links - first set */}
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+
+                {/* LinkedIn links - duplicated for continuous scrolling */}
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://www.linkedin.com/company/prosental/', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">LinkedIn</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
                 </div>
               </div>
             </div>
@@ -589,15 +753,27 @@ export default function Footer() {
               <GoArrowUpRight className="text-white text-xl" />
             </div>
             
-            {/* Mobile Twitter Link */}
+            {/* Mobile X (Twitter) Link */}
             <div 
               onClick={(e) => {
                 e.stopPropagation();
-                window.open('https://twitter.com/prosental_agency', '_blank');
+                window.open('https://x.com/prosental_', '_blank');
               }}
               className="flex items-center justify-between cursor-pointer hover:bg-white/10 p-4 rounded-lg transition-all duration-300"
             >
-              <p className="text-white text-xl">Twitter</p>
+              <p className="text-white text-xl">X (Twitter)</p>
+              <GoArrowUpRight className="text-white text-xl" />
+            </div>
+            
+            {/* Mobile LinkedIn Link */}
+            <div 
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open('https://www.linkedin.com/company/prosental/', '_blank');
+              }}
+              className="flex items-center justify-between cursor-pointer hover:bg-white/10 p-4 rounded-lg transition-all duration-300"
+            >
+              <p className="text-white text-xl">LinkedIn</p>
               <GoArrowUpRight className="text-white text-xl" />
             </div>
           </div>

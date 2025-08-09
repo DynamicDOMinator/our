@@ -118,7 +118,7 @@ export default function HeroSection() {
                 delay: 0.2,
                 ease: [0.25, 0.1, 0.25, 1.0],
               }}
-              className="tracking-tight 2xl:text-[128px] md:text-7xl text-3xl leading-tight"
+              className="tracking-tight 2xl:text-[140px] md:text-7xl text-3xl leading-tight"
               style={{
                 position: "relative",
                 zIndex: 2,
@@ -130,7 +130,7 @@ export default function HeroSection() {
           </div>
 
           {/* Second div - spans 2 columns in row 2 */}
-          <div className="col-span-1 2xl:text-[128px] md:text-7xl text-3xl  md:col-span-2 lg:col-span-2 lg:row-start-2 flex flex-row items-center gap-4">
+          <div className="col-span-1 2xl:text-[140px] md:text-7xl text-3xl  md:col-span-2 lg:col-span-2 lg:row-start-2 flex flex-row items-center gap-4">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -186,7 +186,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className=" md:text-xl text-left text-gray-400 max-w-2xl"
+              className=" md:text-xl text-left text-gray-400 max-w-2xl 2xl:text-3xl"
             >
               We transform your vision into exceptional digital experiences with
               cutting-edge technology and thoughtful design. Our team of experts
