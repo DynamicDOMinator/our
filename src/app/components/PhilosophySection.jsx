@@ -145,9 +145,9 @@ export default function Philosophy() {
             className="lg:text-2xl text-xl lg:pr-40 px-10 lg:px-0"
           >
             {firstParagraphInView ? splitParagraphText(
-              "In our team, developers work alongside designers, strategists and analysts. Cuberto doesn't do cookie-cutter solutions and we build products exactly as they were during the design phase, no short cuts or simplifications."
+              "At PROSENTAL, our developers collaborate seamlessly with designers, strategists and analysts to deliver exceptional digital solutions. We don't believe in one-size-fits-all approaches and craft each project with precision, maintaining the integrity of our design vision throughout development."
             ) : (
-              "In our team, developers work alongside designers, strategists and analysts. Cuberto doesn't do cookie-cutter solutions and we build products exactly as they were during the design phase, no short cuts or simplifications."
+              "At PROSENTAL, our developers collaborate seamlessly with designers, strategists and analysts to deliver exceptional digital solutions. We don't believe in one-size-fits-all approaches and craft each project with precision, maintaining the integrity of our design vision throughout development."
             )}
           </motion.p>
           <motion.p 
@@ -155,9 +155,9 @@ export default function Philosophy() {
             className="lg:text-2xl text-xl pt-7 lg:pr-40 px-10 lg:px-0"
           >
             {secondParagraphInView ? splitParagraphText(
-              "We're driven by user‑centered design that drives productivity and increases revenue. Our expertise and ingenuity are remarkable, yet we always strive to outdo and outperform our previous achievements."
+              "We're passionate about creating user-centered experiences that drive business growth and enhance digital presence. From brand identity to custom development, our comprehensive approach ensures every solution is tailored to exceed expectations and deliver measurable results."
             ) : (
-              "We're driven by user‑centered design that drives productivity and increases revenue. Our expertise and ingenuity are remarkable, yet we always strive to outdo and outperform our previous achievements."
+              "We're passionate about creating user-centered experiences that drive business growth and enhance digital presence. From brand identity to custom development, our comprehensive approach ensures every solution is tailored to exceed expectations and deliver measurable results."
             )}
           </motion.p>
         </div>

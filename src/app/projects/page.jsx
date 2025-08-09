@@ -7,7 +7,6 @@ import gsap from "gsap";
 import "mouse-follower/dist/mouse-follower.min.css";
 import LazyVideo from "../components/LazyVideo";
 
-
 // Add a style tag to hide video controls
 const hideVideoControlsStyle = `
   video::-webkit-media-controls,
@@ -50,14 +49,39 @@ export default function FifthSection() {
   const [activeVideoIndex, setActiveVideoIndex] = useState(null);
   const videoRefs = useRef([]);
 
-
   // Team videos array
   const teamVideos = [
-    { id: "CyberXbytes", src: "/team3.webm", title: "CyberXbytes", description: "CTF platform " },
-    { id: "Yoodydiet", src: "/team2.webm", title: "Yoodydiet", description: "Health & Care" },
-    { id: "Design", src: "/team1.mp4", title: "Design", description: "Desinging & Branding" },
-    { id: "NOCTURA", src: "/team4.webm", title: "NOCTURA", description: "SOFTWEAR AGANCY" },
-    { id: "Electroniqo", src: "/team5.webm",  title: "Electroniqo", description: "E-commerce & Branding" }
+    {
+      id: "CyberXbytes",
+      src: "/team3.webm",
+      title: "CyberXbytes",
+      description: "CTF platform ",
+    },
+    {
+      id: "Yoodydiet",
+      src: "/team2.webm",
+      title: "Yoodydiet",
+      description: "Health & Care",
+    },
+    {
+      id: "Design",
+      src: "/team1.mp4",
+      title: "Design",
+      description: "Design & Branding",
+    },
+    {
+      id: "NOCTURA",
+      src: "/team4.webm",
+      title: "NOCTURA",
+      description: "Software Agency",
+
+    },
+    {
+      id: "Electroniqo",
+      src: "/team5.webm",
+      title: "Electroniqo",
+      description: "E-commerce & Branding",
+    },
   ];
 
   // Add refs for all videos
@@ -280,9 +304,9 @@ export default function FifthSection() {
           // Featured video autoplay failed, error
           // Try again after a short delay
           setTimeout(() => {
-            videoRef.current
-              .play()
-              .catch((e) => {/* Second attempt failed */});
+            videoRef.current.play().catch((e) => {
+              /* Second attempt failed */
+            });
           }, 1000);
         });
       }
@@ -293,7 +317,7 @@ export default function FifthSection() {
   const handleVideoClick = (e, projectId) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (projectId) {
       router.push(`/projects/${projectId}`);
     }
@@ -372,9 +396,9 @@ export default function FifthSection() {
           // Auto-play was prevented or interrupted
           // Try again with user interaction flag
           videoElement.muted = true; // Ensure muted to allow autoplay
-          videoElement
-            .play()
-            .catch((e) => {/* Second attempt failed */});
+          videoElement.play().catch((e) => {
+            /* Second attempt failed */
+          });
         });
       }
     }
@@ -427,8 +451,6 @@ export default function FifthSection() {
           className="text-black italic md:text-9xl text-5xl "
         >
           What We
-
-
         </motion.h5>
         <div className="flex items-center max-w-[1500px] mx-auto">
           <motion.div
@@ -442,17 +464,14 @@ export default function FifthSection() {
                 videoRef.current = el;
                 addToVideoRefs(el);
               }}
-              src="/about-v.mp4"
+              src="/about-v.webm"
+
               loop
               autoPlay
               muted
               playsInline
               preload="auto"
-              onClick={(e) => handleFeaturedVideoClick(e)}
-              onTouchStart={(e) => handleVideoTouch(e, e.target)}
-              className="w-full h-full rounded-full cursor-pointer object-cover"
-              data-cursor="text"
-              data-cursor-text="Explore"
+              className="w-full h-full rounded-full object-cover"
               controlsList="nodownload nofullscreen noremoteplayback"
               disablePictureInPicture
               controls={false}
@@ -475,7 +494,7 @@ export default function FifthSection() {
             }}
             className="text-black md:text-9xl text-5xl"
           >
-          Have Built
+            Have Built
           </motion.h5>
         </div>
       </div>
@@ -516,7 +535,8 @@ export default function FifthSection() {
                   style={{ backgroundColor: "#000" }} // Add background color as fallback
                 ></video>
                 <p className="text-black text-xl pt-5">
-                  <span className="font-semibold">{video.title}</span> – {video.description}
+                  <span className="font-semibold">{video.title}</span> –{" "}
+                  {video.description}
                 </p>
               </motion.div>
             ))}
@@ -526,7 +546,9 @@ export default function FifthSection() {
             {teamVideos.slice(3, 5).map((video, index) => (
               <motion.div
                 key={`right-${index}`}
-                className={index === 0 ? "lg:pt-[280px]" : "lg:pt-[120px] pt-[90px]"}
+                className={
+                  index === 0 ? "lg:pt-[280px]" : "lg:pt-[120px] pt-[90px]"
+                }
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{
@@ -556,7 +578,8 @@ export default function FifthSection() {
                   style={{ backgroundColor: "#000" }} // Add background color as fallback
                 ></video>
                 <p className="text-black text-xl pt-5">
-                  <span className="font-semibold">{video.title}</span> – {video.description}
+                  <span className="font-semibold">{video.title}</span> –{" "}
+                  {video.description}
                 </p>
               </motion.div>
             ))}
