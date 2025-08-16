@@ -481,28 +481,32 @@ export default function Header() {
                   </span>
                 </li>
               </a>
-              <li
-                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                id="twitter-item"
-              >
-                <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  Twitter
-                </span>
-                <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  Twitter
-                </span>
-              </li>
-              <li
-                className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
-                id="linkedin-item"
-              >
-                <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
-                  Linkedin
-                </span>
-                <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
-                  Linkedin
-                </span>
-              </li>
+              <a href="https://x.com/prosental_" target="_blank" rel="noopener noreferrer">
+                <li
+                  className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                  id="twitter-item"
+                >
+                  <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
+                    X (Twitter)
+                  </span>
+                  <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
+                    X (Twitter)
+                  </span>
+                </li>
+              </a>
+              <a href="https://www.linkedin.com/company/prosental/" target="_blank" rel="noopener noreferrer">
+                <li
+                  className="relative overflow-hidden group cursor-pointer transition-transform duration-700 hover:scale-105"
+                  id="linkedin-item"
+                >
+                  <span className="block group-hover:transform group-hover:-translate-y-full group-hover:opacity-0 transition-all duration-700 ease-in-out">
+                    LinkedIn
+                  </span>
+                  <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:transform group-hover:translate-y-0 transition-all duration-700 ease-in-out transform translate-y-full">
+                    LinkedIn
+                  </span>
+                </li>
+              </a>
             </ul>
           </div>
         </div>

@@ -48,6 +48,20 @@ export default function RootLayout({ children }) {
           `}
         </Script>
         {/* TikTok Pixel Code End */}
+        
+        {/* Google Analytics */}
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=G-66YNWC95BG" 
+          strategy="afterInteractive" 
+        /> 
+        <Script id="google-analytics" strategy="afterInteractive"> 
+          {` 
+            window.dataLayer = window.dataLayer || []; 
+            function gtag(){dataLayer.push(arguments);} 
+            gtag('js', new Date()); 
+            gtag('config', 'G-66YNWC95BG'); 
+          `} 
+        </Script>
       </head>
       <body>
         <ClientLayout>{children}</ClientLayout>
