@@ -15,10 +15,11 @@ const LoadingScreen = ({ onComplete }) => {
     const progressBar = progressRef.current;
     const circle = circleRef.current;
     const startTime = Date.now();
-    // Responsive minimum load time - shorter for mobile devices
+    // Responsive minimum load time - much shorter for better UX
     const isMobile = window.innerWidth <= 768;
-    const minLoadTime = isMobile ? 2000 : 3000; // 2 seconds for mobile, 3 for desktop
-    let isPageLoaded = false;
+    const minLoadTime = isMobile ? 800 : 1200; // Reduced from 2-3 seconds to 0.8-1.2 seconds
+    let isHeroReady = false;
+    let isSecondSectionReady = false;
     let canComplete = false;
     let circleAnimation;
 
@@ -150,12 +151,23 @@ const LoadingScreen = ({ onComplete }) => {
 
     // Progress bar will be controlled by the progress state, not GSAP timeline
 
-    // Check if page is loaded
-    const checkPageLoaded = () => {
-      if (document.readyState === 'complete') {
-        isPageLoaded = true;
-        checkCompletion();
+    // Check if critical sections are ready
+    const checkCriticalSectionsReady = () => {
+      // Check if hero section is ready
+      const heroSection = document.getElementById('hero-section');
+      if (heroSection && !isHeroReady) {
+        isHeroReady = true;
+        console.log('Hero section ready');
       }
+      
+      // Check if second section is ready
+      const secondSection = document.getElementById('second-section');
+      if (secondSection && !isSecondSectionReady) {
+        isSecondSectionReady = true;
+        console.log('Second section ready');
+      }
+      
+      checkCompletion();
     };
 
     // Check if we can complete loading
@@ -163,10 +175,10 @@ const LoadingScreen = ({ onComplete }) => {
       const elapsedTime = Date.now() - startTime;
       const minTimeReached = elapsedTime >= minLoadTime;
       
-      // Only complete if minimum time has passed AND page is loaded
-      if (minTimeReached && isPageLoaded && !canComplete) {
+      // Complete if minimum time has passed AND critical sections are ready
+      if (minTimeReached && isHeroReady && isSecondSectionReady && !canComplete) {
         canComplete = true;
-        console.log('Loading complete: min time reached and page loaded');
+        console.log('Loading complete: min time reached and critical sections ready');
         
         // Stop circle bouncing and position it next to text
         if (circleAnimation) {
@@ -234,13 +246,21 @@ const LoadingScreen = ({ onComplete }) => {
       }
     };
 
-    // Listen for page load events
-    if (document.readyState === 'complete') {
-      isPageLoaded = true;
-    } else {
-      window.addEventListener('load', checkPageLoaded);
-      document.addEventListener('readystatechange', checkPageLoaded);
-    }
+    // Check for critical sections immediately and set up observers
+    checkCriticalSectionsReady();
+    
+    // Set up mutation observer to watch for DOM changes
+    const observer = new MutationObserver(() => {
+      checkCriticalSectionsReady();
+    });
+    
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+    
+    // Also check periodically in case sections are added dynamically
+    const checkInterval = setInterval(checkCriticalSectionsReady, 100);
 
     // Simulate loading progress with realistic timing
     const progressInterval = setInterval(() => {
@@ -248,18 +268,21 @@ const LoadingScreen = ({ onComplete }) => {
         const elapsedTime = Date.now() - startTime;
         const minTimeReached = elapsedTime >= minLoadTime;
         
-        // Progress based on time and page load status
-        let targetProgress = Math.min((elapsedTime / minLoadTime) * 95, 95);
-        if (isPageLoaded && minTimeReached) {
+        // Progress based on time and critical sections status
+        let targetProgress = Math.min((elapsedTime / minLoadTime) * 70, 70);
+        
+        // Add progress for each ready section
+        if (isHeroReady) targetProgress += 15;
+        if (isSecondSectionReady) targetProgress += 15;
+        
+        if (isHeroReady && isSecondSectionReady && minTimeReached) {
           targetProgress = 100;
-        } else if (isPageLoaded) {
-          targetProgress = Math.min(targetProgress + 5, 98);
         }
         
         const newProgress = Math.min(prev + Math.random() * 5, targetProgress);
         
-        // Only allow completion if both conditions are met
-        if (newProgress >= 100 && minTimeReached && isPageLoaded && !canComplete) {
+        // Only allow completion if critical sections are ready
+        if (newProgress >= 100 && minTimeReached && isHeroReady && isSecondSectionReady && !canComplete) {
           clearInterval(progressInterval);
           setTimeout(() => checkCompletion(), 100); // Small delay to ensure smooth transition
           return 100;
@@ -276,9 +299,9 @@ const LoadingScreen = ({ onComplete }) => {
 
     return () => {
       clearInterval(progressInterval);
+      clearInterval(checkInterval);
       clearTimeout(minTimeTimeout);
-      window.removeEventListener('load', checkPageLoaded);
-      document.removeEventListener('readystatechange', checkPageLoaded);
+      observer.disconnect();
       tl.kill();
       if (circleAnimation) {
         circleAnimation.kill();
