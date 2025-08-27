@@ -146,6 +146,10 @@ export default function Footer() {
             color: white;
           }
           
+          .whatsapp-hover-container .social-text {
+            color: white;
+          }
+          
           /* Make social media text disappear on hover */
           .social-text {
             transition: opacity 0.3s ease; /* Add transition for smooth effect */
@@ -202,6 +206,22 @@ export default function Footer() {
           }
           
           .linkedin-links:hover .animate-marquee {
+            animation-duration: 30s;
+          }
+          
+          @keyframes whatsapp-marquee {
+            0%   { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+          }
+          
+          .whatsapp-links .animate-marquee {
+            animation: whatsapp-marquee 15s linear infinite;
+            display: flex;
+            flex-wrap: nowrap;
+            width: max-content;
+          }
+          
+          .whatsapp-links:hover .animate-marquee {
             animation-duration: 30s;
           }
           
@@ -722,6 +742,114 @@ export default function Footer() {
             <div className="social-reveal-top"></div>
             <div className="social-reveal-bottom"></div>
           </div>
+
+          {/* WhatsApp Section */}
+          <div className="absolute top-[-80px] right-0 w-full mt-10 border-t-[1px] border-white/50 group cursor-pointer transition-all duration-500 whatsapp-hover-container social-hover-container lg:block hidden">
+            {/* WhatsApp header - always visible and positioned above the marquee */}
+            <div className="text-white lg:text-4xl text-2xl pt-10 absolute w-full left-0 top-0 z-20 social-text">
+              <div className="md:px-20 px-7 flex items-center justify-between">
+                <a href="https://wa.me/201034674293" target="_blank" rel="noopener noreferrer" data-cursor-text="WhatsApp" data-cursor-stick="#whatsapp-text" id="whatsapp-text">WhatsApp</a>
+                <GoArrowUpRight />
+              </div>
+            </div>
+
+            {/* Marquee animation that appears on hover - positioned behind the WhatsApp text */}
+            <div className="marquee-container whatsapp-links px-20 text-white md:text-4xl text-2xl py-10 bg-[#25D366] absolute w-full left-0 top-0 h-full z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center overflow-hidden">
+              <div className="animate-marquee flex items-center gap-5">
+                {/* WhatsApp links - first set */}
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+
+                {/* WhatsApp links - duplicated for continuous scrolling */}
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+                <div onClick={(e) => {
+                  e.stopPropagation();
+                  window.open('https://wa.me/201034674293', '_blank');
+                }} className="flex items-center gap-3 mx-5 hover:scale-110 transition-transform duration-300">
+                  <p className="text-white">WhatsApp</p>
+                  <GoArrowUpRight className="transform transition-transform duration-300 group-hover:rotate-45 text-white" />
+                </div>
+              </div>
+            </div>
+
+            {/* Add the reveal animation elements */}
+            <div className="social-reveal-top"></div>
+            <div className="social-reveal-bottom"></div>
+          </div>
         </div>
         
         {/* Mobile Social Media Section - only visible on mobile and tablet */}
@@ -774,6 +902,18 @@ export default function Footer() {
               className="flex items-center justify-between cursor-pointer hover:bg-white/10 p-4 rounded-lg transition-all duration-300"
             >
               <p className="text-white text-xl">LinkedIn</p>
+              <GoArrowUpRight className="text-white text-xl" />
+            </div>
+            
+            {/* Mobile WhatsApp Link */}
+            <div 
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open('https://wa.me/201034674293', '_blank');
+              }}
+              className="flex items-center justify-between cursor-pointer hover:bg-white/10 p-4 rounded-lg transition-all duration-300"
+            >
+              <p className="text-white text-xl">WhatsApp</p>
               <GoArrowUpRight className="text-white text-xl" />
             </div>
           </div>

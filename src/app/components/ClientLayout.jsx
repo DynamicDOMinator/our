@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Header from "./Header";
 import Footer from "./Footer";
 import SmoothScroll from "./SmoothScroll";
@@ -12,6 +13,10 @@ const ClientLayoutContent = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasVisited, setHasVisited] = useState(false);
   const { markLoadingComplete } = useLoading();
+  const pathname = usePathname();
+  
+  // Check if current page is Arabic landing page
+  const isArabicLandingPage = pathname === '/prosental-ar';
 
   useEffect(() => {
     // Always show loading screen on every page load/reload
@@ -27,15 +32,15 @@ const ClientLayoutContent = ({ children }) => {
 
   return (
     <>
-      {isLoading && !hasVisited && (
+      {isLoading && !hasVisited && !isArabicLandingPage && (
         <LoadingScreen onComplete={handleLoadingComplete} />
       )}
       <SmoothScroll>
         <PageTransition>
-          <Header />
+          {!isArabicLandingPage && <Header />}
           {children}
-          <Footer />
-          <ConditionalLastSection />
+          {!isArabicLandingPage && <Footer />}
+          {!isArabicLandingPage && <ConditionalLastSection />}
         </PageTransition>
       </SmoothScroll>
     </>
