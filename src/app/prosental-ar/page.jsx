@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // Animated Counter Component
 const StatCard = ({ number, suffix = "", label }) => {
@@ -50,7 +51,7 @@ const StatCard = ({ number, suffix = "", label }) => {
        <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">
          {count}{suffix}
        </div>
-       <div className="text-gray-700 text-base font-medium">{label}</div>
+       <div className="text-gray-700 md:text-base text-sm font-medium">{label}</div>
      </div>
    );
 };
@@ -63,6 +64,8 @@ import { FaWhatsapp, FaArrowLeft } from "react-icons/fa";
 import { getAllProjects } from "../data/projects";
 
 export default function ArabicLanding() {
+  const router = useRouter();
+  
   // Set RTL and Arabic language on component mount
   useEffect(() => {
     document.documentElement.lang = 'ar';
@@ -379,7 +382,7 @@ export default function ArabicLanding() {
 
 
       {/* Hero Section */}
-      <section ref={heroRef} className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section ref={heroRef} className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 md:pt-0">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
         <div className="relative z-10 text-center max-w-6xl mx-auto px-4">
           <motion.h1
@@ -436,10 +439,10 @@ export default function ArabicLanding() {
             transition={{ duration: 1, delay: 1 }}
             className="mt-16"
           >
-            <div className="flex justify-center items-center space-x-8 space-x-reverse text-gray-500">
+            <div className="flex justify-center items-center  ">
               <StatCard number={200} suffix="+" label="مشروع مكتمل" />
               <StatCard number={150} suffix="+" label="عميل راضي" />
-              <StatCard number={5} suffix="+" label="سنوات خبرة" />
+              <StatCard number={9} suffix="+" label="سنوات خبرة" />
             </div>
           </motion.div>
         </div>
@@ -504,10 +507,12 @@ export default function ArabicLanding() {
               >
                 <div className="relative overflow-hidden rounded-2xl mb-6">
                   <video
-                    autoPlay
                     loop
                     muted
                     playsInline
+                    loading="lazy"
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => e.target.pause()}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                   >
                     <source src={service.video} type="video/mp4" />
@@ -564,13 +569,16 @@ export default function ArabicLanding() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true, amount: 0.2 }}
                 className="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group cursor-pointer"
+                onClick={() => router.push(`/projects/${project.id}`)}
               >
                 <div className="relative overflow-hidden">
                   <video
-                    autoPlay
                     loop
                     muted
                     playsInline
+                    loading="lazy"
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => e.target.pause()}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                   >
                     <source src={project.previewVideo} type="video/mp4" />
