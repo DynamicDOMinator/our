@@ -347,7 +347,7 @@ export default function ArabicLanding() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
+    <div className="min-h-screen bg-white overflow-x-hidden" dir="rtl" style={{ fontFamily: 'Cairo, sans-serif' }}>
       {/* Logo */}
       <div className="fixed top-8 left-8 z-50">
         <Link href="https://prosental.com/">
@@ -510,12 +510,14 @@ export default function ArabicLanding() {
                     loop
                     muted
                     playsInline
-                    loading="lazy"
-                    onMouseEnter={(e) => e.target.play()}
-                    onMouseLeave={(e) => e.target.pause()}
+                    preload="metadata"
+                    autoPlay
+                    disablePictureInPicture
+                    controlsList="nodownload nofullscreen noremoteplayback"
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                   >
                     <source src={service.video} type="video/mp4" />
+                    Your browser does not support the video tag.
                   </video>
                   <div className={`absolute inset-0 bg-gradient-to-t ${service.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}></div>
                 </div>
@@ -576,12 +578,14 @@ export default function ArabicLanding() {
                     loop
                     muted
                     playsInline
-                    loading="lazy"
-                    onMouseEnter={(e) => e.target.play()}
-                    onMouseLeave={(e) => e.target.pause()}
+                    preload="metadata"
+                    autoPlay
+                    disablePictureInPicture
+                    controlsList="nodownload nofullscreen noremoteplayback"
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                   >
                     <source src={project.previewVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
                   </video>
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>
@@ -652,6 +656,11 @@ export default function ArabicLanding() {
                     href="https://wa.me/201034674293?text=مرحباً، أريد الاستفسار عن خدماتكم"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => {
+                      if (window.fbq) {
+                        window.fbq('track', 'Contact');
+                      }
+                    }}
                     className="w-full flex items-center flex-row-reverse justify-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 text-center  shadow-lg"
                   >
                     تواصل عبر واتساب 
@@ -782,6 +791,7 @@ export default function ArabicLanding() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
+
                     className={`w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-blue-300 disabled:to-blue-400 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 disabled:scale-100 shadow-lg ${
                       isSubmitting ? "cursor-not-allowed" : ""
                     }`}

@@ -78,18 +78,19 @@ export const metadata = {
   category: "technology",
   classification: "Digital Agency",
   referrer: "origin-when-cross-origin",
+  other: {
+    "google-site-verification": "your-google-verification-code",
+    "facebook-domain-verification": "your-facebook-verification-code",
+  },
+};
+
+export const viewport = {
   colorScheme: "light",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
-  other: {
-    "google-site-verification": "your-google-verification-code",
-    "facebook-domain-verification": "your-facebook-verification-code",
-  },
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };

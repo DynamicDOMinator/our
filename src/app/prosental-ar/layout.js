@@ -1,8 +1,8 @@
 import "../fonts/font-imports.css";
 import "../globals.css";
-import { metadata } from "./metadata";
+import { metadata, viewport } from "./metadata";
 
-export { metadata };
+export { metadata, viewport };
 
 export default function ArabicLandingLayout({ children }) {
   return (
