@@ -79,7 +79,7 @@ export default function ArabicLanding() {
   }, []);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    phone: "",
     message: "",
     interestedIn: [],
     attachment: null,
@@ -160,9 +160,9 @@ export default function ArabicLanding() {
     }
   };
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  const validatePhone = (phone) => {
+    // No validation - accept any input
+    return true;
   };
 
   const validateName = (name) => {
@@ -239,15 +239,12 @@ export default function ArabicLanding() {
       newErrors.name = "الاسم يجب أن يكون بين 2-50 حرف ويحتوي على أحرف فقط";
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = "البريد الإلكتروني مطلوب";
-    } else if (!validateEmail(formData.email)) {
-      newErrors.email = "يرجى إدخال بريد إلكتروني صحيح";
+    if (!formData.phone.trim()) {
+      newErrors.phone = "رقم الهاتف مطلوب";
     }
 
-    if (!formData.message.trim()) {
-      newErrors.message = "الرسالة مطلوبة";
-    } else if (formData.message.trim().length < 10) {
+    // Message is not required anymore
+    if (formData.message.trim() && formData.message.trim().length < 10) {
       newErrors.message = "الرسالة يجب أن تكون على الأقل 10 أحرف";
     }
 
@@ -265,8 +262,10 @@ export default function ArabicLanding() {
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("name", formData.name);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("message", formData.message);
+      formDataToSend.append("phone", formData.phone);
+      if (formData.message.trim()) {
+        formDataToSend.append("message", formData.message);
+      }
       formDataToSend.append("source", "Arabic Landing Page");
 
       formData.interestedIn.forEach((interest, index) => {
@@ -289,7 +288,7 @@ export default function ArabicLanding() {
 
       setFormData({
         name: "",
-        email: "",
+        phone: "",
         message: "",
         interestedIn: [],
         attachment: null,
@@ -729,26 +728,26 @@ export default function ArabicLanding() {
                   
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      البريد الإلكتروني *
+                      رقم الهاتف *
                     </label>
                     <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
+                      type="text"
+                      name="phone"
+                      value={formData.phone}
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white ${
-                        errors.email ? "border-red-400" : "border-gray-200"
+                        errors.phone ? "border-red-400" : "border-gray-200"
                       }`}
-                      placeholder="example@email.com"
+                      placeholder="أدخل رقم الهاتف"
                     />
-                    {errors.email && (
-                      <p className="text-red-400 text-sm mt-1">{errors.email}</p>
+                    {errors.phone && (
+                      <p className="text-red-400 text-sm mt-1">{errors.phone}</p>
                     )}
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      تفاصيل المشروع *
+                      تفاصيل المشروع
                     </label>
                     <textarea
                       name="message"
@@ -758,7 +757,7 @@ export default function ArabicLanding() {
                       className={`w-full px-4 py-3 border-2 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none bg-gray-50 focus:bg-white ${
                         errors.message ? "border-red-400" : "border-gray-200"
                       }`}
-                      placeholder="أخبرنا عن مشروعك بالتفصيل..."
+                      placeholder="أخبرنا عن مشروعك بالتفصيل... (اختياري)"
                     />
                     {errors.message && (
                       <p className="text-red-400 text-sm mt-1">{errors.message}</p>
@@ -858,6 +857,36 @@ export default function ArabicLanding() {
 
         </div>
       </footer>
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/201034674293?text=مرحباً، أريد الاستفسار عن خدماتكم"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 w-[60px] h-[60px] lg:w-[80px] lg:h-[80px] bg-green-500 text-white  rounded-full shadow-lg z-50 hover:scale-110 transition-all duration-300 group"
+        onClick={() => {
+          if (window.fbq) {
+            window.fbq('track', 'Contact');
+          }
+        }}
+        style={{
+          animation: 'pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite'
+        }}
+      >
+        <FaWhatsapp className="text-4xl lg:text-6xl absolute top-3 right-3 animate-bounce group-hover:animate-none" />
+        <style jsx>{`
+          @keyframes pulse-ring {
+            0% {
+              box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+              box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+              box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+          }
+        `}</style>
+      </a>
     </div>
   );
 }
