@@ -19,11 +19,20 @@ const ClientLayoutContent = ({ children }) => {
   const isArabicLandingPage = pathname === '/prosental-ar';
 
   useEffect(() => {
-    // Always show loading screen on every page load/reload
-    // This ensures minimum 3 seconds loading time every time
-    setHasVisited(false);
-    setIsLoading(true);
-  }, []);
+    // Only show loading screen on home page
+    // Other pages should load immediately without loading screen
+    const isHomePage = pathname === '/';
+    
+    if (isHomePage) {
+      setHasVisited(false);
+      setIsLoading(true);
+    } else {
+      // For all other pages, skip loading screen
+      setIsLoading(false);
+      setHasVisited(true);
+      markLoadingComplete();
+    }
+  }, [pathname, markLoadingComplete]);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
