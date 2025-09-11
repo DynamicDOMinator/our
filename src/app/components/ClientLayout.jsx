@@ -10,8 +10,8 @@ import LoadingScreen from "./LoadingScreen";
 import { LoadingProvider, useLoading } from "../contexts/LoadingContext";
 
 const ClientLayoutContent = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasVisited, setHasVisited] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Start with loading off by default
+  const [hasVisited, setHasVisited] = useState(true); // Assume visited by default
   const { markLoadingComplete } = useLoading();
   const pathname = usePathname();
   
@@ -19,13 +19,36 @@ const ClientLayoutContent = ({ children }) => {
   const isArabicLandingPage = pathname === '/prosental-ar';
 
   useEffect(() => {
+    // Only run this effect on the client side
+    if (typeof window === 'undefined') return;
+    
     // Only show loading screen on home page
-    // Other pages should load immediately without loading screen
     const isHomePage = pathname === '/';
     
     if (isHomePage) {
-      setHasVisited(false);
-      setIsLoading(true);
+      try {
+        // Check localStorage for previous visits
+        const hasVisitedBefore = localStorage.getItem('hasVisitedHome') === 'true';
+        
+        if (!hasVisitedBefore) {
+          // First visit to home page - show loading animation
+          setIsLoading(true);
+          setHasVisited(false);
+          // Set localStorage flag to prevent future loading animations
+          localStorage.setItem('hasVisitedHome', 'true');
+        } else {
+          // Skip loading animation if user has visited before
+          setIsLoading(false);
+          setHasVisited(true);
+          markLoadingComplete();
+        }
+      } catch (error) {
+        // Handle localStorage errors (e.g., in private browsing)
+        console.error('Error accessing localStorage:', error);
+        setIsLoading(false);
+        setHasVisited(true);
+        markLoadingComplete();
+      }
     } else {
       // For all other pages, skip loading screen
       setIsLoading(false);

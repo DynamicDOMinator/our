@@ -7,6 +7,7 @@ import Cursor from "mouse-follower";
 import gsap from "gsap";
 import "mouse-follower/dist/mouse-follower.min.css";
 import { getProjectById } from "../../data/projects";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function ProjectDetail() {
   const params = useParams();
@@ -120,7 +121,41 @@ export default function ProjectDetail() {
   };
 
   return (
-    <motion.div
+    
+    <div className=" relative">
+
+
+
+<div onClick={() => window.open("https://wa.me/201034674293?text=Hello, I want to inquire about your services", "_blank")}     className=" fixed bottom-20 cursor-pointer left-1/2 transform -translate-x-1/2 bg-black/70 text-white md:p-10 md:text-2xl w-60 h-20 md:h-auto md:w-auto flex flex-col justify-center items-center rounded-full z-50 hover:scale-110 transition-all duration-300 group"
+  style={{ 
+    animation: "pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite", 
+  }}
+>
+
+<p className="">
+  start your project today
+</p>
+
+<style jsx>{` 
+  @keyframes pulse-ring { 
+    0% { 
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7); 
+    } 
+    70% { 
+      box-shadow: 0 0 0 15px rgba(0, 0, 0, 0); 
+    } 
+    100% { 
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); 
+    } 
+  } 
+`}</style>
+</div>
+
+
+
+
+
+   <motion.div
       ref={sectionRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -364,5 +399,10 @@ export default function ProjectDetail() {
         </div>
       </div>
     </motion.div>
+
+    </div> 
+
+
+ 
   );
 }
